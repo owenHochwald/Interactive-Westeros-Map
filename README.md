@@ -24,3 +24,16 @@ This project is of particular interest to me because:
 - I am passionate about both the technical aspects of programming and the world-building within the "Game of Thrones" universe.
 - I want to combine my love for storytelling and software development, creating a tool that allows users to dive deeper into the lore of Westeros.
 
+---
+
+## User Stories
+
+1. As a user, I want to be able to add additional cities to the map with a specified population and alliance.
+
+2. As a user, I want to be able to add a location to the list of locations visited.
+
+3. As a user, I want to be able to view all of the locations I've visited as progress bar of the total locations.
+
+3. As a user, I want to be able to remove a custom-made locations from the map.
+
+---
