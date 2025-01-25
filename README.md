@@ -1,10 +1,26 @@
-# My Personal Project
+# Westeros Interactive Map
 
-## A subtitle
+## What will the application do?
 
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
+This project will be an interactive map of Westeros, inspired by the "Game of Thrones" series. The application will allow users to:
 
-An example of text with **bold** and *italic* fonts.  
+- Explore key locations, and events within the world of Westeros.
+- Click on different locations to access detailed information, including descriptions, images, and historical context.
+- Zoom in and out of regions and navigate between various areas of the map.
+- Filter locations based on criteria such as alliances, important battles, or cities.
+- Display statistical features on interaction with landmarks / cities in the map.
+  
+## Who will use it?
+
+The primary users of this application will be:
+
+- Fans of the "Game of Thrones" series and "A Song of Ice and Fire" books.
+- Individuals who want to explore the geographical and historical details of Westeros.
+
+## Why is this project of interest to you?
+
+This project is of particular interest to me because:
+
+- I am passionate about both the technical aspects of programming and the world-building within the "Game of Thrones" universe.
+- I want to combine my love for storytelling and software development, creating a tool that allows users to dive deeper into the lore of Westeros.
+
