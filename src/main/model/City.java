@@ -41,7 +41,7 @@ public class City {
 
     }
 
-    // REQUIRES: a well-formed city
+    // REQUIRES: a well-formed city, city is not already an ally
     // MODIFES: this, city
     // EFFECTS: creates an alliance between two cities
     public void addAlliance(City city) {
