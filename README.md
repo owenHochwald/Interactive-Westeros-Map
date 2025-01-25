@@ -28,7 +28,7 @@ This project is of particular interest to me because:
 
 ## User Stories
 
-1. As a user, I want to be able to add additional cities to the map with a specified population and alliance.
+1. As a user, I want to be able to add additional cities to the map with a specified population, name, list of alliances, etc.
 
 2. As a user, I want to be able to add a location to the list of locations visited.
 
