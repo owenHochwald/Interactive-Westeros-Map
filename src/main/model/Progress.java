@@ -7,14 +7,8 @@ package model;
 public class Progress {
 
     // EFFECTS: Creates a new Progress class with no visited cities and as many total cities 
-    //          as active cities objects
+    //          as active City objects
     public Progress() {
-
-    }
-
-
-    // EFFECTS: prints the number of visited cities out of the total number of cities as a progress bar
-    public void printProgress() {
 
     }
 
@@ -23,6 +17,11 @@ public class Progress {
     // EFFECTS: increases number of visited cities by 1, and mark that city as visited
     public void visitCity(City city) {
 
+    }
+
+    // setters
+    public void setTotalNumCities() {
+        
     }
 
     // getters
