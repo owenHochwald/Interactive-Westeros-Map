@@ -8,16 +8,34 @@ import java.util.ArrayList;
  * wether or not the city has been visited by the user, and wether or not the city is a capital city.
  */
 public class City {
+    
+    private String name;
+    private int population;
+    private String lord;
+    private String region;
+    private ArrayList<City> alliances;
+    private boolean isCapital;
+    private boolean visited;
+
 
     // REQUIRES: non-empty name, population >= 10, non-empty lord, well-formed region
-    // EFFECTS: creates a new unvisited city with given name, population, alliances, lord, region, capital status, and no alliances.
+    // EFFECTS: creates a new unvisited city with given name, population, alliances, lord, region,
+    //          capital status, and no alliances.
     public City(String name, int population, String lord, String region, boolean isCapital) {
+        this.name = name;
+        this.population = population;
+        this.lord = lord;
+        this.region = region;
+        this.alliances = new ArrayList<City>();
+        this.isCapital = isCapital;
+        this.visited = false;
 
     }
 
     // MODIFIES: this
     // EFFECTS: increases population by 1,000
     public void increasePopulation() {
+        this.population += 1000;
         
     }
 
@@ -25,57 +43,61 @@ public class City {
     // MODIFIES: this
     // EFFECTS: changes the lord of a city
     public void changeLord(String lord) {
-
+        this.lord = lord;
     }
 
     // MODIFES: this
     // EFFECTS: toggles wether a city is visited or not
     public void toggleVisited() {
-
+        visited = !visited;
     }
 
 
     // MODIFIES: this
     // EFFECTS: toggles wether a city is a capital city or not
     public void toggleCapital() {
-
+        isCapital = !isCapital;
     }
 
     // REQUIRES: a well-formed city, city is not already an ally
     // MODIFES: this, city
     // EFFECTS: creates an alliance between two cities
     public void addAlliance(City city) {
+        alliances.add(city);
+        if (!city.getAlliances().contains(this)) {
+            city.addAlliance(this);
+        }
 
     }
 
     // getters
 
     public String getName() {
-        return "";
+        return name;
     }
     
     public int getPopulation() {
-        return 10;
+        return population;
     }
 
-    public ArrayList<City> getAlliances(){
-        return new ArrayList<City>();
+    public ArrayList<City> getAlliances() {
+        return alliances;
     }
 
-    public String getLord(){
-        return "";
+    public String getLord() {
+        return lord;
     }
 
     public String getRegion() {
-        return "";
+        return region;
     }
 
     public boolean getIsCapital() {
-        return false;
+        return isCapital;
     }
 
     public boolean getVisited() {
-        return false;
+        return visited;
     }
 
     
