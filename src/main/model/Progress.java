@@ -20,7 +20,8 @@ public class Progress {
     }
 
     // setters
-    public void setTotalNumCities() {
+    // REQUIRES: num >= totalNumCities
+    public void setTotalNumCities(int num) {
         
     }
 
