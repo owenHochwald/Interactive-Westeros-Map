@@ -13,9 +13,9 @@ public class TestCity {
 
     @BeforeEach
     void runBefore() {
-        city = new City("Winterfell", 15000, "Stark", "The North", true);
-        Progress.setNumVisited(0);
         Progress.setTotalNumCities(0);
+        Progress.setNumVisited(0);
+        city = new City("Winterfell", 15000, "Stark", "The North", true);
 
     }
 
