@@ -11,7 +11,7 @@ public class City {
     
     private String name;
     private int population;
-    private String lord;
+    private String house;
     private String region;
     private ArrayList<City> alliances;
     private boolean isCapital;
@@ -25,11 +25,12 @@ public class City {
     public City(String name, int population, String house, String region, boolean isCapital) {
         this.name = name;
         this.population = population;
-        this.lord = lord;
+        this.house = house;
         this.region = region;
         this.alliances = new ArrayList<City>();
         this.isCapital = isCapital;
         this.visited = false;
+        Progress.increaseTotalCities();
 
     }
 
@@ -43,6 +44,11 @@ public class City {
     // MODIFES: this
     // EFFECTS: toggles wether a city is visited or not
     public void toggleVisited() {
+        if (!visited) {
+            Progress.increaseNumVisited();
+        } else {
+            Progress.decreaseNumVisited();
+        }
         visited = !visited;
     }
 
@@ -68,16 +74,20 @@ public class City {
     // MODIFES: this, city
     // EFFECTS: removes an alliance between two cities
     public void removeAlliance(City city) {
+        alliances.remove(city);
+        if (city.getAlliances().contains(this)) {
+            city.removeAlliance(this);
+        }
 
     }
     
     // setters
     public void setHouse(String house) {
-        // stub
+        this.house = house;
     }
 
     public void setPopulation(int population) {
-        // stub
+        this.population = population;
     }
 
     // getters
@@ -99,7 +109,7 @@ public class City {
     }
 
     public String getHouse() {
-        return "";
+        return house;
     }
 
     public boolean getIsCapital() {
