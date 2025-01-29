@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /*
  * Represents a city with a name, population (number of poeple  living there),
- * list of cities the city is allied with, the lord of the city, what region the city is located in,
+ * list of cities the city is allied with, the house the city belongs to, what region the city is located in,
  * wether or not the city has been visited by the user, and wether or not the city is a capital city.
  */
 public class City {
@@ -18,10 +18,11 @@ public class City {
     private boolean visited;
 
 
-    // REQUIRES: non-empty name, population >= 10, non-empty lord, well-formed region
-    // EFFECTS: creates a new unvisited city with given name, population, alliances, lord, region,
-    //          capital status, and no alliances.
-    public City(String name, int population, String lord, String region, boolean isCapital) {
+    // REQUIRES: name, region, house must not be null / empty,  population >= 10
+    // MODIFIES: this, Progress
+    // EFFECTS: creates a new unvisited city with given name, population, alliances, house, region,
+    //          capital status, and no alliances. Increases total number of cities by 1.
+    public City(String name, int population, String house, String region, boolean isCapital) {
         this.name = name;
         this.population = population;
         this.lord = lord;
@@ -37,13 +38,6 @@ public class City {
     public void increasePopulation() {
         this.population += 1000;
         
-    }
-
-    // REQUIRES: a well-formed string
-    // MODIFIES: this
-    // EFFECTS: changes the lord of a city
-    public void changeLord(String lord) {
-        this.lord = lord;
     }
 
     // MODIFES: this
@@ -70,6 +64,22 @@ public class City {
 
     }
 
+    // REQUIRES: a well-formed city, city is in alliances
+    // MODIFES: this, city
+    // EFFECTS: removes an alliance between two cities
+    public void removeAlliance(City city) {
+
+    }
+    
+    // setters
+    public void setHouse(String house) {
+        // stub
+    }
+
+    public void setPopulation(int population) {
+        // stub
+    }
+
     // getters
 
     public String getName() {
@@ -82,10 +92,6 @@ public class City {
 
     public ArrayList<City> getAlliances() {
         return alliances;
-    }
-
-    public String getLord() {
-        return lord;
     }
 
     public String getRegion() {
