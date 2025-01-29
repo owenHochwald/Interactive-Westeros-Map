@@ -98,6 +98,10 @@ public class City {
         return region;
     }
 
+    public String getHouse() {
+        return "";
+    }
+
     public boolean getIsCapital() {
         return isCapital;
     }
