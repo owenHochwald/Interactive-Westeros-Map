@@ -8,46 +8,50 @@ package model;
 
 public class Progress {
 
+    private static int numVisited = 0;
+    private static int totalNumCities = 0;
+
     // MODIFIES: this
     // EFFECTS: increases the total number of cities by 1
     public static void increaseTotalCities() {
-        // stub
+        totalNumCities++;
     }
 
     // MODIFIES: this
     // EFFECTS: increases the number of visited cities by 1
     public static void increaseNumVisited() {
-        // 
+        numVisited++;
     }
 
     // MODIFIES: this
     // EFFECTS: decrease the number of visited cities by 1
     public static void decreaseNumVisited() {
-
+        numVisited--;
     }
 
     // MODIFIES: this
     // EFFECTS: resets number of visited cities to zero
     public static void resetProgress() {
-
+        numVisited = 0;
     }
 
     // getters
     public static int getNumVisited() {
-        return 0;
+        return numVisited;
     }
 
     public static int getTotalNumCities() {
-        return 0;
+        return totalNumCities;
     }
 
     // setters
-    public static void setNumVisited(int numVisited) {
+    public static void setNumVisited(int num) {
+        numVisited = num;
 
     }
 
-    public static void setTotalNumCities(int getTotalNumCities) {
-        
+    public static void setTotalNumCities(int num) {
+        totalNumCities = num;
     }
 
 }
