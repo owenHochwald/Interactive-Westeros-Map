@@ -17,6 +17,7 @@ public class City {
     private ArrayList<City> alliances;
     private boolean isCapital;
     private boolean visited;
+    final private boolean customMade;
 
 
     // REQUIRES: name, region, house must not be null / empty,  population >= 10
@@ -32,6 +33,7 @@ public class City {
         this.alliances = new ArrayList<City>();
         this.isCapital = isCapital;
         this.visited = false;
+        this.customMade = customMade;
         Progress.increaseTotalCities();
 
     }
@@ -123,7 +125,7 @@ public class City {
     }
 
     public boolean customMade() {
-        return false;
+        return customMade;
     }
 
     
