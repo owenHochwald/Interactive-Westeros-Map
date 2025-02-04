@@ -66,6 +66,7 @@ public class MapApp {
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\tView all cities-> va");
+        System.out.println("\tChange visit status of cities-> cv");
         System.out.println("\tView only custom-made cities-> vc");
         System.out.println("\tDisplay your progress toward visiting cities-> p");
         System.out.println("\tQuit-> q");
@@ -79,6 +80,9 @@ public class MapApp {
             case "va":
                 viewAllCities();
                 break;
+            case "cv":
+                changeVisitStatus();
+                break;
             case "vc":
                 changeCustomCities();
                 break;
@@ -91,11 +95,35 @@ public class MapApp {
 
     }
 
-    // EFFECTS: displays all cities one by one with ability to mark as visited
+    // EFFECTS: displays all cities one by one
     private void viewAllCities() {
-
+        for (City city : cities) {
+            System.out.println(city.getName() + " controlled by House " + city.getHouse()+ ": visited? " + city.getVisited());
+            System.out.println();
+        }
     }
 
+    // MODIFIES: this
+    // EFFECTS: allow user to change visit status one by one of each city
+    private void changeVisitStatus() {
+        System.out.println("Toggle city visited (m) or see next city(n): ");
+        for (City city : cities) {
+            System.out.print(city.getName() + "--" + "visited: " + city.getVisited() + " -> ");
+
+            String choice = input.next();
+
+            switch (choice) {
+                case "m":
+                    city.toggleVisited();
+                    break;
+                case "n":
+                    break;
+                default:
+                    break;
+            }
+            System.out.println();
+        }
+    }
     // MODIFIES: this
     // EFFECTS displays custom cities one by one with ability to change their attributes
     private void changeCustomCities() {
@@ -111,14 +139,7 @@ public class MapApp {
 
     // MODIFIES: this
     // EFFECTS: removes a custom city
-    private void removeCity() {
-
-    }
-
-    // MODIFIES: this
-    // EFFECTS: marks a city as visited
-    private void markVisited() {
-
+    private void removeCity(City city) {
     }
 
     // REQUIRES: both cities are in cities
