@@ -15,12 +15,13 @@ public class TestCity {
     void runBefore() {
         Progress.setTotalNumCities(0);
         Progress.setNumVisited(0);
-        city = new City("Winterfell", 15000, "Stark", "The North", true);
+        city = new City("Winterfell", 15000, "Stark", "The North", true, false);
 
     }
 
     @Test
     void cityConstructorTest() {
+        City c2 = new City("Kings Landing", 1000000, "Lannister", "Crownlands", true, true);
         assertEquals("Winterfell", city.getName());
         assertEquals(15000, city.getPopulation());
         assertEquals("Stark", city.getHouse());
@@ -30,6 +31,8 @@ public class TestCity {
         assertFalse(city.getVisited());
         assertEquals(1, Progress.getTotalNumCities());
         assertEquals(0, Progress.getNumVisited());
+        assertTrue(c2.customMade());
+        assertFalse(city.customMade());
     }
 
     @Test
@@ -118,7 +121,7 @@ public class TestCity {
 
     @Test
     void addCityOnceTest() {
-        City c1 = new City("test", 10, "none", "Iron islands", false);
+        City c1 = new City("test", 10, "none", "Iron islands", false, false);
         assertEquals(2, Progress.getTotalNumCities());
         city.addAlliance(c1);
         assertEquals(1, c1.getAlliances().size());
@@ -129,8 +132,8 @@ public class TestCity {
 
     @Test
     void addCityTwiceTest() {
-        City c1 = new City("test 1", 10, "none", "Iron islands", false);
-        City c2 = new City("test 2", 100, "none", "Crownlands", true);
+        City c1 = new City("test 1", 10, "none", "Iron islands", false, true);
+        City c2 = new City("test 2", 100, "none", "Crownlands", true, true);
         assertEquals(3, Progress.getTotalNumCities());
         city.addAlliance(c1);
         city.addAlliance(c2);
@@ -147,8 +150,8 @@ public class TestCity {
 
     @Test
     void removeCityOnceTest() {
-        City c1 = new City("test 1", 10, "none", "Iron islands", false);
-        City c2 = new City("test 2", 100, "none", "Crownlands", true);
+        City c1 = new City("test 1", 10, "none", "Iron islands", false, false);
+        City c2 = new City("test 2", 100, "none", "Crownlands", true, false);
         assertEquals(3, Progress.getTotalNumCities());
         city.addAlliance(c1);
         city.addAlliance(c2);
@@ -170,8 +173,8 @@ public class TestCity {
 
     @Test
     void removeCityTwiceTest() {
-        City c1 = new City("test 1", 10, "none", "Iron islands", false);
-        City c2 = new City("test 2", 100, "none", "Crownlands", true);
+        City c1 = new City("test 1", 10, "none", "Iron islands", false, true);
+        City c2 = new City("test 2", 100, "none", "Crownlands", true, false);
         assertEquals(3, Progress.getTotalNumCities());
         city.addAlliance(c1);
         city.addAlliance(c2);
@@ -195,8 +198,8 @@ public class TestCity {
 
     @Test
     void addCityTwiceWithConnectedAllianceTest() {
-        City c1 = new City("test 1", 10, "none", "Iron islands", false);
-        City c2 = new City("test 2", 100, "none", "Crownlands", true);
+        City c1 = new City("test 1", 10, "none", "Iron islands", false, true);
+        City c2 = new City("test 2", 100, "none", "Crownlands", true, true);
         c1.addAlliance(c2);
         city.addAlliance(c1);
         city.addAlliance(c2);
