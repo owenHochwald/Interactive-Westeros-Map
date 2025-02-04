@@ -5,7 +5,8 @@ import java.util.ArrayList;
 /*
  * Represents a city with a name, population (number of poeple  living there),
  * list of cities the city is allied with, the house the city belongs to, what region the city is located in,
- * wether or not the city has been visited by the user, and wether or not the city is a capital city.
+ * wether or not the city has been visited by the user, wether or not the city is a capital city, and wether or
+ * not the city is custom.
  */
 public class City {
     
@@ -21,8 +22,9 @@ public class City {
     // REQUIRES: name, region, house must not be null / empty,  population >= 10
     // MODIFIES: this, Progress
     // EFFECTS: creates a new unvisited city with given name, population, alliances, house, region,
-    //          capital status, and no alliances. Increases total number of cities by 1.
-    public City(String name, int population, String house, String region, boolean isCapital) {
+    //          capital status, and no alliances. Increases total number of cities by 1, set customMade
+    //          to wether city is custom made or not
+    public City(String name, int population, String house, String region, boolean isCapital, boolean customMade) {
         this.name = name;
         this.population = population;
         this.house = house;
@@ -118,6 +120,10 @@ public class City {
 
     public boolean getVisited() {
         return visited;
+    }
+
+    public boolean customMade() {
+        return false;
     }
 
     
