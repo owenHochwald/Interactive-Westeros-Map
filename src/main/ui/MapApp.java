@@ -149,21 +149,45 @@ public class MapApp {
     // MODIFIES: this
     // EFFECTS: allow user to change visit status one by one of each city
     private void changeVisitStatus() {
-        System.out.println("Toggle city visited (m) or see next city(n): ");
+        if (cities.isEmpty()) {
+            System.out.println("╔═══════════════════════════════════╗");
+            System.out.println("║     No cities available           ║");
+            System.out.println("╚═══════════════════════════════════╝");
+            return;
+        }
+        
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║                 CHANGE VISIT STATUS                        ║");
+        System.out.println("╠════════════════════════════════════════════════════════════╣");
+        System.out.println("║  [m] Toggle city visited status                           ║");
+        System.out.println("║  [n] Next city                                            ║");
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
+        
         for (City city : cities) {
-            System.out.print(city.getName() + "--" + "visited: " + city.getVisited() + " -> ");
-
-            String choice = input.next();
-
+            String visitedStatus = city.getVisited() ? "Visited" : "Not Visited";
+            String capitalStatus = city.getIsCapital() ? " (Capital)" : "";
+            
+            System.out.println("╔════════════════════════════════════════════════════════════╗");
+            System.out.printf("║  Current City: %-43s║%n", city.getName() + capitalStatus);
+            System.out.printf("║  Status: %-49s║%n", visitedStatus);
+            System.out.print("║  Enter choice: ");
+            
+            String choice = input.next().toLowerCase();
+            
             switch (choice) {
                 case "m":
                     city.toggleVisited();
+                    String newStatus = city.getVisited() ? "Visited" : "Not Visited";
+                    System.out.printf("║  Status updated to: %-39s║%n", newStatus);
                     break;
                 case "n":
+                    System.out.println("║  Moving to next city...                                    ║");
                     break;
                 default:
+                    System.out.println("║  Invalid choice, moving to next city...                    ║");
                     break;
             }
+            System.out.println("╚════════════════════════════════════════════════════════════╝");
             System.out.println();
         }
     }
