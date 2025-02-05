@@ -5,16 +5,23 @@ import java.util.Scanner;
 
 import model.City;
 
+/*
+ * Represents a UI to handle all of the user interaction with the console.
+ * Cities must contain unique cities with unique names.
+ * 
+ */
+
 public class MapApp {
     private ArrayList<City> cities;
     private Scanner input;
+    private ArrayList<City> customCities;
+    
 
     // EFFECTS: runs the Westeros Map App
     public MapApp() {
         runApp();
 
     }
-
 
     // MODIFIES: this
     // EFFECTS: handle user input
@@ -25,12 +32,13 @@ public class MapApp {
 
         init();
 
-        while(true) {
+        while (true) {
             displayMenu();
 
             command = input.next().toLowerCase();
 
             if (command.equals("q")) {
+                System.out.println("Thanks for playing!");
                 break;
             } else {
                 handleInput(command);
@@ -43,7 +51,8 @@ public class MapApp {
     private void init() {
 
         this.cities = new ArrayList<>();
-        input = new Scanner(System.in);
+        this.input = new Scanner(System.in);
+        this.customCities = new ArrayList<>();
 
         City kingsLanding = new City("King's Landing", 500000, "Baratheon", "Crownlands", true, false);
         City winterfell = new City("Winterfell", 100000, "Stark", "The North", true, false);
@@ -59,19 +68,24 @@ public class MapApp {
         cities.add(whiteHarbor);
         cities.add(sunspear);
         cities.add(riverrun);
-        
+
     }
 
     // EFFECTS: displays map menu options
     private void displayMenu() {
-        System.out.println("\nSelect from:");
-        System.out.println("\tView all cities-> va");
-        System.out.println("\tChange visit status of cities-> cv");
-        System.out.println("\tView only custom-made cities-> vc");
-        System.out.println("\tDisplay your progress toward visiting cities-> p");
-        System.out.println("\tQuit-> q");
-
+        System.out.println("\n=====================================");
+        System.out.println("      GAME OF THRONES MAP MENU       ");
+        System.out.println("=====================================");
+        System.out.println("[va] View all cities");
+        System.out.println("[cv] Change visit status of cities");
+        System.out.println("[vc] View only custom-made cities");
+        System.out.println("[a] Add a custom city");
+        System.out.println("[p] Display your progress toward visiting cities");
+        System.out.println("[q] Quit");
+        System.out.println("=====================================");
+        System.out.print("Enter your choice: ");
     }
+    
 
     // MODIFIES: this
     // EFFECTS: processes user keyboard input
@@ -86,6 +100,9 @@ public class MapApp {
             case "vc":
                 changeCustomCities();
                 break;
+            case "a":
+                addCity();
+                break;
             case "p":
                 displayProgress();
                 break;
@@ -97,11 +114,26 @@ public class MapApp {
 
     // EFFECTS: displays all cities one by one
     private void viewAllCities() {
+        if (cities.isEmpty()) {
+            System.out.println("\nNo cities available.");
+            return;
+        }
+    
+        System.out.println("\n--------- Cities ---------");
+    
         for (City city : cities) {
-            System.out.println(city.getName() + " controlled by House " + city.getHouse()+ ": visited? " + city.getVisited());
+            String capitalStatus = city.getIsCapital() ? " (Capital)" : "";
+            String visitedStatus = city.getVisited() ? " Visited" : " Not Visited";
+    
+            System.out.printf(
+                    "%s%s - Ruled by House %s | Region: %s | Population: %,d | %s%n",
+                    city.getName(), capitalStatus, city.getHouse(), city.getRegion(), city.getPopulation(), visitedStatus
+            );
             System.out.println();
         }
+        System.out.println("-------------------------");
     }
+    
 
     // MODIFIES: this
     // EFFECTS: allow user to change visit status one by one of each city
@@ -124,35 +156,154 @@ public class MapApp {
             System.out.println();
         }
     }
+
+    // EFFECTS: displays options menu for custom cities
+    private void customCitiesMenu() {
+        System.out.println("\n=====================================");
+        System.out.println("      CUSTOM CITIES MANAGEMENT      ");
+        System.out.println("=====================================");
+        System.out.println("[r] Remove a city");
+        System.out.println("[a] Establish an alliance");
+        System.out.println("[v] Toggle visited status");
+        System.out.println("[n] Go to the next city");
+        System.out.println("[q] Quit");
+        System.out.println("=====================================");
+        System.out.print("Enter your choice: ");
+    }
+    
+
     // MODIFIES: this
-    // EFFECTS displays custom cities one by one with ability to change their attributes
-    private void changeCustomCities() {
+    // EFFECTS: processes user keyboard input for custom cities view
+    private void handleInputCustomCityView(String key, City city) {
+        switch (key) {
+            case "r":
+                removeCity(city);
+                break;
+            case "a":
+                establishAlliance(city);
+                break;
+            case "v":
+                city.toggleVisited();
+                break;
+            case "n":
+                break;
+            default:
+                System.out.println("Invalid selection!");
+        }
 
     }
 
+    // MODIFIES: this
+    // EFFECTS displays custom cities one by one with ability to change their settings
+    private void changeCustomCities() {
+        System.out.println();
+        if(customCities.isEmpty()) {
+            System.out.println("No custom cities created : (");
+        } else {
+            for (City city : customCities) {
+                System.out.println("-----------------------------------------------");
+                System.out.println("\t\t\tCity: " + city.getName() + ", alliances: "
+                        + displayAllianceNames(city.getAlliances()) + ", visited: "
+                        + city.getVisited());
+                System.out.println("-----------------------------------------------");
+
+                customCitiesMenu();
+                String choice = input.next().toLowerCase();
+    
+                if (choice.equals("q")) {
+                    break;
+                }
+                handleInputCustomCityView(choice, city);
+            }
+        }
+    }
+
+    
 
     // MODIFIES: this
     // EFFECTS: adds a custom city
     private void addCity() {
-
+        System.out.println("\nEnter city details:");
+    
+        System.out.print("Name: ");
+        String name = input.next();
+        input.nextLine(); 
+    
+        System.out.print("Population: ");
+        while (!input.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a valid number for population.");
+            input.next(); 
+        }
+        int population = input.nextInt();
+        input.nextLine(); 
+    
+        System.out.print("House (ruling family): ");
+        String house = input.nextLine();
+    
+        System.out.print("Region: ");
+        String region = input.nextLine();
+    
+        System.out.print("Is this city a capital? (true/false): ");
+        while (!input.hasNextBoolean()) {
+            System.out.println("Invalid input. Please enter true or false.");
+            input.next(); 
+        }
+        boolean isCapital = input.nextBoolean();
+        input.nextLine();
+    
+        City newCity = new City(name, population, house, region, isCapital, true);
+        cities.add(newCity);
+        customCities.add(newCity);
+    
+        System.out.println("Added " + name + " successfully!");
     }
+    
 
+    // REQUIRES: city in cities
     // MODIFIES: this
     // EFFECTS: removes a custom city
     private void removeCity(City city) {
+        cities.remove(city);
     }
 
-    // REQUIRES: both cities are in cities
+    // REQUIRES: city is in cities
     // MODIFIES: this
     // EFFECTS: establishes an alliance between two cities in the map
-    private void establishAlliance(City c1, City c2) {
+    private void establishAlliance(City c1) {
+        System.out.print("Enter a city name to ally the current city with: ");
+        String cityName = input.next();
+        City c2 = findCityByName(cityName);
+        c1.addAlliance(c2);
+        System.out.println("City: " + c1.getName() + ", alliance: " + displayAllianceNames(c1.getAlliances()));
+        System.out.println("City: " + c2.getName() + ", alliance: " + displayAllianceNames(c2.getAlliances()));
+    }
 
+    // Helper method for establishAlliance
+    // REQUIRES: name in the cities names
+    // EFFECTS: returns the city with the matching name
+    private City findCityByName(String name) {
+        for (City city : cities) {
+            if (city.getName().equals(name)) {
+                return city;
+            }
+        }
+        return null;
+    }
+
+    // Helper method for displaying alliances tidy
+    // REQUIRES: a well-formed city
+    // EFFECTS: displays city names for a given alliance
+    private ArrayList<String> displayAllianceNames(ArrayList<City> cityList) {
+        ArrayList<String> nameList = new ArrayList<>();
+        for (City city : cityList) {
+            nameList.add(city.getName());
+        }
+        return nameList;
     }
 
     // EFFETS: shows the visited city progress as a progress bar
     private void displayProgress() {
 
     }
-
 
 }
