@@ -29,7 +29,7 @@ public class TestCity {
         assertTrue(city.getIsCapital());
         assertTrue(city.getAlliances().isEmpty());
         assertFalse(city.getVisited());
-        assertEquals(1, Progress.getTotalNumCities());
+        assertEquals(2, Progress.getTotalNumCities());
         assertEquals(0, Progress.getNumVisited());
         assertTrue(c2.customMade());
         assertFalse(city.customMade());
