@@ -73,17 +73,17 @@ public class MapApp {
 
     // EFFECTS: displays map menu options
     private void displayMenu() {
-        System.out.println("\n=====================================");
-        System.out.println("      GAME OF THRONES MAP MENU       ");
-        System.out.println("=====================================");
-        System.out.println("[va] View all cities");
-        System.out.println("[cv] Change visit status of cities");
-        System.out.println("[vc] View only custom-made cities");
-        System.out.println("[a] Add a custom city");
-        System.out.println("[p] Display your progress toward visiting cities");
-        System.out.println("[q] Quit");
-        System.out.println("=====================================");
-        System.out.print("Enter your choice: ");
+        System.out.println("╔════════════════════════════════════════╗");
+        System.out.println("║       GAME OF THRONES MAP MENU         ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.println("║  [va] View all cities                  ║");
+        System.out.println("║  [cv] Change visit status of cities    ║");
+        System.out.println("║  [vc] View only custom-made cities     ║");
+        System.out.println("║  [a]  Add a custom city                ║");
+        System.out.println("║  [p]  Display your progress            ║");
+        System.out.println("║  [q]  Quit                            ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.print("║  Enter your choice: ");
     }
     
 
@@ -115,23 +115,33 @@ public class MapApp {
     // EFFECTS: displays all cities one by one
     private void viewAllCities() {
         if (cities.isEmpty()) {
-            System.out.println("\nNo cities available.");
+            System.out.println("╔═══════════════════════════════════╗");
+            System.out.println("║     No cities available           ║");
+            System.out.println("╚═══════════════════════════════════╝");
             return;
         }
     
-        System.out.println("\n--------- Cities ---------");
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║                     ALL CITIES                             ║");
+        System.out.println("╠════════════════════════════════════════════════════════════╣");
     
         for (City city : cities) {
             String capitalStatus = city.getIsCapital() ? " (Capital)" : "";
-            String visitedStatus = city.getVisited() ? " Visited" : " Not Visited";
+            String visitedStatus = city.getVisited() ? "Yes" : "No";
     
-            System.out.printf(
-                    "%s%s - Ruled by House %s | Region: %s | Population: %,d | %s%n",
-                    city.getName(), capitalStatus, city.getHouse(), city.getRegion(), city.getPopulation(), visitedStatus
-            );
-            System.out.println();
+            System.out.println("║  Name: " + padRight(city.getName() + capitalStatus, 52) + "║");
+            System.out.println("║  House: " + padRight(city.getHouse(), 52) + "║");
+            System.out.println("║  Region: " + padRight(city.getRegion(), 51) + "║");
+            System.out.println("║  Population: " + padRight(String.format("%,d", city.getPopulation()), 47) + "║");
+            System.out.println("║  Visited: " + padRight(visitedStatus, 50) + "║");
+            System.out.println("╠════════════════════════════════════════════════════════════╣");
         }
-        System.out.println("-------------------------");
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
+    }
+    
+    // Helper method to pad strings to the right
+    private String padRight(String s, int n) {
+        return String.format("%-" + n + "s", s);
     }
     
 
@@ -159,16 +169,16 @@ public class MapApp {
 
     // EFFECTS: displays options menu for custom cities
     private void customCitiesMenu() {
-        System.out.println("\n=====================================");
-        System.out.println("      CUSTOM CITIES MANAGEMENT      ");
-        System.out.println("=====================================");
-        System.out.println("[r] Remove a city");
-        System.out.println("[a] Establish an alliance");
-        System.out.println("[v] Toggle visited status");
-        System.out.println("[n] Go to the next city");
-        System.out.println("[q] Quit");
-        System.out.println("=====================================");
-        System.out.print("Enter your choice: ");
+        System.out.println("╔════════════════════════════════════════╗");
+        System.out.println("║       CUSTOM CITIES MANAGEMENT         ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.println("║  [r] Remove a city                     ║");
+        System.out.println("║  [a] Establish an alliance            ║");
+        System.out.println("║  [v] Toggle visited status            ║");
+        System.out.println("║  [n] Go to the next city              ║");
+        System.out.println("║  [q] Quit                            ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.print("║  Enter your choice: ");
     }
     
 
@@ -197,25 +207,36 @@ public class MapApp {
     // EFFECTS displays custom cities one by one with ability to change their settings
     private void changeCustomCities() {
         System.out.println();
-        if(customCities.isEmpty()) {
-            System.out.println("No custom cities created : (");
+        if (customCities.isEmpty()) {
+            System.out.println("╔═══════════════════════════════════╗");
+            System.out.println("║     No custom cities created :(   ║");
+            System.out.println("╚═══════════════════════════════════╝");
         } else {
             for (City city : customCities) {
-                System.out.println("-----------------------------------------------");
-                System.out.println("\t\t\tCity: " + city.getName() + ", alliances: "
-                        + displayAllianceNames(city.getAlliances()) + ", visited: "
-                        + city.getVisited());
-                System.out.println("-----------------------------------------------");
-
+                displayCityInfo(city);
                 customCitiesMenu();
                 String choice = input.next().toLowerCase();
-    
+                
                 if (choice.equals("q")) {
                     break;
                 }
                 handleInputCustomCityView(choice, city);
             }
         }
+    }
+    
+    private void displayCityInfo(City city) {
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║                     CITY INFORMATION                       ║");
+        System.out.println("╠════════════════════════════════════════════════════════════╣");
+        System.out.printf("║  Name: %-52s║%n", city.getName());
+        System.out.printf("║  Population: %-47d║%n", city.getPopulation());
+        System.out.printf("║  House: %-52s║%n", city.getHouse());
+        System.out.printf("║  Region: %-51s║%n", city.getRegion());
+        System.out.printf("║  Capital City: %-45s║%n", city.getIsCapital() ? "Yes" : "No");
+        System.out.printf("║  Visited: %-50s║%n", city.getVisited() ? "Yes" : "No");
+        System.out.printf("║  Alliances: %-48s║%n", displayAllianceNames(city.getAlliances()));
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
 
     
