@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.City;
+import model.Progress;
 
 /*
  * Represents a UI to handle all of the user interaction with the console.
@@ -324,7 +325,35 @@ public class MapApp {
 
     // EFFETS: shows the visited city progress as a progress bar
     private void displayProgress() {
-
+        int numVisited = Progress.getNumVisited();
+        int totalCities = Progress.getTotalNumCities();
+        
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║                    VISITING PROGRESS                        ║");
+        System.out.println("╠════════════════════════════════════════════════════════════╣");
+        
+        if (totalCities == 0) {
+            System.out.println("║  No cities available to visit                              ║");
+        } else {
+            int percentage = (int)((numVisited * 100.0) / totalCities);
+            int barLength = 50;  // Total length of the progress bar
+            int filledLength = (int)((numVisited * (double)barLength) / totalCities);
+            
+            StringBuilder bar = new StringBuilder("║  [");
+            for (int i = 0; i < barLength; i++) {
+                if (i < filledLength) {
+                    bar.append("█");  // Filled portion
+                } else {
+                    bar.append("░");  // Empty portion
+                }
+            }
+            bar.append("]  ║");
+            
+            System.out.println(bar.toString());
+            System.out.printf("║  Cities Visited: %d/%d (%d%%)                               ║%n", 
+                    numVisited, totalCities, percentage);
+        }
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
 
 }
