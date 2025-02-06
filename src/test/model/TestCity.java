@@ -15,6 +15,8 @@ public class TestCity {
     void runBefore() {
         Progress.setTotalNumCities(0);
         Progress.setNumCitiesVisited(0);
+        Progress.setTotalNumEntries(0);
+        Progress.setTotalNumVisited(0);
         city = new City("Winterfell", 15000, "Stark", "The North", true, false);
 
     }
@@ -31,6 +33,8 @@ public class TestCity {
         assertFalse(city.getVisited());
         assertEquals(2, Progress.getTotalNumCities());
         assertEquals(0, Progress.getNumCitiesVisited());
+        assertEquals(2, Progress.getTotalNumEntries());
+        assertEquals(0, Progress.getTotalNumVisitedEntries());
         assertTrue(c2.customMade());
         assertFalse(city.customMade());
     }
@@ -58,8 +62,10 @@ public class TestCity {
     void toggleVisitedWhenFalseTest() {
         assertFalse(city.getVisited());
         assertEquals(0, Progress.getNumCitiesVisited());
+        assertEquals(0, Progress.getTotalNumVisitedEntries());
         city.toggleVisited();
         assertEquals(1, Progress.getNumCitiesVisited());
+        assertEquals(1, Progress.getTotalNumVisitedEntries());
         assertTrue(city.getVisited());
     }
 
@@ -67,10 +73,12 @@ public class TestCity {
     void toggleVisitedWhenTrueTest() {
         city.toggleVisited();
         assertEquals(1, Progress.getNumCitiesVisited());
+        assertEquals(1, Progress.getTotalNumVisitedEntries());
         assertTrue(city.getVisited());
         city.toggleVisited();
         assertFalse(city.getVisited());
         assertEquals(0, Progress.getNumCitiesVisited());
+        assertEquals(0, Progress.getTotalNumVisitedEntries());
     }
 
     @Test
@@ -84,13 +92,16 @@ public class TestCity {
     void toggleVisitedTrueTwiceTest() {
         city.toggleVisited();
         assertEquals(1, Progress.getNumCitiesVisited());
+        assertEquals(1, Progress.getTotalNumVisitedEntries());
         assertTrue(city.getVisited());
         city.toggleVisited();
         assertFalse(city.getVisited());
         assertEquals(0, Progress.getNumCitiesVisited());
+        assertEquals(0, Progress.getTotalNumVisitedEntries());
         city.toggleVisited();
         assertTrue(city.getVisited());
         assertEquals(1, Progress.getNumCitiesVisited());
+        assertEquals(1, Progress.getTotalNumVisitedEntries());
     }
 
     @Test
@@ -135,6 +146,7 @@ public class TestCity {
         City c1 = new City("test 1", 10, "none", "Iron islands", false, true);
         City c2 = new City("test 2", 100, "none", "Crownlands", true, true);
         assertEquals(3, Progress.getTotalNumCities());
+        assertEquals(3, Progress.getTotalNumEntries());
         city.addAlliance(c1);
         city.addAlliance(c2);
         assertEquals(1, c1.getAlliances().size());
@@ -153,6 +165,7 @@ public class TestCity {
         City c1 = new City("test 1", 10, "none", "Iron islands", false, false);
         City c2 = new City("test 2", 100, "none", "Crownlands", true, false);
         assertEquals(3, Progress.getTotalNumCities());
+        assertEquals(3, Progress.getTotalNumEntries());
         city.addAlliance(c1);
         city.addAlliance(c2);
         assertEquals(1, c1.getAlliances().size());
