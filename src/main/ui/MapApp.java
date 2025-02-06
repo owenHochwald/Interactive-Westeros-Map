@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.City;
+import model.Location;
 import model.Progress;
 
 /*
@@ -14,9 +15,9 @@ import model.Progress;
 
 public class MapApp {
     private ArrayList<City> cities;
-    private Scanner input;
     private ArrayList<City> customCities;
-    
+    private ArrayList<Location> locations;
+    private Scanner input;
 
     // EFFECTS: runs the Westeros Map App
     public MapApp() {
@@ -50,10 +51,10 @@ public class MapApp {
     // MODIFES: this
     // EFFECTS: inits preset locations to the map
     private void init() {
-
         this.cities = new ArrayList<>();
-        this.input = new Scanner(System.in);
         this.customCities = new ArrayList<>();
+        this.locations = new ArrayList<>();
+        this.input = new Scanner(System.in);
 
         City kingsLanding = new City("King's Landing", 500000, "Baratheon", "Crownlands", true, false);
         City winterfell = new City("Winterfell", 100000, "Stark", "The North", true, false);
@@ -70,6 +71,13 @@ public class MapApp {
         cities.add(sunspear);
         cities.add(riverrun);
 
+        Location godsEye = new Location("Gods Eye", "The Riverlands", false);
+        Location theWall = new Location("The Wall", "The North", false);
+        Location wolfsWood = new Location("Wolf's Wood", "The North", false);
+        locations.add(godsEye);
+        locations.add(theWall);
+        locations.add(wolfsWood);
+
     }
 
     // EFFECTS: displays map menu options
@@ -78,15 +86,17 @@ public class MapApp {
         System.out.println("║       GAME OF THRONES MAP MENU         ║");
         System.out.println("╠════════════════════════════════════════╣");
         System.out.println("║  [va] View all cities                  ║");
-        System.out.println("║  [cv] Change visit status of cities    ║");
         System.out.println("║  [vc] View only custom-made cities     ║");
-        System.out.println("║  [a]  Add a custom city                ║");
+        System.out.println("║  [l]  View all locations               ║");
+        System.out.println("║  [lc] View only custom-made locations  ║");
+        System.out.println("║  [v] Visit places                      ║");
+        System.out.println("║  [al]  Add a custom location           ║");
+        System.out.println("║  [ac]  Add a custom city               ║");
         System.out.println("║  [p]  Display your progress            ║");
-        System.out.println("║  [q]  Quit                            ║");
+        System.out.println("║  [q]  Quit                             ║");
         System.out.println("╠════════════════════════════════════════╣");
         System.out.print("║  Enter your choice: ");
     }
-    
 
     // MODIFIES: this
     // EFFECTS: processes user keyboard input
@@ -95,17 +105,26 @@ public class MapApp {
             case "va":
                 viewAllCities();
                 break;
-            case "cv":
+            case "v":
                 changeVisitStatus();
                 break;
             case "vc":
                 changeCustomCities();
                 break;
-            case "a":
+            case "ac":
                 addCity();
+                break;
+            case "al":
+                addLocation();
                 break;
             case "p":
                 displayProgress();
+                break;
+            case "l":
+                viewAllLocations();
+                break;
+            case "lc":
+                viewCustomLocations();
                 break;
             default:
                 System.out.println("Invalid selection!");
@@ -121,15 +140,15 @@ public class MapApp {
             System.out.println("╚═══════════════════════════════════╝");
             return;
         }
-    
+
         System.out.println("╔════════════════════════════════════════════════════════════╗");
         System.out.println("║                     ALL CITIES                             ║");
         System.out.println("╠════════════════════════════════════════════════════════════╣");
-    
+
         for (City city : cities) {
             String capitalStatus = city.getIsCapital() ? " (Capital)" : "";
             String visitedStatus = city.getVisited() ? "Yes" : "No";
-    
+
             System.out.println("║  Name: " + padRight(city.getName() + capitalStatus, 52) + "║");
             System.out.println("║  House: " + padRight(city.getHouse(), 52) + "║");
             System.out.println("║  Region: " + padRight(city.getRegion(), 51) + "║");
@@ -139,52 +158,70 @@ public class MapApp {
         }
         System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
-    
+
     // Helper method to pad strings to the right
     private String padRight(String s, int n) {
         return String.format("%-" + n + "s", s);
     }
-    
 
     // MODIFIES: this
     // EFFECTS: allow user to change visit status one by one of each city
     private void changeVisitStatus() {
-        if (cities.isEmpty()) {
-            System.out.println("╔═══════════════════════════════════╗");
-            System.out.println("║     No cities available           ║");
-            System.out.println("╚═══════════════════════════════════╝");
-            return;
-        }
-        
         System.out.println("╔════════════════════════════════════════════════════════════╗");
         System.out.println("║                 CHANGE VISIT STATUS                        ║");
         System.out.println("╠════════════════════════════════════════════════════════════╣");
-        System.out.println("║  [m] Toggle city visited status                           ║");
-        System.out.println("║  [n] Next city                                            ║");
+        System.out.println("║  Navigating through cities and locations                   ║");
+        System.out.println("║  [m] Toggle visited status                                 ║");
+        System.out.println("║  [n] Next entry                                            ║");
         System.out.println("╚════════════════════════════════════════════════════════════╝");
-        
-        for (City city : cities) {
-            String visitedStatus = city.getVisited() ? "Visited" : "Not Visited";
-            String capitalStatus = city.getIsCapital() ? " (Capital)" : "";
-            
+    
+        // Combine cities and locations in one list for iteration
+        ArrayList<Object> places = new ArrayList<>();
+        places.addAll(cities);
+        places.addAll(locations);
+    
+        for (Object place : places) {
+            String name;
+            boolean isVisited;
+            String additionalInfo = "";
+    
+            if (place instanceof City) {
+                City city = (City) place;
+                name = city.getName();
+                isVisited = city.getVisited();
+                additionalInfo = city.getIsCapital() ? " (Capital)" : "";
+            } else if (place instanceof Location) {
+                Location location = (Location) place;
+                name = location.getName();
+                isVisited = location.getVisited(); // Assumes Location has isVisited() method
+            } else {
+                continue;
+            }
+    
+            String visitedStatus = isVisited ? "Visited" : "Not Visited";
+    
             System.out.println("╔════════════════════════════════════════════════════════════╗");
-            System.out.printf("║  Current City: %-43s║%n", city.getName() + capitalStatus);
+            System.out.printf("║  Current Place: %-43s║%n", name + additionalInfo);
             System.out.printf("║  Status: %-49s║%n", visitedStatus);
             System.out.print("║  Enter choice: ");
-            
+    
             String choice = input.next().toLowerCase();
-            
+    
             switch (choice) {
                 case "m":
-                    city.toggleVisited();
-                    String newStatus = city.getVisited() ? "Visited" : "Not Visited";
+                    if (place instanceof City) {
+                        ((City) place).toggleVisited();
+                    } else if (place instanceof Location) {
+                        ((Location) place).toggleVisited(); // Assumes Location has toggleVisited() method
+                    }
+                    String newStatus = isVisited ? "Not Visited" : "Visited";
                     System.out.printf("║  Status updated to: %-39s║%n", newStatus);
                     break;
                 case "n":
-                    System.out.println("║  Moving to next city...                                    ║");
+                    System.out.println("║  Moving to next place...                                    ║");
                     break;
                 default:
-                    System.out.println("║  Invalid choice, moving to next city...                    ║");
+                    System.out.println("║  Invalid choice, moving to next place...                    ║");
                     break;
             }
             System.out.println("╚════════════════════════════════════════════════════════════╝");
@@ -205,7 +242,6 @@ public class MapApp {
         System.out.println("╠════════════════════════════════════════╣");
         System.out.print("║  Enter your choice: ");
     }
-    
 
     // MODIFIES: this
     // EFFECTS: processes user keyboard input for custom cities view
@@ -229,8 +265,10 @@ public class MapApp {
     }
 
     // MODIFIES: this
-    // EFFECTS displays custom cities one by one with ability to change their settings
+    // EFFECTS displays custom cities one by one with ability to change their
+    // settings
     private void changeCustomCities() {
+        ArrayList<City> customCities = getCustomCities();
         System.out.println();
         if (customCities.isEmpty()) {
             System.out.println("╔═══════════════════════════════════╗");
@@ -241,7 +279,7 @@ public class MapApp {
                 displayCityInfo(city);
                 customCitiesMenu();
                 String choice = input.next().toLowerCase();
-                
+
                 if (choice.equals("q")) {
                     break;
                 }
@@ -249,7 +287,7 @@ public class MapApp {
             }
         }
     }
-    
+
     private void displayCityInfo(City city) {
         System.out.println("╔════════════════════════════════════════════════════════════╗");
         System.out.println("║                     CITY INFORMATION                       ║");
@@ -264,46 +302,134 @@ public class MapApp {
         System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
 
-    
+    private void viewCustomLocations() {
+        ArrayList<Location> customLocations = getCustomLocations();
+
+        if (customLocations.isEmpty()) {
+            System.out.println("╔═══════════════════════════════════╗");
+            System.out.println("║   No custom locations created :(  ║");
+            System.out.println("╚═══════════════════════════════════╝");
+            return;
+        }
+
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║                   CUSTOM LOCATIONS                         ║");
+        System.out.println("╠════════════════════════════════════════════════════════════╣");
+
+        for (Location location : customLocations) {
+            displayLocationInfo(location);
+        }
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
+    }
+
+    // Helper method to get custom cities
+    private ArrayList<City> getCustomCities() {
+        ArrayList<City> customCities = new ArrayList<>();
+        for (City city : cities) {
+            if (city.customMade()) {
+                customCities.add(city);
+            }
+        }
+        return customCities;
+    }
+
+    // Helper method to get custom locations
+    private ArrayList<Location> getCustomLocations() {
+        ArrayList<Location> customLocations = new ArrayList<>();
+        for (Location location : locations) {
+            if (location.customMade()) {
+                customLocations.add(location);
+            }
+        }
+        return customLocations;
+    }
+
+    // EFFECTS: displays all locations to the console
+    private void viewAllLocations() {
+        if (locations.isEmpty()) {
+            System.out.println("╔═══════════════════════════════════╗");
+            System.out.println("║     No locations available        ║");
+            System.out.println("╚═══════════════════════════════════╝");
+            return;
+        }
+
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║                     ALL LOCATIONS                          ║");
+        System.out.println("╠════════════════════════════════════════════════════════════╣");
+
+        for (Location location : locations) {
+            displayLocationInfo(location);
+        }
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
+    }
+
+    // Helper method for viewAllLocations
+    // EFFECTS: displays a single Location to the screen
+    private void displayLocationInfo(Location location) {
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║                   LOCATION INFORMATION                     ║");
+        System.out.println("╠════════════════════════════════════════════════════════════╣");
+        System.out.printf("║  Name: %-52s║%n", location.getName());
+        System.out.printf("║  Region: %-50s║%n", location.getRegion());
+        System.out.printf("║  Visited: %-49s║%n", location.getVisited() ? "Yes" : "No");
+        System.out.println("╚════════════════════════════════════════════════════════════╝");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds a custom location
+    private void addLocation() {
+        System.out.println("\nEnter location details:");
+
+        System.out.print("Name: ");
+        String name = input.next();
+        input.nextLine();
+
+        System.out.print("Region: ");
+        String region = input.nextLine();
+
+        Location newLocation = new Location(name, region, true);
+        locations.add(newLocation);
+
+        System.out.println("Added " + name + " successfully!");
+    }
 
     // MODIFIES: this
     // EFFECTS: adds a custom city
     private void addCity() {
         System.out.println("\nEnter city details:");
-    
+
         System.out.print("Name: ");
         String name = input.next();
-        input.nextLine(); 
-    
+        input.nextLine();
+
         System.out.print("Population: ");
         while (!input.hasNextInt()) {
             System.out.println("Invalid input. Please enter a valid number for population.");
-            input.next(); 
+            input.next();
         }
         int population = input.nextInt();
-        input.nextLine(); 
-    
+        input.nextLine();
+
         System.out.print("House (ruling family): ");
         String house = input.nextLine();
-    
+
         System.out.print("Region: ");
         String region = input.nextLine();
-    
+
         System.out.print("Is this city a capital? (true/false): ");
         while (!input.hasNextBoolean()) {
             System.out.println("Invalid input. Please enter true or false.");
-            input.next(); 
+            input.next();
         }
         boolean isCapital = input.nextBoolean();
         input.nextLine();
-    
+
         City newCity = new City(name, population, house, region, isCapital, true);
         cities.add(newCity);
         customCities.add(newCity);
-    
+
         System.out.println("Added " + name + " successfully!");
     }
-    
 
     // REQUIRES: city in cities
     // MODIFIES: this
@@ -349,34 +475,26 @@ public class MapApp {
 
     // EFFETS: shows the visited city progress as a progress bar
     private void displayProgress() {
-        int numVisited = Progress.getNumCitiesVisited();
-        int totalCities = Progress.getTotalNumCities();
-        
+        int numVisited = Progress.getTotalNumVisitedEntries();
+        int totalPlaces = Progress.getTotalNumEntries();
         System.out.println("╔════════════════════════════════════════════════════════════╗");
         System.out.println("║                    VISITING PROGRESS                        ║");
         System.out.println("╠════════════════════════════════════════════════════════════╣");
-        
-        if (totalCities == 0) {
-            System.out.println("║  No cities available to visit                              ║");
-        } else {
-            int percentage = (int)((numVisited * 100.0) / totalCities);
-            int barLength = 50;  // Total length of the progress bar
-            int filledLength = (int)((numVisited * (double)barLength) / totalCities);
-            
-            StringBuilder bar = new StringBuilder("║  [");
-            for (int i = 0; i < barLength; i++) {
-                if (i < filledLength) {
-                    bar.append("█");  // Filled portion
-                } else {
-                    bar.append("░");  // Empty portion
-                }
+        int percentage = (int) ((numVisited * 100.0) / totalPlaces);
+        int barLength = 50; 
+        int filledLength = (int) ((numVisited * (double) barLength) / totalPlaces);
+        StringBuilder bar = new StringBuilder("║  [");
+        for (int i = 0; i < barLength; i++) {
+            if (i < filledLength) {
+                bar.append("█"); 
+            } else {
+                bar.append("░");
             }
-            bar.append("]  ║");
-            
-            System.out.println(bar.toString());
-            System.out.printf("║  Cities Visited: %d/%d (%d%%)                               ║%n", 
-                    numVisited, totalCities, percentage);
         }
+        bar.append("]  ║");
+        System.out.println(bar.toString());
+        System.out.printf("║  Places Visited: %d/%d (%d%%)                               ║%n",
+                    numVisited, totalPlaces, percentage);
         System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
 
