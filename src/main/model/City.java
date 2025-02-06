@@ -37,6 +37,20 @@ public class City extends Location {
         
     }
 
+    // MODIFES: this, Progress
+    // EFFECTS: toggles wether a location is visited or not
+    @Override
+    public void toggleVisited() {
+        if (!visited) {
+            Progress.increaseNumVisitedEntries();
+            Progress.increaseNumCitiesVisited();
+        } else {
+            Progress.decreasesNumVisitedEntries();
+            Progress.decreaseNumCitiesVisited();
+        }
+        visited = !visited;
+    }
+
     // MODIFIES: this
     // EFFECTS: toggles wether a city is a capital city or not
     public void toggleCapital() {

@@ -21,18 +21,18 @@ public class Location {
         this.region = region;
         this.visited = false;
         this.customMade = customMade;
-        // TODO: add Progress updates
+        Progress.increaseNumEntries();
     }
 
 
 
-    // MODIFES: this
+    // MODIFES: this, Progress
     // EFFECTS: toggles wether a location is visited or not
     public void toggleVisited() {
         if (!visited) {
-            Progress.increaseNumCitiesVisited();
+            Progress.increaseNumVisitedEntries();
         } else {
-            Progress.decreaseNumCitiesVisited();
+            Progress.decreasesNumVisitedEntries();
         }
         visited = !visited;
     }
