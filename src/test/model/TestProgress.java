@@ -15,6 +15,8 @@ public class TestProgress {
     void setup() {
         Progress.setNumCitiesVisited(0);
         Progress.setTotalNumCities(0);
+        Progress.resetTotalEntry();
+        Progress.resetEntryProgress();
     }
 
     @Test
@@ -96,6 +98,7 @@ public class TestProgress {
 
     @Test
     void decreaseNumEntriesVisitedByOneTest(){
+        Progress.setTotalNumEntries(1);
         Progress.increaseNumVisitedEntries();
         assertEquals(1, Progress.getTotalNumVisitedEntries());
 
@@ -111,15 +114,15 @@ public class TestProgress {
     @Test
     void setEntriesOneVisitedTest() {
         Progress.setTotalNumVisited(1);
-        assertEquals(1, Progress.getTotalNumEntries());
+        assertEquals(1, Progress.getTotalNumVisitedEntries());
         Progress.setTotalNumVisited(10);
-        assertEquals(10, Progress.getTotalNumEntries());
+        assertEquals(10, Progress.getTotalNumVisitedEntries());
     }
 
     
     @Test
     void decreaseNumVisitedEntriesByTwoTest(){
-        Progress.setTotalNumEntries(3);
+        Progress.setTotalNumVisited(3);
         assertEquals(3, Progress.getTotalNumVisitedEntries());
 
         Progress.decreasesNumVisitedEntries();
@@ -139,7 +142,7 @@ public class TestProgress {
     void resetProgressFromTenEntriesTest() {
         Progress.setTotalNumEntries(10);
         assertEquals(10, Progress.getTotalNumEntries());
-        Progress.resetEntryProgress();
+        Progress.resetTotalEntry();
         assertEquals(0, Progress.getTotalNumEntries());
     }
 
@@ -178,5 +181,25 @@ public class TestProgress {
         assertEquals(9, Progress.getNumCitiesVisited());
         Progress.resetCityProgress();
         assertEquals(0, Progress.getNumCitiesVisited());
+    }
+
+    @Test
+    void resetVisitedCityProgressTest() {
+        Progress.setNumCitiesVisited(10);
+        assertEquals(10, Progress.getNumCitiesVisited());
+        Progress.resetCityProgress();
+        assertEquals(0, Progress.getNumCitiesVisited());
+        Progress.resetCityProgress();
+        assertEquals(0, Progress.getNumCitiesVisited());
+    }
+
+    @Test
+    void resetTotalCityProgressTest() {
+        Progress.setTotalNumCities(10);
+        assertEquals(10, Progress.getTotalNumCities());
+        Progress.resetTotalCities();
+        assertEquals(0, Progress.getTotalNumCities());
+        Progress.resetTotalCities();
+        assertEquals(0, Progress.getTotalNumCities());
     }
 }
