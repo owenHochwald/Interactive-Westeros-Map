@@ -1,17 +1,17 @@
 package model;
 
 /*
-* Location to represent map locations, like natural landmarks, with a name, region, 
-* House, and a custom made boolean
+* Location to represent map locations, like natural landmarks, with a name, region,
+* and a custom made boolean
 */
 
 public class Location {
 
     // REQUIRES: name, region, house must not be null / empty,  population >= 10
     // MODIFIES: this, Progress
-    // EFFECTS: creates a new unvisited location with given name, house, region,
+    // EFFECTS: creates a new unvisited location with given name, region,
     //          and customMade. Increases total number of locations by 1.
-    public Location(String name, String house, String region, boolean isCapital, boolean customMade) {
+    public Location(String name, String region, boolean visited, boolean customMade) {
     }
 
 
@@ -22,23 +22,12 @@ public class Location {
 
     }
 
-    
-    // setters
-    public void setHouse(String house) {
-
-    }
-
     // getters
-
     public String getName() {
         return "";
     }
 
     public String getRegion() {
-        return "";
-    }
-
-    public String getHouse() {
         return "";
     }
 
