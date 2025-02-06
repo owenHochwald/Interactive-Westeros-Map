@@ -29,16 +29,13 @@ public class MapApp {
     // EFFECTS: handle user input
     private void runApp() {
         String command = null;
-
         System.out.println("Welcome to the Westeros Interactive Map(Console Version)!");
 
         init();
 
         while (true) {
             displayMenu();
-
             command = input.next().toLowerCase();
-
             if (command.equals("q")) {
                 System.out.println("Thanks for playing!");
                 break;
@@ -55,29 +52,28 @@ public class MapApp {
         this.customCities = new ArrayList<>();
         this.locations = new ArrayList<>();
         this.input = new Scanner(System.in);
+        initCities();
+        initLocations();
+    }
 
-        City kingsLanding = new City("King's Landing", 500000, "Baratheon", "Crownlands", true, false);
-        City winterfell = new City("Winterfell", 100000, "Stark", "The North", true, false);
-        City lannisport = new City("Lannisport", 50000, "Lannister", "The Westerlands", false, false);
-        City oldtown = new City("Oldtown", 200000, "Hightower", "The Reach", false, false);
-        City whiteHarbor = new City("White Harbor", 100000, "Manderly", "The North", false, false);
-        City sunspear = new City("Sunspear", 50000, "Martell", "Dorne", true, false);
-        City riverrun = new City("Riverrun", 40000, "Tully", "The Riverlands", false, false);
-        cities.add(kingsLanding);
-        cities.add(winterfell);
-        cities.add(lannisport);
-        cities.add(oldtown);
-        cities.add(whiteHarbor);
-        cities.add(sunspear);
-        cities.add(riverrun);
+    // MODIFIES: this
+    // EFFECTS: initializes preset cities
+    private void initCities() {
+        cities.add(new City("King's Landing", 500000, "Baratheon", "Crownlands", true, false));
+        cities.add(new City("Winterfell", 100000, "Stark", "The North", true, false));
+        cities.add(new City("Lannisport", 50000, "Lannister", "The Westerlands", false, false));
+        cities.add(new City("Oldtown", 200000, "Hightower", "The Reach", false, false));
+        cities.add(new City("White Harbor", 100000, "Manderly", "The North", false, false));
+        cities.add(new City("Sunspear", 50000, "Martell", "Dorne", true, false));
+        cities.add(new City("Riverrun", 40000, "Tully", "The Riverlands", false, false));
+    }
 
-        Location godsEye = new Location("Gods Eye", "The Riverlands", false);
-        Location theWall = new Location("The Wall", "The North", false);
-        Location wolfsWood = new Location("Wolf's Wood", "The North", false);
-        locations.add(godsEye);
-        locations.add(theWall);
-        locations.add(wolfsWood);
-
+    // MODIFIES: this
+    // EFFECTS: initializes preset locations
+    private void initLocations() {
+        locations.add(new Location("Gods Eye", "The Riverlands", false));
+        locations.add(new Location("The Wall", "The North", false));
+        locations.add(new Location("Wolf's Wood", "The North", false));
     }
 
     // EFFECTS: displays map menu options
@@ -102,34 +98,16 @@ public class MapApp {
     // EFFECTS: processes user keyboard input
     private void handleInput(String key) {
         switch (key) {
-            case "va":
-                viewAllCities();
-                break;
-            case "v":
-                changeVisitStatus();
-                break;
-            case "vc":
-                changeCustomCities();
-                break;
-            case "ac":
-                addCity();
-                break;
-            case "al":
-                addLocation();
-                break;
-            case "p":
-                displayProgress();
-                break;
-            case "l":
-                viewAllLocations();
-                break;
-            case "lc":
-                viewCustomLocations();
-                break;
-            default:
-                System.out.println("Invalid selection!");
+            case "va" -> viewAllCities();
+            case "v" -> changeVisitStatus();
+            case "vc" -> changeCustomCities();
+            case "ac" -> addCity();
+            case "al" -> addLocation();
+            case "p" -> displayProgress();
+            case "l" -> viewAllLocations();
+            case "lc" -> viewCustomLocations();
+            default -> System.out.println("Invalid selection!");
         }
-
     }
 
     // EFFECTS: displays all cities one by one
@@ -164,9 +142,9 @@ public class MapApp {
         return String.format("%-" + n + "s", s);
     }
 
-    // MODIFIES: this
-    // EFFECTS: allow user to change visit status one by one of each city
-    private void changeVisitStatus() {
+    // helper for the changeVisitStatus method
+    // EFFECTS: displays the visit status menu
+    private void displayVisitStatusMenu() {
         System.out.println("╔════════════════════════════════════════════════════════════╗");
         System.out.println("║                 CHANGE VISIT STATUS                        ║");
         System.out.println("╠════════════════════════════════════════════════════════════╣");
@@ -174,59 +152,68 @@ public class MapApp {
         System.out.println("║  [m] Toggle visited status                                 ║");
         System.out.println("║  [n] Next entry                                            ║");
         System.out.println("╚════════════════════════════════════════════════════════════╝");
-    
-        // Combine cities and locations in one list for iteration
-        ArrayList<Object> places = new ArrayList<>();
+    }
+
+    // EFFECTS: displays the current place being modified
+    private void displayCurrentPlace(String name, boolean isVisited, String additionalInfo) {
+        String visitedStatus = isVisited ? "Visited" : "Not Visited";
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.printf("║  Current Place: %-43s║%n", name + additionalInfo);
+        System.out.printf("║  Status: %-49s║%n", visitedStatus);
+        System.out.print("║  Enter choice: ");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: allow user to change visit status one by one of each city
+    private void changeVisitStatus() {
+        displayVisitStatusMenu();
+
+        ArrayList<Location> places = new ArrayList<>();
         places.addAll(cities);
         places.addAll(locations);
-    
-        for (Object place : places) {
-            String name;
-            boolean isVisited;
-            String additionalInfo = "";
-    
-            if (place instanceof City) {
-                City city = (City) place;
-                name = city.getName();
-                isVisited = city.getVisited();
-                additionalInfo = city.getIsCapital() ? " (Capital)" : "";
-            } else if (place instanceof Location) {
-                Location location = (Location) place;
-                name = location.getName();
-                isVisited = location.getVisited(); // Assumes Location has isVisited() method
-            } else {
-                continue;
-            }
-    
-            String visitedStatus = isVisited ? "Visited" : "Not Visited";
-    
-            System.out.println("╔════════════════════════════════════════════════════════════╗");
-            System.out.printf("║  Current Place: %-43s║%n", name + additionalInfo);
-            System.out.printf("║  Status: %-49s║%n", visitedStatus);
-            System.out.print("║  Enter choice: ");
-    
+        for (Location place : places) {
+            handlePlace(place);
+
             String choice = input.next().toLowerCase();
-    
-            switch (choice) {
-                case "m":
-                    if (place instanceof City) {
-                        ((City) place).toggleVisited();
-                    } else if (place instanceof Location) {
-                        ((Location) place).toggleVisited(); // Assumes Location has toggleVisited() method
-                    }
-                    String newStatus = isVisited ? "Not Visited" : "Visited";
-                    System.out.printf("║  Status updated to: %-39s║%n", newStatus);
-                    break;
-                case "n":
-                    System.out.println("║  Moving to next place...                                    ║");
-                    break;
-                default:
-                    System.out.println("║  Invalid choice, moving to next place...                    ║");
-                    break;
+            if (choice.equals("m")) {
+                toggleVisitStatus(place, place.getVisited());
+            } else if (!choice.equals("n")) {
+                System.out.println("║  Invalid choice, moving to next place...                    ║");
             }
-            System.out.println("╚════════════════════════════════════════════════════════════╝");
-            System.out.println();
+            System.out.println("╚════════════════════════════════════════════════════════════╝\n");
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: helper to process the places lists
+    private void handlePlace(Location place) {
+        String name;
+        boolean isVisited;
+        String additionalInfo = "";
+
+        if (place instanceof City) {
+            City city = (City) place;
+            name = city.getName();
+            isVisited = city.getVisited();
+            additionalInfo = city.getIsCapital() ? " (Capital)" : "";
+        } else {
+            name = place.getName();
+            isVisited = place.getVisited();
+        }
+
+        displayCurrentPlace(name, isVisited, additionalInfo);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: toggles the visited status of the given place
+    private void toggleVisitStatus(Location place, boolean isVisited) {
+        if (place instanceof City) {
+            ((City) place).toggleVisited();
+        } else {
+            ((Location) place).toggleVisited();
+        }
+        String newStatus = isVisited ? "Not Visited" : "Visited";
+        System.out.printf("║  Status updated to: %-39s║%n", newStatus);
     }
 
     // EFFECTS: displays options menu for custom cities
@@ -397,45 +384,61 @@ public class MapApp {
     // EFFECTS: adds a custom city
     private void addCity() {
         System.out.println("\nEnter city details:");
-
-        System.out.print("Name: ");
-        String name = input.next();
-        input.nextLine();
-
-        System.out.print("Population: ");
-        while (!input.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a valid number for population.");
-            input.next();
-        }
-        int population = input.nextInt();
-        input.nextLine();
-
-        System.out.print("House (ruling family): ");
-        String house = input.nextLine();
-
-        System.out.print("Region: ");
-        String region = input.nextLine();
-
-        System.out.print("Is this city a capital? (true/false): ");
-        while (!input.hasNextBoolean()) {
-            System.out.println("Invalid input. Please enter true or false.");
-            input.next();
-        }
-        boolean isCapital = input.nextBoolean();
-        input.nextLine();
+        String name = getUserInput("Name: ");
+        int population = getValidatedInt("Population: ");
+        String house = getUserInput("House (ruling family): ");
+        String region = getUserInput("Region: ");
+        boolean isCapital = getValidatedBoolean("Is this city a capital? (true/false): ");
 
         City newCity = new City(name, population, house, region, isCapital, true);
         cities.add(newCity);
         customCities.add(newCity);
-
         System.out.println("Added " + name + " successfully!");
+    }
+
+    // EFFECTS: prompts the user for a string input and returns it
+    private String getUserInput(String prompt) {
+        System.out.print(prompt);
+        input.nextLine();
+        return input.nextLine();
+    }
+
+    // EFFECTS: prompts the user for an integer input and validates it
+    private int getValidatedInt(String prompt) {
+        System.out.print(prompt);
+        while (!input.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a valid number.");
+            input.next();
+        }
+        int value = input.nextInt();
+        input.nextLine();
+        return value;
+    }
+
+    // EFFECTS: prompts the user for a boolean input and validates it
+    private boolean getValidatedBoolean(String prompt) {
+        System.out.print(prompt);
+        while (!input.hasNextBoolean()) {
+            System.out.println("Invalid input. Please enter true or false.");
+            input.next();
+        }
+        boolean value = input.nextBoolean();
+        input.nextLine();
+        return value;
     }
 
     // REQUIRES: city in cities
     // MODIFIES: this
     // EFFECTS: removes a custom city
     private void removeCity(City city) {
+        if (city.getVisited()) {
+            Progress.decreaseNumCitiesVisited();
+            Progress.decreasesNumVisitedEntries();
+        }
+        Progress.decreasesNumEntries();
+        Progress.setTotalNumCities(Progress.getTotalNumCities() - 1);
         cities.remove(city);
+
     }
 
     // REQUIRES: city is in cities
@@ -481,12 +484,12 @@ public class MapApp {
         System.out.println("║                    VISITING PROGRESS                        ║");
         System.out.println("╠════════════════════════════════════════════════════════════╣");
         int percentage = (int) ((numVisited * 100.0) / totalPlaces);
-        int barLength = 50; 
+        int barLength = 50;
         int filledLength = (int) ((numVisited * (double) barLength) / totalPlaces);
         StringBuilder bar = new StringBuilder("║  [");
         for (int i = 0; i < barLength; i++) {
             if (i < filledLength) {
-                bar.append("█"); 
+                bar.append("█");
             } else {
                 bar.append("░");
             }
@@ -494,7 +497,7 @@ public class MapApp {
         bar.append("]  ║");
         System.out.println(bar.toString());
         System.out.printf("║  Places Visited: %d/%d (%d%%)                               ║%n",
-                    numVisited, totalPlaces, percentage);
+                numVisited, totalPlaces, percentage);
         System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
 
