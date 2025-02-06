@@ -16,14 +16,14 @@ public class TestProgress {
         // c1 = new City("test 1", 10, "none", "Iron islands", false);
         // c2 = new City("test 2", 100, "none", "Crownlands", true);
         // p = new Progress();
-        Progress.setNumVisited(0);
+        Progress.setNumCitiesVisited(0);
         Progress.setTotalNumCities(0);
     }
 
     @Test
     void progressInitTest() {
         assertEquals(0, Progress.getTotalNumCities());
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
     }
 
     @Test
@@ -42,65 +42,65 @@ public class TestProgress {
 
     @Test
     void increaseNumVisitedByOneTest() {
-        Progress.increaseNumVisited();
-        assertEquals(1, Progress.getNumVisited());
+        Progress.increaseNumCitiesVisited();
+        assertEquals(1, Progress.getNumCitiesVisited());
     }
 
     
     @Test
     void increaseNumVisitedByTwoTest() {
-        Progress.increaseNumVisited();
-        Progress.increaseNumVisited();
-        assertEquals(2, Progress.getNumVisited());
+        Progress.increaseNumCitiesVisited();
+        Progress.increaseNumCitiesVisited();
+        assertEquals(2, Progress.getNumCitiesVisited());
     }
 
     @Test
     void increaseNumVisitedByTwoAndDecreaseTest() {
-        Progress.increaseNumVisited();
-        Progress.increaseNumVisited();
-        assertEquals(2, Progress.getNumVisited());
+        Progress.increaseNumCitiesVisited();
+        Progress.increaseNumCitiesVisited();
+        assertEquals(2, Progress.getNumCitiesVisited());
 
-        Progress.decreaseNumVisited();
-        assertEquals(1, Progress.getNumVisited());
+        Progress.decreaseNumCitiesVisited();
+        assertEquals(1, Progress.getNumCitiesVisited());
 
-        Progress.increaseNumVisited();
-        assertEquals(2, Progress.getNumVisited());
+        Progress.increaseNumCitiesVisited();
+        assertEquals(2, Progress.getNumCitiesVisited());
     }
 
     @Test
     void decreaseNumVisitedByOneTest(){
-        Progress.increaseNumVisited();
-        assertEquals(1, Progress.getNumVisited());
+        Progress.increaseNumCitiesVisited();
+        assertEquals(1, Progress.getNumCitiesVisited());
 
-        Progress.decreaseNumVisited();
-        assertEquals(0, Progress.getNumVisited());
+        Progress.decreaseNumCitiesVisited();
+        assertEquals(0, Progress.getNumCitiesVisited());
     }
 
     
     @Test
     void decreaseNumVisitedByTwoTest(){
-        Progress.setNumVisited(3);
-        assertEquals(3, Progress.getNumVisited());
+        Progress.setNumCitiesVisited(3);
+        assertEquals(3, Progress.getNumCitiesVisited());
 
-        Progress.decreaseNumVisited();
-        assertEquals(2, Progress.getNumVisited());
-        Progress.decreaseNumVisited();
-        assertEquals(1, Progress.getNumVisited());
+        Progress.decreaseNumCitiesVisited();
+        assertEquals(2, Progress.getNumCitiesVisited());
+        Progress.decreaseNumCitiesVisited();
+        assertEquals(1, Progress.getNumCitiesVisited());
     }
 
     @Test
     void resetProgressFromZeroTest() {
-        assertEquals(0, Progress.getNumVisited());
-        Progress.resetProgress();
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
+        Progress.resetCityProgress();
+        assertEquals(0, Progress.getNumCitiesVisited());
     }
 
     @Test
     void resetProgressFromNineTest() {
-        assertEquals(0, Progress.getNumVisited());
-        Progress.setNumVisited(9);
-        assertEquals(9, Progress.getNumVisited());
-        Progress.resetProgress();
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
+        Progress.setNumCitiesVisited(9);
+        assertEquals(9, Progress.getNumCitiesVisited());
+        Progress.resetCityProgress();
+        assertEquals(0, Progress.getNumCitiesVisited());
     }
 }

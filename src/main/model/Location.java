@@ -30,9 +30,9 @@ public class Location {
     // EFFECTS: toggles wether a location is visited or not
     public void toggleVisited() {
         if (!visited) {
-            Progress.increaseNumVisited();
+            Progress.increaseNumCitiesVisited();
         } else {
-            Progress.decreaseNumVisited();
+            Progress.decreaseNumCitiesVisited();
         }
         visited = !visited;
     }

@@ -349,7 +349,7 @@ public class MapApp {
 
     // EFFETS: shows the visited city progress as a progress bar
     private void displayProgress() {
-        int numVisited = Progress.getNumVisited();
+        int numVisited = Progress.getNumCitiesVisited();
         int totalCities = Progress.getTotalNumCities();
         
         System.out.println("╔════════════════════════════════════════════════════════════╗");

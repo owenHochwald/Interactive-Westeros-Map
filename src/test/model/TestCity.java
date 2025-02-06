@@ -14,7 +14,7 @@ public class TestCity {
     @BeforeEach
     void runBefore() {
         Progress.setTotalNumCities(0);
-        Progress.setNumVisited(0);
+        Progress.setNumCitiesVisited(0);
         city = new City("Winterfell", 15000, "Stark", "The North", true, false);
 
     }
@@ -30,7 +30,7 @@ public class TestCity {
         assertTrue(city.getAlliances().isEmpty());
         assertFalse(city.getVisited());
         assertEquals(2, Progress.getTotalNumCities());
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
         assertTrue(c2.customMade());
         assertFalse(city.customMade());
     }
@@ -57,20 +57,20 @@ public class TestCity {
     @Test
     void toggleVisitedWhenFalseTest() {
         assertFalse(city.getVisited());
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
         city.toggleVisited();
-        assertEquals(1, Progress.getNumVisited());
+        assertEquals(1, Progress.getNumCitiesVisited());
         assertTrue(city.getVisited());
     }
 
     @Test
     void toggleVisitedWhenTrueTest() {
         city.toggleVisited();
-        assertEquals(1, Progress.getNumVisited());
+        assertEquals(1, Progress.getNumCitiesVisited());
         assertTrue(city.getVisited());
         city.toggleVisited();
         assertFalse(city.getVisited());
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
     }
 
     @Test
@@ -83,14 +83,14 @@ public class TestCity {
     @Test
     void toggleVisitedTrueTwiceTest() {
         city.toggleVisited();
-        assertEquals(1, Progress.getNumVisited());
+        assertEquals(1, Progress.getNumCitiesVisited());
         assertTrue(city.getVisited());
         city.toggleVisited();
         assertFalse(city.getVisited());
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
         city.toggleVisited();
         assertTrue(city.getVisited());
-        assertEquals(1, Progress.getNumVisited());
+        assertEquals(1, Progress.getNumCitiesVisited());
     }
 
     @Test

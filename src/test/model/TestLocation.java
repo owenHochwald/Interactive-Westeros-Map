@@ -12,7 +12,7 @@ public class TestLocation {
 
     @Before
     public void setup() {
-        Progress.setNumVisited(0);
+        Progress.setNumCitiesVisited(0);
         loc = new Location("Kings Road", "Crownlands", true);
     }
 
@@ -21,26 +21,26 @@ public class TestLocation {
         assertEquals("Kings Road", loc.getName());
         assertEquals("Crownlands", loc.getRegion());
         assertTrue(loc.customMade());
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
     }
 
     @Test
     public void toggleVisitedWhenFalseTest() {
         assertFalse(loc.getVisited());
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
         loc.toggleVisited();
-        assertEquals(1, Progress.getNumVisited());
+        assertEquals(1, Progress.getNumCitiesVisited());
         assertTrue(loc.getVisited());
     }
 
     @Test
     public void toggleVisitedWhenTrueTest() {
         loc.toggleVisited();
-        assertEquals(1, Progress.getNumVisited());
+        assertEquals(1, Progress.getNumCitiesVisited());
         assertTrue(loc.getVisited());
         loc.toggleVisited();
         assertFalse(loc.getVisited());
-        assertEquals(0, Progress.getNumVisited());
+        assertEquals(0, Progress.getNumCitiesVisited());
     }
     
 }
