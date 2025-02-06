@@ -51,6 +51,18 @@ public class Progress {
     }
 
     // MODIFIES: this
+    // EFFECTS: resets number of total entries to zero
+    public static void resetTotalEntry() {
+        totalNumEntries = 0;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: resets number of total cities to zero
+    public static void resetTotalCities() {
+        totalNumEntries = 0;
+    }
+
+    // MODIFIES: this
     // EFFECTS: increases the number of visited cities by 1
     public static void increaseNumCitiesVisited() {
         numCitiesVisited++;
