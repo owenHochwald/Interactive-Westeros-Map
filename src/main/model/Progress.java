@@ -27,6 +27,16 @@ public class Progress {
     public static void decreasesNumEntries() {
     }
 
+        // MODIFIES: this
+    // EFFECTS: increases the total number of visited entries by 1
+    public static void increaseNumVisitedEntries() {
+    }
+
+    // MODIFIES: this
+    // EFFECTS: decreases the total number of visited entries by 1
+    public static void decreasesNumVisitedEntries() {
+    }
+
     
     // MODIFIES: this
     // EFFECTS: resets number of visited entries to zero
