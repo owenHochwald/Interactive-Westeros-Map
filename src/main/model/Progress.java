@@ -8,8 +8,10 @@ package model;
 
 public class Progress {
 
-    private static int numVisited = 0;
+    private static int numCitiesVisited = 0;
     private static int totalNumCities = 0;
+    private static int totalNumEntries = 0;
+    private static int numEntriesVisited = 0;
 
     // MODIFIES: this
     // EFFECTS: increases the total number of cities by 1
@@ -20,51 +22,55 @@ public class Progress {
     // MODIFIES: this
     // EFFECTS: increases the total number of entries by 1
     public static void increaseNumEntries() {
+        totalNumEntries++;
     }
 
     // MODIFIES: this
     // EFFECTS: decreases the total number of entries by 1
     public static void decreasesNumEntries() {
+        totalNumEntries--;
     }
 
         // MODIFIES: this
     // EFFECTS: increases the total number of visited entries by 1
     public static void increaseNumVisitedEntries() {
+        numEntriesVisited++;
     }
 
     // MODIFIES: this
     // EFFECTS: decreases the total number of visited entries by 1
     public static void decreasesNumVisitedEntries() {
+        numEntriesVisited--;
     }
 
     
     // MODIFIES: this
     // EFFECTS: resets number of visited entries to zero
     public static void resetEntryProgress() {
-        numVisited = 0;
+        numEntriesVisited = 0;
     }
 
     // MODIFIES: this
     // EFFECTS: increases the number of visited cities by 1
     public static void increaseNumCitiesVisited() {
-        numVisited++;
+        numCitiesVisited++;
     }
 
     // MODIFIES: this
     // EFFECTS: decrease the number of visited cities by 1
     public static void decreaseNumCitiesVisited() {
-        numVisited--;
+        numCitiesVisited--;
     }
 
     // MODIFIES: this
     // EFFECTS: resets number of visited cities to zero
     public static void resetCityProgress() {
-        numVisited = 0;
+        numCitiesVisited = 0;
     }
 
     // getters
     public static int getNumCitiesVisited() {
-        return numVisited;
+        return numCitiesVisited;
     }
 
     public static int getTotalNumCities() {
@@ -72,16 +78,16 @@ public class Progress {
     }
 
     public static int getTotalNumEntries() {
-        return 0;
+        return totalNumEntries;
     }
 
     public static int getTotalNumVisitedEntries() {
-        return 0;
+        return numEntriesVisited;
     }
 
     // setters
     public static void setNumCitiesVisited(int num) {
-        numVisited = num;
+        numCitiesVisited = num;
 
     }
 
@@ -90,11 +96,12 @@ public class Progress {
     }
 
     public static void setTotalNumEntries(int num) {
+        totalNumEntries = num;
 
     }
 
     public static void setTotalNumVisited(int num) {
-        
+        numEntriesVisited = num;
     }
 
 }
