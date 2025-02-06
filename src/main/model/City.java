@@ -22,12 +22,11 @@ public class City extends Location {
     //          capital status, and no alliances. Increases total number of cities by 1, set customMade
     //          to wether city is custom made or not
     public City(String name, int population, String house, String region, boolean isCapital, boolean customMade) {
-        super(name, region, isCapital, customMade);
+        super(name, region, customMade);
         this.population = population;
         this.house = house;
         this.isCapital = isCapital;
         this.alliances = new ArrayList<City>();
-        this.visited = false;
         Progress.increaseTotalCities();
     }
 

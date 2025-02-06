@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 public class TestLocation {
     private Location loc;
@@ -14,14 +13,13 @@ public class TestLocation {
     @Before
     public void setup() {
         Progress.setNumVisited(0);
-        loc = new Location("Kings Road", "Crownlands", false, true);
+        loc = new Location("Kings Road", "Crownlands", true);
     }
 
     @Test
     public void constructorTest() {
         assertEquals("Kings Road", loc.getName());
         assertEquals("Crownlands", loc.getRegion());
-        assertFalse(loc.getVisited());
         assertTrue(loc.customMade());
         assertEquals(0, Progress.getNumVisited());
     }

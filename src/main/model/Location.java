@@ -16,10 +16,10 @@ public class Location {
     // MODIFIES: this, Progress
     // EFFECTS: creates a new unvisited location with given name, region,
     //          and customMade. Increases total number of locations by 1.
-    public Location(String name, String region, boolean visited, boolean customMade) {
+    public Location(String name, String region, boolean customMade) {
         this.name = name;
         this.region = region;
-        this.visited = visited;
+        this.visited = false;
         this.customMade = customMade;
         // TODO: add Progress updates
     }
