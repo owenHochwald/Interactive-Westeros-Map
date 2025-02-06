@@ -10,7 +10,7 @@ public class Location {
     protected String name;
     protected String region;
     protected boolean visited;
-    protected boolean customMade;
+    final protected boolean customMade;
 
     // REQUIRES: name, region, house must not be null / empty,  population >= 10
     // MODIFIES: this, Progress

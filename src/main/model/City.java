@@ -8,16 +8,12 @@ import java.util.ArrayList;
  * wether or not the city has been visited by the user, wether or not the city is a capital city, and wether or
  * not the city is custom.
  */
-public class City {
+public class City extends Location {
     
-    private String name;
     private int population;
     private String house;
-    private String region;
     private ArrayList<City> alliances;
     private boolean isCapital;
-    private boolean visited;
-    final private boolean customMade;
 
 
     // REQUIRES: name, region, house must not be null / empty,  population >= 10
@@ -26,16 +22,13 @@ public class City {
     //          capital status, and no alliances. Increases total number of cities by 1, set customMade
     //          to wether city is custom made or not
     public City(String name, int population, String house, String region, boolean isCapital, boolean customMade) {
-        this.name = name;
+        super(name, region, isCapital, customMade);
         this.population = population;
         this.house = house;
-        this.region = region;
-        this.alliances = new ArrayList<City>();
         this.isCapital = isCapital;
+        this.alliances = new ArrayList<City>();
         this.visited = false;
-        this.customMade = customMade;
         Progress.increaseTotalCities();
-
     }
 
     // MODIFIES: this
@@ -44,18 +37,6 @@ public class City {
         this.population += 1000;
         
     }
-
-    // MODIFES: this
-    // EFFECTS: toggles wether a city is visited or not
-    public void toggleVisited() {
-        if (!visited) {
-            Progress.increaseNumVisited();
-        } else {
-            Progress.decreaseNumVisited();
-        }
-        visited = !visited;
-    }
-
 
     // MODIFIES: this
     // EFFECTS: toggles wether a city is a capital city or not
@@ -96,20 +77,12 @@ public class City {
 
     // getters
 
-    public String getName() {
-        return name;
-    }
-    
     public int getPopulation() {
         return population;
     }
 
     public ArrayList<City> getAlliances() {
         return alliances;
-    }
-
-    public String getRegion() {
-        return region;
     }
 
     public String getHouse() {
@@ -119,14 +92,5 @@ public class City {
     public boolean getIsCapital() {
         return isCapital;
     }
-
-    public boolean getVisited() {
-        return visited;
-    }
-
-    public boolean customMade() {
-        return customMade;
-    }
-
     
 }
