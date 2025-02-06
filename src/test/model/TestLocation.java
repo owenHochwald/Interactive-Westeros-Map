@@ -4,19 +4,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 public class TestLocation {
     private Location loc;
 
-    @BeforeEach
-    void setup() {
+    @Before
+    public void setup() {
+        Progress.setNumVisited(0);
         loc = new Location("Kings Road", "Crownlands", false, true);
     }
 
     @Test
-    void constructorTest() {
+    public void constructorTest() {
         assertEquals("Kings Road", loc.getName());
         assertEquals("Crownlands", loc.getRegion());
         assertFalse(loc.getVisited());
@@ -25,7 +27,7 @@ public class TestLocation {
     }
 
     @Test
-    void toggleVisitedWhenFalseTest() {
+    public void toggleVisitedWhenFalseTest() {
         assertFalse(loc.getVisited());
         assertEquals(0, Progress.getNumVisited());
         loc.toggleVisited();
@@ -34,7 +36,7 @@ public class TestLocation {
     }
 
     @Test
-    void toggleVisitedWhenTrueTest() {
+    public void toggleVisitedWhenTrueTest() {
         loc.toggleVisited();
         assertEquals(1, Progress.getNumVisited());
         assertTrue(loc.getVisited());

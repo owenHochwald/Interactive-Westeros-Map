@@ -7,11 +7,21 @@ package model;
 
 public class Location {
 
+    protected String name;
+    protected String region;
+    protected boolean visited;
+    protected boolean customMade;
+
     // REQUIRES: name, region, house must not be null / empty,  population >= 10
     // MODIFIES: this, Progress
     // EFFECTS: creates a new unvisited location with given name, region,
     //          and customMade. Increases total number of locations by 1.
     public Location(String name, String region, boolean visited, boolean customMade) {
+        this.name = name;
+        this.region = region;
+        this.visited = visited;
+        this.customMade = customMade;
+        // TODO: add Progress updates
     }
 
 
@@ -19,24 +29,29 @@ public class Location {
     // MODIFES: this
     // EFFECTS: toggles wether a location is visited or not
     public void toggleVisited() {
-
+        if (!visited) {
+            Progress.increaseNumVisited();
+        } else {
+            Progress.decreaseNumVisited();
+        }
+        visited = !visited;
     }
 
     // getters
     public String getName() {
-        return "";
+        return name;
     }
 
     public String getRegion() {
-        return "";
+        return region;
     }
 
     public boolean getVisited() {
-        return false;
+        return visited;
     }
 
     public boolean customMade() {
-        return false;
+        return customMade;
     }
 }
     
