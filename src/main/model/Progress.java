@@ -59,7 +59,7 @@ public class Progress {
     // MODIFIES: this
     // EFFECTS: resets number of total cities to zero
     public static void resetTotalCities() {
-        totalNumEntries = 0;
+        totalNumCities = 0;
     }
 
     // MODIFIES: this
