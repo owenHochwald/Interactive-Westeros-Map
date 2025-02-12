@@ -1,6 +1,7 @@
 package persistence;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.json.JSONObject;
 
@@ -19,15 +20,27 @@ public class JsonReader {
     };
 
 
-    // EFFECTS: reads Location from file and returns it;
+    // EFFECTS: reads Locations from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public Location readLocation() throws IOException {
+    public ArrayList<Location> readLocations() throws IOException {
         return null;
     }
 
-    // EFFECTS: reads City from file and returns it;
+    // EFFECTS: reads Location from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public City readCity() throws IOException {
+    private Location readLocation() throws IOException {
+        return null;
+    }
+
+    // EFFECTS: reads city from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    private City readCity() throws IOException {
+        return null;
+    }
+
+    // EFFECTS: reads Citys from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public ArrayList<City> readCities() throws IOException {
         return null;
     }
 
