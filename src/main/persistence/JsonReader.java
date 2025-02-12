@@ -72,7 +72,11 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         String region = jsonObject.getString("region");
         boolean customMade = jsonObject.getBoolean("customMade");
+        boolean visited = jsonObject.getBoolean("visited");
         Location location = new Location(name, region, customMade);
+        if (visited) {
+            location.toggleVisited();
+        }
         return location;
     }
 
@@ -84,7 +88,18 @@ public class JsonReader {
         String region = jsonObject.getString("region");
         boolean capital = jsonObject.getBoolean("isCapital");
         boolean customMade = jsonObject.getBoolean("customMade");
+        boolean visited = jsonObject.getBoolean("visited");
+        JSONArray alliancesArray = jsonObject.getJSONArray("alliances");
+        ArrayList<String> alliances = new ArrayList<>();
+        for (int i = 0; i < alliancesArray.length(); i++) {
+            String allianceName = alliancesArray.getString(i);
+            alliances.add(allianceName);
+        }
+        // TODO: implement the rest of adding alliances only when other cities are present
         City city = new City(name, population, house, region, capital, customMade);
+        if (visited) {
+            city.toggleVisited();
+        }
         return city;
     }
 

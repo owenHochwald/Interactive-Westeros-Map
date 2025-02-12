@@ -1,32 +1,38 @@
 {
-    "locations": [
-        {
-            "name": "Kings Road",
-            "region": "Crownlands",
-            "customMade": true
-        },
-        {
-            "name": "The Gods Eye",
-            "region": "The Riverlands",
-            "customMade": false
-        }
-    ],
     "cities": [
         {
-            "name": "Winterfell",
-            "population": 15000,
-            "house": "Stark",
-            "region": "The North",
             "isCapital": true,
-            "customMade": false
+            "customMade": false,
+            "name": "Winterfell",
+            "visited": true,
+            "alliances": ["Kings Landing"],
+            "region": "The North",
+            "house": "Stark",
+            "population": 15000
         },
         {
-            "name": "Kings Landing",
-            "population": 1000000,
-            "house": "Lannister",
-            "region": "Crownlands",
             "isCapital": true,
-            "customMade": true
+            "customMade": true,
+            "name": "Kings Landing",
+            "visited": true,
+            "alliances": ["Winterfell"],
+            "region": "Crownlands",
+            "house": "Lannister",
+            "population": 1000000
+        }
+    ],
+    "locations": [
+        {
+            "customMade": true,
+            "name": "Kings Road",
+            "visited": true,
+            "region": "Crownlands"
+        },
+        {
+            "customMade": false,
+            "name": "The Gods Eye",
+            "visited": false,
+            "region": "The Riverlands"
         }
     ]
 }

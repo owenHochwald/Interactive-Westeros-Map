@@ -44,7 +44,7 @@ public class Location implements Writable {
         return null;
     }
 
-    
+
 
 
 

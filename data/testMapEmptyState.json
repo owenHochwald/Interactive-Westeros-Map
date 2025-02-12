@@ -1,0 +1,18 @@
+{
+    "cities": [{
+        "isCapital": false,
+        "customMade": false,
+        "name": "test",
+        "visited": false,
+        "alliances": [],
+        "region": "test",
+        "house": "test",
+        "population": 10
+    }],
+    "locations": [{
+        "customMade": false,
+        "name": "Owen",
+        "visited": false,
+        "region": "Owen"
+    }]
+}

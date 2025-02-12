@@ -7,7 +7,6 @@ import model.Location;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +18,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {
         try {
+            @SuppressWarnings("unused")
             Location location = new Location("Owen", "Owen", false);
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
@@ -55,11 +55,17 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterGeneralWorkroom() {
         try {
-
             City c1 = new City("Winterfell", 15000, "Stark", "The North", true, false);
+            c1.toggleVisited();
             City c2 = new City("Kings Landing", 1000000, "Lannister", "Crownlands", true, true);
+            c2.toggleVisited();
+            c1.addAlliance(c2);
             Location l1 = new Location("Kings Road", "Crownlands", true);
             Location l2 = new Location("The Gods Eye", "The Riverlands", false);
+            l1.toggleVisited();
+
+            ArrayList<String> alliances = new ArrayList<>();
+            alliances.add("Kings Landing");
 
             ArrayList<Location> locations = new ArrayList<>();
             locations.add(l1);
@@ -78,10 +84,13 @@ class JsonWriterTest extends JsonTest {
             ArrayList<City> readCities = reader.readCities();
             assertEquals(2, readLocations.size());
             assertEquals(2, readCities.size());
+            assertTrue(readCities.get(0).getVisited());
+            assertTrue(readLocations.get(0).getVisited());
             checkCity(readCities.get(0), "Winterfell", 15000, "Stark", "The North", true, false);
             checkCity(readCities.get(1), "Kings Landing", 1000000, "Lannister", "Crownlands", true, true);
             checkLocation(readLocations.get(0), "Kings Road", "Crownlands", true);
             checkLocation(readLocations.get(1), "The Gods Eye", "The Riverlands", false);
+            // TODO: add alliance checking 
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
