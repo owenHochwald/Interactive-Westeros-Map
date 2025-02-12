@@ -1,0 +1,32 @@
+{
+    "locations": [
+        {
+            "name": "Kings Road",
+            "region": "Crownlands",
+            "customMade": true
+        },
+        {
+            "name": "The Gods Eye",
+            "region": "The Riverlands",
+            "customMade": false
+        }
+    ],
+    "cities": [
+        {
+            "name": "Winterfell",
+            "population": 15000,
+            "house": "Stark",
+            "region": "The North",
+            "isCapital": true,
+            "customMade": false
+        },
+        {
+            "name": "Kings Landing",
+            "population": 1000000,
+            "house": "Lannister",
+            "region": "Crownlands",
+            "isCapital": true,
+            "customMade": true
+        }
+    ]
+}

@@ -1,11 +1,13 @@
 package ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.City;
 import model.Location;
 import model.Progress;
+import persistence.JsonReader;
 
 /*
  * Represents a UI to handle all of the user interaction with the console.
@@ -14,13 +16,16 @@ import model.Progress;
  */
 
 public class MapApp {
+    private static final String JSON_STORE = "./data/mapState.json";
     private ArrayList<City> cities;
     private ArrayList<City> customCities;
     private ArrayList<Location> locations;
     private Scanner input;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the Westeros Map App
     public MapApp() {
+        jsonReader = new JsonReader(JSON_STORE);
         runApp();
 
     }
@@ -85,10 +90,11 @@ public class MapApp {
         System.out.println("║  [vc] View only custom-made cities     ║");
         System.out.println("║  [l]  View all locations               ║");
         System.out.println("║  [lc] View only custom-made locations  ║");
-        System.out.println("║  [v] Visit places                      ║");
-        System.out.println("║  [al]  Add a custom location           ║");
-        System.out.println("║  [ac]  Add a custom city               ║");
+        System.out.println("║  [v]  Visit places                     ║");
+        System.out.println("║  [al] Add a custom location            ║");
+        System.out.println("║  [ac] Add a custom city                ║");
         System.out.println("║  [p]  Display your progress            ║");
+        System.out.println("║  [ls] Load saved map                   ║");
         System.out.println("║  [q]  Quit                             ║");
         System.out.println("╠════════════════════════════════════════╣");
         System.out.print("║  Enter your choice: ");
@@ -106,6 +112,7 @@ public class MapApp {
             case "p" -> displayProgress();
             case "l" -> viewAllLocations();
             case "lc" -> viewCustomLocations();
+            case "ls" -> loadMap();
             default -> System.out.println("Invalid selection!");
         }
     }
@@ -140,7 +147,14 @@ public class MapApp {
     // MODIFES: this
     // EFFECTS: loads a map from file
     private void loadMap() {
-        
+        try {
+            locations = jsonReader.readLocations();
+            cities = jsonReader.readCities();
+            System.out.println("╠  ...Loaded in saved cities and locations...  ═╣");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+
     }
 
 
