@@ -131,104 +131,20 @@ public class TestCity {
     }
 
     @Test
-    void addCityOnceTest() {
-        City c1 = new City("test", 10, "none", "Iron islands", false, false);
-        assertEquals(2, Progress.getTotalNumCities());
-        city.addAlliance(c1);
-        assertEquals(1, c1.getAlliances().size());
-        assertEquals(city, c1.getAlliances().get(0));
+    void addCityStringTest() {
+        assertEquals(1, Progress.getTotalNumCities());
+        city.addAlliance("test1");
+        assertEquals("test1", city.getAlliances().get(0));
         assertEquals(1, city.getAlliances().size());
-        assertEquals(c1, city.getAlliances().get(0));
-    }
-
-    @Test
-    void addCityTwiceTest() {
-        City c1 = new City("test 1", 10, "none", "Iron islands", false, true);
-        City c2 = new City("test 2", 100, "none", "Crownlands", true, true);
-        assertEquals(3, Progress.getTotalNumCities());
-        assertEquals(3, Progress.getTotalNumEntries());
-        city.addAlliance(c1);
-        city.addAlliance(c2);
-        assertEquals(1, c1.getAlliances().size());
-        assertEquals(city, c1.getAlliances().get(0));
-
-        assertEquals(1, c2.getAlliances().size());
-        assertEquals(city, c2.getAlliances().get(0));
-
+        city.addAlliance("test2");
+        assertEquals("test2", city.getAlliances().get(1));
         assertEquals(2, city.getAlliances().size());
-        assertEquals(c1, city.getAlliances().get(0));
-        assertEquals(c2, city.getAlliances().get(1));
-    }
-
-    @Test
-    void removeCityOnceTest() {
-        City c1 = new City("test 1", 10, "none", "Iron islands", false, false);
-        City c2 = new City("test 2", 100, "none", "Crownlands", true, false);
-        assertEquals(3, Progress.getTotalNumCities());
-        assertEquals(3, Progress.getTotalNumEntries());
-        city.addAlliance(c1);
-        city.addAlliance(c2);
-        assertEquals(1, c1.getAlliances().size());
-        assertEquals(city, c1.getAlliances().get(0));
-
-        assertEquals(1, c2.getAlliances().size());
-        assertEquals(city, c2.getAlliances().get(0));
-
-        assertEquals(2, city.getAlliances().size());
-        assertEquals(c1, city.getAlliances().get(0));
-        assertEquals(c2, city.getAlliances().get(1));
-
-        city.removeAlliance(c1);
-        assertEquals(0, c1.getAlliances().size());
+        city.removeAlliance("test1");
         assertEquals(1, city.getAlliances().size());
-    }
-
-
-    @Test
-    void removeCityTwiceTest() {
-        City c1 = new City("test 1", 10, "none", "Iron islands", false, true);
-        City c2 = new City("test 2", 100, "none", "Crownlands", true, false);
-        assertEquals(3, Progress.getTotalNumCities());
-        city.addAlliance(c1);
-        city.addAlliance(c2);
-        assertEquals(1, c1.getAlliances().size());
-        assertEquals(city, c1.getAlliances().get(0));
-
-        assertEquals(1, c2.getAlliances().size());
-        assertEquals(city, c2.getAlliances().get(0));
-
-        assertEquals(2, city.getAlliances().size());
-        assertEquals(c1, city.getAlliances().get(0));
-        assertEquals(c2, city.getAlliances().get(1));
-
-        
-        city.removeAlliance(c1);
-        city.removeAlliance(c2);
-        assertEquals(0, c1.getAlliances().size());
-        assertEquals(0, c2.getAlliances().size());
+        city.removeAlliance("test2");
         assertEquals(0, city.getAlliances().size());
+
     }
-
-    @Test
-    void addCityTwiceWithConnectedAllianceTest() {
-        City c1 = new City("test 1", 10, "none", "Iron islands", false, true);
-        City c2 = new City("test 2", 100, "none", "Crownlands", true, true);
-        c1.addAlliance(c2);
-        city.addAlliance(c1);
-        city.addAlliance(c2);
-        assertEquals(2, c1.getAlliances().size());
-        assertEquals(c2, c1.getAlliances().get(0));
-
-        assertEquals(2, c2.getAlliances().size());
-        assertEquals(c1, c2.getAlliances().get(0));
-
-        assertEquals(2, city.getAlliances().size());
-        assertEquals(c1, city.getAlliances().get(0));
-        assertEquals(c2, city.getAlliances().get(1));
-
-        assertEquals(city, c1.getAlliances().get(1));
-    }
-
     @Test
     void getRegionTest() {
         assertEquals("The North", city.getRegion());
