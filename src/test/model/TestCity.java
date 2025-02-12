@@ -143,8 +143,8 @@ public class TestCity {
         assertEquals(1, city.getAlliances().size());
         city.removeAlliance("test2");
         assertEquals(0, city.getAlliances().size());
-
     }
+
     @Test
     void getRegionTest() {
         assertEquals("The North", city.getRegion());

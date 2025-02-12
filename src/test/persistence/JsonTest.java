@@ -3,6 +3,8 @@ package persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
 import model.City;
 import model.Location;
 
@@ -14,13 +16,16 @@ public class JsonTest {
         assertEquals(customMade, location.customMade());
     }
 
-    protected void checkCity(City city, String name, int population, String house, String region, boolean isCapital, boolean customMade) {
+    protected void checkCity(City city, String name, int population, String house, String region, boolean isCapital,
+         boolean customMade, boolean visited, ArrayList<String> alliances) {
         assertEquals(name, city.getName());
         assertEquals(region, city.getRegion());
         assertEquals(customMade, city.customMade());
         assertEquals(population, city.getPopulation());
         assertEquals(house, city.getHouse());
         assertEquals(isCapital, city.getIsCapital());
+        assertEquals(visited, city.getVisited());
+        assertEquals(alliances, city.getAlliances());
 
     }
 }

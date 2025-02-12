@@ -3,12 +3,14 @@
         {
             "name": "Kings Road",
             "region": "Crownlands",
-            "customMade": true
+            "customMade": true,
+            "visited": false
         },
         {
             "name": "The Gods Eye",
             "region": "The Riverlands",
-            "customMade": false
+            "customMade": false,
+            "visited" : false
         }
     ],
     "cities": [
@@ -18,7 +20,9 @@
             "house": "Stark",
             "region": "The North",
             "isCapital": true,
-            "customMade": false
+            "customMade": false,
+            "visited": true,
+            "alliances" : []
         },
         {
             "name": "Kings Landing",
@@ -26,7 +30,9 @@
             "house": "Lannister",
             "region": "Crownlands",
             "isCapital": true,
-            "customMade": true
+            "customMade": true,
+            "visited" : false,
+            "alliances" : []
         }
     ]
 }

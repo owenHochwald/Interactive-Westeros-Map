@@ -328,7 +328,7 @@ public class MapApp {
         System.out.printf("║  Region: %-51s║%n", city.getRegion());
         System.out.printf("║  Capital City: %-45s║%n", city.getIsCapital() ? "Yes" : "No");
         System.out.printf("║  Visited: %-50s║%n", city.getVisited() ? "Yes" : "No");
-        System.out.printf("║  Alliances: %-48s║%n", displayAllianceNames(city.getAlliances()));
+        System.out.printf("║  Alliances: %-48s║%n",city.getAlliances());
         System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
 
@@ -491,9 +491,9 @@ public class MapApp {
         System.out.print("Enter a city name to ally the current city with: ");
         String cityName = input.next();
         City c2 = findCityByName(cityName);
-        c1.addAlliance(c2);
-        System.out.println("City: " + c1.getName() + ", alliance: " + displayAllianceNames(c1.getAlliances()));
-        System.out.println("City: " + c2.getName() + ", alliance: " + displayAllianceNames(c2.getAlliances()));
+        c1.addAlliance(c2.getName());
+        System.out.println("City: " + c1.getName() + ", alliance: " + c1.getAlliances());
+        System.out.println("City: " + c2.getName() + ", alliance: " + c2.getAlliances());
     }
 
     // Helper method for establishAlliance
@@ -508,18 +508,7 @@ public class MapApp {
         return null;
     }
 
-    // Helper method for displaying alliances tidy
-    // REQUIRES: a well-formed city
-    // EFFECTS: displays city names for a given alliance
-    private ArrayList<String> displayAllianceNames(ArrayList<City> cityList) {
-        ArrayList<String> nameList = new ArrayList<>();
-        for (City city : cityList) {
-            nameList.add(city.getName());
-        }
-        return nameList;
-    }
-
-    // EFFETS: shows the visited city progress as a progress bar
+    // EFFECTS: shows the visited city progress as a progress bar
     private void displayProgress() {
         int numVisited = Progress.getTotalNumVisitedEntries();
         int totalPlaces = Progress.getTotalNumEntries();

@@ -100,6 +100,9 @@ public class JsonReader {
         if (visited) {
             city.toggleVisited();
         }
+        for (String allianceName : alliances) {
+            city.addAlliance(allianceName);
+        }
         return city;
     }
 

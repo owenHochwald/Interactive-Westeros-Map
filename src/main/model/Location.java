@@ -1,15 +1,11 @@
 package model;
 
-import org.json.JSONObject;
-
-import persistence.Writable;
-
 /*
 * Location to represent map locations, like natural landmarks, with a name, region,
 * and a custom made boolean
 */
 
-public class Location implements Writable {
+public class Location {
 
     protected final boolean customMade;
     protected String name;
@@ -38,16 +34,6 @@ public class Location implements Writable {
         }
         visited = !visited;
     }
-
-    @Override
-    public JSONObject toJson() {
-        return null;
-    }
-
-
-
-
-
 
     // getters
     public String getName() {

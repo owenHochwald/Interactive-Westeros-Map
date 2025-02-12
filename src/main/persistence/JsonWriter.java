@@ -56,8 +56,8 @@ public class JsonWriter {
             cityJson.put("customMade", city.customMade());
 
             JSONArray allianceArray = new JSONArray();
-            for (City allianceCity : city.getAlliances()) {
-                allianceArray.put(allianceCity.getName());  
+            for (String allianceCity : city.getAlliances()) {
+                allianceArray.put(allianceCity);  
             }
             cityJson.put("alliances", allianceArray);
 

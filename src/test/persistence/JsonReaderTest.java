@@ -60,8 +60,10 @@ public class JsonReaderTest extends JsonTest {
             cities = reader.readCities();
             assertEquals(2, locations.size());
             assertEquals(2, cities.size());
-            checkCity(cities.get(0), "Winterfell", 15000, "Stark", "The North", true, false);
-            checkCity(cities.get(1), "Kings Landing", 1000000, "Lannister", "Crownlands", true, true);
+            checkCity(cities.get(0), "Winterfell", 15000, "Stark", "The North", true,
+                 false, true, new ArrayList<String>());
+            checkCity(cities.get(1), "Kings Landing", 1000000, "Lannister", "Crownlands", true,
+                true, false, new ArrayList<String>());
             checkLocation(locations.get(0), "Kings Road", "Crownlands", true);
             checkLocation(locations.get(1), "The Gods Eye", "The Riverlands", false);
             // TODO: add case for when city has alliances

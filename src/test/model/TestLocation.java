@@ -20,6 +20,7 @@ public class TestLocation {
 
     @Test
     public void constructorTest() {
+        Progress.resetTotalCities();
         assertEquals("Kings Road", loc.getName());
         assertEquals("Crownlands", loc.getRegion());
         assertTrue(loc.customMade());

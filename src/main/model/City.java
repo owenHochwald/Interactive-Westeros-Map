@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import org.json.JSONObject;
 
 /*
  * Represents a city with a name, population (number of poeple  living there),
@@ -14,7 +13,7 @@ public class City extends Location {
     
     private int population;
     private String house;
-    private ArrayList<City> alliances;
+    private ArrayList<String> alliances;
     private boolean isCapital;
 
 
@@ -28,7 +27,7 @@ public class City extends Location {
         this.population = population;
         this.house = house;
         this.isCapital = isCapital;
-        this.alliances = new ArrayList<City>();
+        this.alliances = new ArrayList<>();
         Progress.increaseTotalCities();
     }
 
@@ -59,21 +58,14 @@ public class City extends Location {
         isCapital = !isCapital;
     }
 
-    // REQUIRES: a well-formed city, city is not already an ally
-    // MODIFES: this, city
-    // EFFECTS: creates an alliance between two cities
-    public void addAlliance(City city) {
-        alliances.add(city);
-        if (!city.getAlliances().contains(this)) {
-            city.addAlliance(this);
-        }
-
-    }
 
     // REQUIRES: city cannot be empty / null, city is not already an ally
-    // MODIFES: this, city
-    // EFFECTS: creates an alliance between two cities
+    // MODIFES: this
+    // EFFECTS: adds a city to this alliances
     public void addAlliance(String city) {
+        if(!alliances.contains(city)) {
+            alliances.add(city);
+        }
 
     }
 
@@ -81,26 +73,11 @@ public class City extends Location {
     // MODIFES: this, city
     // EFFECTS: removes an alliance between two cities
     public void removeAlliance(String city) {
-
-    }
-
-    // REQUIRES: a well-formed city, city is in alliances
-    // MODIFES: this, city
-    // EFFECTS: removes an alliance between two cities
-    public void removeAlliance(City city) {
-        alliances.remove(city);
-        if (city.getAlliances().contains(this)) {
-            city.removeAlliance(this);
+        if (alliances.contains(city)) {
+            alliances.remove(city);
         }
 
     }
-
-    @Override
-    public JSONObject toJson() {
-        return null;
-    }
-
-
 
     
     // setters
@@ -118,7 +95,7 @@ public class City extends Location {
         return population;
     }
 
-    public ArrayList<City> getAlliances() {
+    public ArrayList<String> getAlliances() {
         return alliances;
     }
 
