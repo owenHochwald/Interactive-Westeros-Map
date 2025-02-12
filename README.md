@@ -41,3 +41,9 @@ This project is of particular interest to me because:
 5. As a user, I want to be able to be able to load my custom map state from file (if I so choose)
 
 ---
+
+## References
+
+Paul Carter (November 10, 2024) JsonSerializationDemo.
+
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

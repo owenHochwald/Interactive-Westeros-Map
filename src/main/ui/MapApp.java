@@ -137,6 +137,14 @@ public class MapApp {
         System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
 
+    // MODIFES: this
+    // EFFECTS: loads a map from file
+    private void loadMap() {
+        
+    }
+
+
+
     // Helper method to pad strings to the right
     private String padRight(String s, int n) {
         return String.format("%-" + n + "s", s);

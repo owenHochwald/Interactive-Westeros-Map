@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 /*
  * Represents a city with a name, population (number of poeple  living there),
  * list of cities the city is allied with, the house the city belongs to, what region the city is located in,
@@ -78,6 +82,14 @@ public class City extends Location {
         }
 
     }
+
+    @Override
+    public JSONObject toJson() {
+        return null;
+    }
+
+
+
     
     // setters
     public void setHouse(String house) {
