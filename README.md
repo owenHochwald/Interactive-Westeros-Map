@@ -36,4 +36,8 @@ This project is of particular interest to me because:
 
 3. As a user, I want to be able to remove a custom-made locations from the map.
 
+4. As a user, I want to be able to save my custom map state to file (if I so choose)
+
+5. As a user, I want to be able to be able to load my custom map state from file (if I so choose)
+
 ---
