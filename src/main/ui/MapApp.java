@@ -9,6 +9,7 @@ import model.City;
 import model.Location;
 import model.Progress;
 import persistence.JsonReader;
+import persistence.JsonWriter;
 
 /*
  * Represents a UI to handle all of the user interaction with the console.
@@ -23,10 +24,12 @@ public class MapApp {
     private ArrayList<Location> locations;
     private Scanner input;
     private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
 
     // EFFECTS: runs the Westeros Map App
     public MapApp() {
         jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
         runApp();
 
     }
@@ -151,6 +154,10 @@ public class MapApp {
     // EFFECTS: loads a map from file
     private void loadMap() {
         try {
+            Progress.resetCityProgress();
+            Progress.resetEntryProgress();
+            Progress.resetTotalCities();
+            Progress.resetTotalEntry();
             locations = jsonReader.readLocations();
             cities = jsonReader.readCities();
             System.out.println("╠  ...Loaded in saved cities and locations...  ═╣");
@@ -161,7 +168,14 @@ public class MapApp {
 
     // EFFECTS: saves the workroom to file
     private void saveMap() {
-
+        try {
+            jsonWriter.open();
+            jsonWriter.write(locations, cities);
+            jsonWriter.close();
+            System.out.println("Saved your map to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
 

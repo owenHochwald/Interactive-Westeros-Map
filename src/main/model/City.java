@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
-import persistence.Writable;
-
 /*
  * Represents a city with a name, population (number of poeple  living there),
  * list of cities the city is allied with, the house the city belongs to, what region the city is located in,
