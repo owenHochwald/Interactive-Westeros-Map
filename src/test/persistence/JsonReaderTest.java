@@ -17,7 +17,7 @@ public class JsonReaderTest extends JsonTest {
     private ArrayList<City> cities;
 
     @Test
-    void testReaderNonExistentFileForLocation() {
+    public void testReaderNonExistentFileForLocation() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
             locations = reader.readLocations();
@@ -28,7 +28,7 @@ public class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderNonExistentFileForCity() {
+    public void testReaderNonExistentFileForCity() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
             cities = reader.readCities();
@@ -39,7 +39,7 @@ public class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderEmptyMapStateLocations() {
+    public void testReaderEmptyMapStateLocations() {
         JsonReader reader = new JsonReader("./data/testReaderEmptyMap.json");
         try {
             locations = reader.readLocations();
@@ -53,7 +53,7 @@ public class JsonReaderTest extends JsonTest {
 
     
     @Test
-    void testReaderGeneralWorkRoom() {
+    public void testReaderGeneralWorkRoom() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralMapState.json");
         try {
             locations = reader.readLocations();

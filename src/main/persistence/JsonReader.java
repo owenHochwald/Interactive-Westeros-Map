@@ -1,8 +1,13 @@
 package persistence;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import model.City;
@@ -13,9 +18,12 @@ import model.Location;
  */
 
 public class JsonReader {
+    private String src;
+
 
     // EFFETS: constructs reader to read data from source file
     public JsonReader(String src) {
+        this.src = src;
         
     };
 
@@ -23,40 +31,61 @@ public class JsonReader {
     // EFFECTS: reads Locations from file and returns it;
     // throws IOException if an error occurs reading data from file
     public ArrayList<Location> readLocations() throws IOException {
-        return null;
-    }
+        String jsonData = readFile(src);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        ArrayList<Location> locations = new ArrayList<>();
 
-    // EFFECTS: reads Location from file and returns it;
-    // throws IOException if an error occurs reading data from file
-    private Location readLocation() throws IOException {
-        return null;
-    }
-
-    // EFFECTS: reads city from file and returns it;
-    // throws IOException if an error occurs reading data from file
-    private City readCity() throws IOException {
-        return null;
+        JSONArray locationsArray = jsonObject.getJSONArray("locations");
+        for (int i = 0; i < locationsArray.length(); i++) {
+            locations.add(parseLocation(locationsArray.getJSONObject(i)));
+        }
+        return locations;
     }
 
     // EFFECTS: reads Citys from file and returns it;
     // throws IOException if an error occurs reading data from file
     public ArrayList<City> readCities() throws IOException {
-        return null;
+        String jsonData = readFile(src);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        ArrayList<City> cities = new ArrayList<>();
+
+        JSONArray citiesArray = jsonObject.getJSONArray("cities");
+        for (int i = 0; i < citiesArray.length(); i++) {
+            cities.add(parseCity(citiesArray.getJSONObject(i)));
+        }
+        return cities;
     }
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
-        return null;
+        StringBuilder contentBuilder = new StringBuilder();
+
+        try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> contentBuilder.append(s));
+        }
+
+        return contentBuilder.toString();
     }
 
     // EFFECTS: parses location from JSON object and returns it
     private Location parseLocation(JSONObject jsonObject) {
-        return null;
+        String name = jsonObject.getString("name");
+        String region = jsonObject.getString("region");
+        boolean customMade = jsonObject.getBoolean("customMade");
+        Location location = new Location(name, region, customMade);
+        return location;
     }
 
     // EFFECTS: parses city from JSON object and returns it
     private City parseCity(JSONObject jsonObject) {
-        return null;
+        String name = jsonObject.getString("name");
+        int population = jsonObject.getInt("population");
+        String house = jsonObject.getString("house");
+        String region = jsonObject.getString("region");
+        boolean capital = jsonObject.getBoolean("isCapital");
+        boolean customMade = jsonObject.getBoolean("customMade");
+        City city = new City(name, population, house, region, capital, customMade);
+        return city;
     }
 
 }
