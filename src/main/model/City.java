@@ -70,6 +70,20 @@ public class City extends Location {
 
     }
 
+    // REQUIRES: city cannot be empty / null, city is not already an ally
+    // MODIFES: this, city
+    // EFFECTS: creates an alliance between two cities
+    public void addAlliance(String city) {
+
+    }
+
+    // REQUIRES: city cannot be empty / null, city is in ally
+    // MODIFES: this, city
+    // EFFECTS: removes an alliance between two cities
+    public void removeAlliance(String city) {
+
+    }
+
     // REQUIRES: a well-formed city, city is in alliances
     // MODIFES: this, city
     // EFFECTS: removes an alliance between two cities
