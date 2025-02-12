@@ -146,6 +146,20 @@ public class TestCity {
     }
 
     @Test
+    void addAndRemoveAllianceWhenAlreadyPresent() {
+        city.addAlliance("test1");
+        assertEquals("test1", city.getAlliances().get(0));
+        assertEquals(1, city.getAlliances().size());
+        city.addAlliance("test1");
+        assertEquals("test1", city.getAlliances().get(0));
+        assertEquals(1, city.getAlliances().size());
+        city.removeAlliance("test1");
+        assertEquals(0, city.getAlliances().size());
+        city.removeAlliance("test1");
+        assertEquals(0, city.getAlliances().size());
+    }
+
+    @Test
     void getRegionTest() {
         assertEquals("The North", city.getRegion());
     }
