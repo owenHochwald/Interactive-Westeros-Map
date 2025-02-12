@@ -4,6 +4,7 @@ import model.City;
 
 
 import java.io.*;
+import java.util.ArrayList;
 
 // Represents a writer that writes JSON representation of workroom to file
 public class JsonWriter {
@@ -21,7 +22,7 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of locations and cities to file
-    public void write(Location locations, City cities) {
+    public void write(ArrayList <Location> locations, ArrayList<City> cities) {
     }
 
     // MODIFIES: this
