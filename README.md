@@ -47,3 +47,7 @@ This project is of particular interest to me because:
 Paul Carter (November 10, 2024) JsonSerializationDemo.
 
 https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+Bohemian (December 29, 2012) How to test a private constructor in Java application?
+
+https://stackoverflow.com/questions/14077842/how-to-test-a-private-constructor-in-java-application
