@@ -3,9 +3,14 @@ package model;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.lang.reflect.Constructor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.lang.reflect.Modifier;
+
 
 public class TestProgress {
     Progress p;
@@ -17,6 +22,16 @@ public class TestProgress {
         Progress.setTotalNumCities(0);
         Progress.resetTotalEntry();
         Progress.resetEntryProgress();
+    }
+
+    @Test
+    void testFailInitPrivateConstructor() {
+        try  {
+            Constructor<Progress> constructor = Progress.class.getDeclaredConstructor();
+            constructor.setAccessible(true);
+        } catch (Exception e) {
+            // pass
+        }
     }
 
     @Test

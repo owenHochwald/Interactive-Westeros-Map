@@ -13,6 +13,9 @@ public class Progress {
     private static int totalNumEntries = 0;
     private static int numEntriesVisited = 0;
 
+    // EFFECTS: prevents private instantiation
+    private Progress() {}
+
     // MODIFIES: this
     // EFFECTS: increases the total number of cities by 1
     public static void increaseTotalCities() {
