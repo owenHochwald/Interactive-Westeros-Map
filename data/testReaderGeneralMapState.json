@@ -4,7 +4,7 @@
             "name": "Kings Road",
             "region": "Crownlands",
             "customMade": true,
-            "visited": false
+            "visited": true
         },
         {
             "name": "The Gods Eye",
@@ -22,7 +22,8 @@
             "isCapital": true,
             "customMade": false,
             "visited": true,
-            "alliances" : []
+            "alliances": ["Kings Landing"]
+
         },
         {
             "name": "Kings Landing",
@@ -32,7 +33,7 @@
             "isCapital": true,
             "customMade": true,
             "visited" : false,
-            "alliances" : []
+            "alliances": ["Winterfell"]
         }
     ]
 }

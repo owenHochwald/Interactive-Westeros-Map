@@ -10,10 +10,11 @@ import model.Location;
 
 public class JsonTest {
 
-    protected void checkLocation(Location location, String name, String region, boolean customMade) {
+    protected void checkLocation(Location location, String name, String region, boolean customMade, boolean visited) {
         assertEquals(name, location.getName());
         assertEquals(region, location.getRegion());
         assertEquals(customMade, location.customMade());
+        assertEquals(visited, location.getVisited());
     }
 
     protected void checkCity(City city, String name, int population, String house, String region, boolean isCapital,

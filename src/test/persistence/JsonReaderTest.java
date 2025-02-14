@@ -64,9 +64,10 @@ public class JsonReaderTest extends JsonTest {
                  false, true, new ArrayList<String>());
             checkCity(cities.get(1), "Kings Landing", 1000000, "Lannister", "Crownlands", true,
                 true, false, new ArrayList<String>());
-            checkLocation(locations.get(0), "Kings Road", "Crownlands", true);
-            checkLocation(locations.get(1), "The Gods Eye", "The Riverlands", false);
+            checkLocation(locations.get(0), "Kings Road", "Crownlands", true, true);
+            checkLocation(locations.get(1), "The Gods Eye", "The Riverlands", false, false);
             // TODO: add case for when city has alliances
+            assertEquals("Winterfell", cities.get(1).getAlliances().get(0));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

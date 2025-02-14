@@ -102,8 +102,8 @@ class JsonWriterTest extends JsonTest {
         assertEquals(2, readCities.size());
         assertTrue(readCities.get(0).getVisited());
         assertTrue(readLocations.get(0).getVisited());
-        checkLocation(readLocations.get(0), "Kings Road", "Crownlands", true);
-        checkLocation(readLocations.get(1), "The Gods Eye", "The Riverlands", false);
+        checkLocation(readLocations.get(0), "Kings Road", "Crownlands", true, true);
+        checkLocation(readLocations.get(1), "The Gods Eye", "The Riverlands", false, false);
         assertEquals(4, Progress.getTotalNumCities());
         assertEquals(6, Progress.getTotalNumVisitedEntries());
         assertEquals(8, Progress.getTotalNumEntries());
