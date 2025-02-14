@@ -51,7 +51,6 @@ public class JsonReaderTest extends JsonTest {
         }
     }
 
-    
     @Test
     public void testReaderGeneralWorkRoom() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralMapState.json");
@@ -65,16 +64,14 @@ public class JsonReaderTest extends JsonTest {
             a1.add("Kings Landing");
             a2.add("Winterfell");
             checkCity(cities.get(0), "Winterfell", 15000, "Stark", "The North", true,
-                 false, true, a1);
+                    false, true, a1);
             checkCity(cities.get(1), "Kings Landing", 1000000, "Lannister", "Crownlands", true,
-                true, false, a2);
+                    true, false, a2);
             checkLocation(locations.get(0), "Kings Road", "Crownlands", true, true);
             checkLocation(locations.get(1), "The Gods Eye", "The Riverlands", false, false);
-            // TODO: add case for when city has alliances
             assertEquals("Winterfell", cities.get(1).getAlliances().get(0));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
-    }   
+    }
 }
-

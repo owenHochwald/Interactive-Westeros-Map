@@ -14,7 +14,8 @@ public class Progress {
     private static int numEntriesVisited = 0;
 
     // EFFECTS: prevents private instantiation
-    private Progress() {}
+    private Progress() {
+    }
 
     // MODIFIES: this
     // EFFECTS: increases the total number of cities by 1
@@ -34,7 +35,7 @@ public class Progress {
         totalNumEntries--;
     }
 
-        // MODIFIES: this
+    // MODIFIES: this
     // EFFECTS: increases the total number of visited entries by 1
     public static void increaseNumVisitedEntries() {
         numEntriesVisited++;
@@ -46,7 +47,6 @@ public class Progress {
         numEntriesVisited--;
     }
 
-    
     // MODIFIES: this
     // EFFECTS: resets number of visited entries to zero
     public static void resetEntryProgress() {

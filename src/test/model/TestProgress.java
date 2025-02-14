@@ -1,20 +1,14 @@
 package model;
 
-
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Constructor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.lang.reflect.Modifier;
-
 
 public class TestProgress {
-    Progress p;
-
+    Progress progressTest;
 
     @BeforeEach
     void setup() {
@@ -26,7 +20,7 @@ public class TestProgress {
 
     @Test
     void testFailInitPrivateConstructor() {
-        try  {
+        try {
             Constructor<Progress> constructor = Progress.class.getDeclaredConstructor();
             constructor.setAccessible(true);
         } catch (Exception e) {
@@ -48,7 +42,6 @@ public class TestProgress {
         assertEquals(1, Progress.getTotalNumCities());
     }
 
-    
     @Test
     void increaseTotalNumCitiesByTwoTest() {
         Progress.increaseTotalCities();
@@ -62,7 +55,6 @@ public class TestProgress {
         assertEquals(1, Progress.getTotalNumEntries());
     }
 
-    
     @Test
     void increaseTotalNumEntriesByTwoTest() {
         Progress.increaseNumEntries();
@@ -76,7 +68,6 @@ public class TestProgress {
         assertEquals(1, Progress.getTotalNumVisitedEntries());
     }
 
-    
     @Test
     void increaseNumVisitedEntriesByTwoTest() {
         Progress.increaseNumVisitedEntries();
@@ -90,7 +81,6 @@ public class TestProgress {
         assertEquals(1, Progress.getNumCitiesVisited());
     }
 
-    
     @Test
     void increaseNumVisitedByTwoTest() {
         Progress.increaseNumCitiesVisited();
@@ -112,7 +102,7 @@ public class TestProgress {
     }
 
     @Test
-    void decreaseNumEntriesVisitedByOneTest(){
+    void decreaseNumEntriesVisitedByOneTest() {
         Progress.setTotalNumEntries(1);
         Progress.increaseNumVisitedEntries();
         assertEquals(1, Progress.getTotalNumVisitedEntries());
@@ -121,7 +111,6 @@ public class TestProgress {
         assertEquals(0, Progress.getTotalNumVisitedEntries());
         assertEquals(1, Progress.getTotalNumEntries());
 
-        
         Progress.decreasesNumEntries();
         assertEquals(0, Progress.getTotalNumEntries());
     }
@@ -134,9 +123,8 @@ public class TestProgress {
         assertEquals(10, Progress.getTotalNumVisitedEntries());
     }
 
-    
     @Test
-    void decreaseNumVisitedEntriesByTwoTest(){
+    void decreaseNumVisitedEntriesByTwoTest() {
         Progress.setTotalNumVisited(3);
         assertEquals(3, Progress.getTotalNumVisitedEntries());
 
@@ -162,7 +150,7 @@ public class TestProgress {
     }
 
     @Test
-    void decreaseNumVisitedByOneTest(){
+    void decreaseNumVisitedByOneTest() {
         Progress.increaseNumCitiesVisited();
         assertEquals(1, Progress.getNumCitiesVisited());
 
@@ -170,9 +158,8 @@ public class TestProgress {
         assertEquals(0, Progress.getNumCitiesVisited());
     }
 
-    
     @Test
-    void decreaseNumVisitedByTwoTest(){
+    void decreaseNumVisitedByTwoTest() {
         Progress.setNumCitiesVisited(3);
         assertEquals(3, Progress.getNumCitiesVisited());
 
