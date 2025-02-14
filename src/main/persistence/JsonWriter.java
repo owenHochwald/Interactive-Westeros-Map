@@ -1,6 +1,8 @@
 package persistence;
+
 import model.Location;
 import model.City;
+
 
 
 import java.io.*;
@@ -32,7 +34,13 @@ public class JsonWriter {
     // EFFECTS: writes JSON representation of locations and cities to file
     public void write(ArrayList<Location> locations, ArrayList<City> cities) {
         JSONObject json = new JSONObject();
+        json.put("locations", convertLocationsToJson(locations));
+        json.put("cities", convertCitiesToJson(cities));
+        saveToFile(json.toString(TAB));
+    }
 
+    // EFFECTS: converts list of locations to JSON array
+    private JSONArray convertLocationsToJson(ArrayList<Location> locations) {
         JSONArray locationArray = new JSONArray();
         for (Location location : locations) {
             JSONObject locationJson = new JSONObject();
@@ -40,10 +48,13 @@ public class JsonWriter {
             locationJson.put("region", location.getRegion());
             locationJson.put("customMade", location.customMade());
             locationJson.put("visited", location.getVisited());
-
             locationArray.put(locationJson);
         }
-        
+        return locationArray;
+    }
+
+    // EFFECTS: converts list of cities to JSON array
+    private JSONArray convertCitiesToJson(ArrayList<City> cities) {
         JSONArray cityArray = new JSONArray();
         for (City city : cities) {
             JSONObject cityJson = new JSONObject();
@@ -62,13 +73,8 @@ public class JsonWriter {
             cityJson.put("alliances", allianceArray);
 
             cityArray.put(cityJson);
-
         }
-
-        json.put("locations", locationArray);
-        json.put("cities", cityArray);
-
-        saveToFile(json.toString(TAB));
+        return cityArray;
     }
 
 

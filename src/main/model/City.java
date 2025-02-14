@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-
 /*
  * Represents a city with a name, population (number of poeple  living there),
  * list of cities the city is allied with, the house the city belongs to, what region the city is located in,
@@ -10,18 +9,19 @@ import java.util.ArrayList;
  * not the city is custom.
  */
 public class City extends Location {
-    
+
     private int population;
     private String house;
     private ArrayList<String> alliances;
     private boolean isCapital;
 
-
-    // REQUIRES: name, region, house must not be null / empty,  population >= 10
+    // REQUIRES: name, region, house must not be null / empty, population >= 10
     // MODIFIES: this, Progress
-    // EFFECTS: creates a new unvisited city with given name, population, alliances, house, region,
-    //          capital status, and no alliances. Increases total number of cities by 1, set customMade
-    //          to wether city is custom made or not
+    // EFFECTS: creates a new unvisited city with given name, population, alliances,
+    // house, region,
+    // capital status, and no alliances. Increases total number of cities by 1, set
+    // customMade
+    // to wether city is custom made or not
     public City(String name, int population, String house, String region, boolean isCapital, boolean customMade) {
         super(name, region, customMade);
         this.population = population;
@@ -35,7 +35,7 @@ public class City extends Location {
     // EFFECTS: increases population by 1,000
     public void increasePopulation() {
         this.population += 1000;
-        
+
     }
 
     // MODIFES: this, Progress
@@ -58,12 +58,11 @@ public class City extends Location {
         isCapital = !isCapital;
     }
 
-
     // REQUIRES: city cannot be empty / null, city is not already an ally
     // MODIFES: this
     // EFFECTS: adds a city to this alliances
     public void addAlliance(String city) {
-        if(!alliances.contains(city)) {
+        if (!alliances.contains(city)) {
             alliances.add(city);
         }
 
@@ -79,7 +78,6 @@ public class City extends Location {
 
     }
 
-    
     // setters
     public void setHouse(String house) {
         this.house = house;
@@ -106,5 +104,5 @@ public class City extends Location {
     public boolean getIsCapital() {
         return isCapital;
     }
-    
+
 }

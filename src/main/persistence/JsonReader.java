@@ -21,12 +21,10 @@ public class JsonReader {
     private String src;
 
 
-    // EFFETS: constructs reader to read data from source file
+    // EFFECTS: constructs reader to read data from source file
     public JsonReader(String src) {
         this.src = src;
-        
-    };
-
+    }
 
     // EFFECTS: reads Locations from file and returns it;
     // throws IOException if an error occurs reading data from file
@@ -95,7 +93,6 @@ public class JsonReader {
             String allianceName = alliancesArray.getString(i);
             alliances.add(allianceName);
         }
-        // TODO: implement the rest of adding alliances only when other cities are present
         City city = new City(name, population, house, region, capital, customMade);
         if (visited) {
             city.toggleVisited();
