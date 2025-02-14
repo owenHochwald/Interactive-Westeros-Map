@@ -442,7 +442,8 @@ public class MapApp {
     // EFFECTS: prompts the user for a string input and returns it
     private String getUserInput(String prompt) {
         System.out.print(prompt);
-        input.nextLine();
+        input.next();
+
         return input.nextLine();
     }
 

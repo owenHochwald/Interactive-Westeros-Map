@@ -3,54 +3,112 @@
         {
             "isCapital": true,
             "customMade": false,
+            "name": "King's Landing",
+            "visited": false,
+            "alliances": [],
+            "region": "Crownlands",
+            "house": "Baratheon",
+            "population": 500000
+        },
+        {
+            "isCapital": true,
+            "customMade": false,
             "name": "Winterfell",
-            "visited": true,
+            "visited": false,
             "alliances": [],
             "region": "The North",
             "house": "Stark",
-            "population": 15000
+            "population": 100000
+        },
+        {
+            "isCapital": false,
+            "customMade": false,
+            "name": "Lannisport",
+            "visited": false,
+            "alliances": [],
+            "region": "The Westerlands",
+            "house": "Lannister",
+            "population": 50000
+        },
+        {
+            "isCapital": false,
+            "customMade": false,
+            "name": "Oldtown",
+            "visited": false,
+            "alliances": [],
+            "region": "The Reach",
+            "house": "Hightower",
+            "population": 200000
+        },
+        {
+            "isCapital": false,
+            "customMade": false,
+            "name": "White Harbor",
+            "visited": false,
+            "alliances": [],
+            "region": "The North",
+            "house": "Manderly",
+            "population": 100000
+        },
+        {
+            "isCapital": true,
+            "customMade": false,
+            "name": "Sunspear",
+            "visited": false,
+            "alliances": [],
+            "region": "Dorne",
+            "house": "Martell",
+            "population": 50000
+        },
+        {
+            "isCapital": false,
+            "customMade": false,
+            "name": "Riverrun",
+            "visited": false,
+            "alliances": [],
+            "region": "The Riverlands",
+            "house": "Tully",
+            "population": 40000
         },
         {
             "isCapital": true,
             "customMade": true,
-            "name": "Kings Landing",
-            "visited": true,
+            "name": " Erie",
+            "visited": false,
             "alliances": [],
-            "region": "Crownlands",
-            "house": "Lannister",
-            "population": 1000000
+            "region": " East",
+            "house": "",
+            "population": 60000
+        },
+        {
+            "isCapital": false,
+            "customMade": true,
+            "name": "",
+            "visited": false,
+            "alliances": [],
+            "region": "",
+            "house": "",
+            "population": 5000
         }
     ],
     "locations": [
         {
-            "customMade": true,
-            "name": "Kings Road",
-            "visited": true,
-            "region": "Crownlands"
-        },
-        {
             "customMade": false,
-            "name": "The Gods Eye",
-            "visited": true,
+            "name": "Gods Eye",
+            "visited": false,
             "region": "The Riverlands"
         },
         {
-            "customMade": true,
-            "name": "asdf",
-            "visited": true,
-            "region": "asdf"
+            "customMade": false,
+            "name": "The Wall",
+            "visited": false,
+            "region": "The North"
         },
         {
-            "customMade": true,
-            "name": "asdf",
-            "visited": true,
-            "region": "asdf"
-        },
-        {
-            "customMade": true,
-            "name": "asdf",
-            "visited": true,
-            "region": "asdf"
+            "customMade": false,
+            "name": "Wolf's Wood",
+            "visited": false,
+            "region": "The North"
         }
     ]
 }
