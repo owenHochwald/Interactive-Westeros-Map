@@ -24,6 +24,8 @@ public class MapApp {
     private JsonWriter jsonWriter;
     private LocationManager locationManager;
     private CityManager cityManager;
+    private Viewer viewer;
+    private VisitManager visitManager;
 
     // EFFECTS: runs the Westeros Map App
     public MapApp() {
@@ -62,6 +64,8 @@ public class MapApp {
         initLocations();
         locationManager = new LocationManager(locations, input);
         cityManager = new CityManager(cities, input);
+        viewer = new Viewer(cities, locations);
+        visitManager = new VisitManager(cities, locations, input);
     }
 
     // MODIFIES: this
@@ -105,9 +109,9 @@ public class MapApp {
     // EFFECTS: processes user keyboard input
     private void handleInput(String key) {
         switch (key) {
-            case "1" -> viewAllCities();
-            case "2" -> viewAllLocations();
-            case "3" -> changeVisitStatus();
+            case "1" -> viewer.viewAllCities();
+            case "2" -> viewer.viewAllLocations();
+            case "3" -> visitManager.changeVisitStatus();
             case "4" -> manageEntries();
             case "5" -> loadMap();
             case "6" -> saveMap();
@@ -138,33 +142,6 @@ public class MapApp {
 
     }
 
-    // EFFECTS: displays all cities one by one
-    private void viewAllCities() {
-        if (cities.isEmpty()) {
-            System.out.println("╔═══════════════════════════════════╗");
-            System.out.println("║     No cities available           ║");
-            System.out.println("╚═══════════════════════════════════╝");
-            return;
-        }
-
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║                     ALL CITIES                             ║");
-        System.out.println("╠════════════════════════════════════════════════════════════╣");
-
-        for (City city : cities) {
-            String capitalStatus = city.getIsCapital() ? " (Capital)" : "";
-            String visitedStatus = city.getVisited() ? "Yes" : "No";
-
-            System.out.println("║  Name: " + padRight(city.getName() + capitalStatus, 52) + "║");
-            System.out.println("║  House: " + padRight(city.getHouse(), 52) + "║");
-            System.out.println("║  Region: " + padRight(city.getRegion(), 51) + "║");
-            System.out.println("║  Population: " + padRight(String.format("%,d", city.getPopulation()), 47) + "║");
-            System.out.println("║  Visited: " + padRight(visitedStatus, 50) + "║");
-            System.out.println("╠════════════════════════════════════════════════════════════╣");
-        }
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
-    }
-
     // MODIFES: this
     // EFFECTS: loads a map from file
     private void loadMap() {
@@ -181,6 +158,7 @@ public class MapApp {
         }
     }
 
+    // MODIFES: mapState
     // EFFECTS: saves the workroom to file
     private void saveMap() {
         try {
@@ -191,114 +169,6 @@ public class MapApp {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
-    }
-
-    // Helper method to pad strings to the right
-    private String padRight(String s, int n) {
-        return String.format("%-" + n + "s", s);
-    }
-
-    // EFFECTS: displays the visit status menu
-    private void displayVisitStatusMenu() {
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║                 CHANGE VISIT STATUS                        ║");
-        System.out.println("╠════════════════════════════════════════════════════════════╣");
-        System.out.println("║  Navigating through cities and locations                   ║");
-        System.out.println("║  [m] Toggle visited status                                 ║");
-        System.out.println("║  [n] Next entry                                            ║");
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
-    }
-
-    // EFFECTS: displays the current place being modified
-    private void displayCurrentPlace(String name, boolean isVisited, String additionalInfo) {
-        String visitedStatus = isVisited ? "Visited" : "Not Visited";
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.printf("║  Current Place: %-43s║%n", name + additionalInfo);
-        System.out.printf("║  Status: %-49s║%n", visitedStatus);
-        System.out.print("║  Enter choice: ");
-    }
-
-    // MODIFIES: this
-    // EFFECTS: allow user to change visit status one by one of each city
-    private void changeVisitStatus() {
-        displayVisitStatusMenu();
-
-        ArrayList<Location> places = new ArrayList<>();
-        places.addAll(cities);
-        places.addAll(locations);
-        for (Location place : places) {
-            handlePlace(place);
-
-            String choice = input.next().toLowerCase();
-            if (choice.equals("m")) {
-                toggleVisitStatus(place, place.getVisited());
-            } else if (!choice.equals("n")) {
-                System.out.println("║  Invalid choice, moving to next place...                    ║");
-            }
-            System.out.println("╚════════════════════════════════════════════════════════════╝\n");
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: helper to process the places lists
-    private void handlePlace(Location place) {
-        String name;
-        boolean isVisited;
-        String additionalInfo = "";
-
-        if (place instanceof City) {
-            City city = (City) place;
-            name = city.getName();
-            isVisited = city.getVisited();
-            additionalInfo = city.getIsCapital() ? " (Capital)" : "";
-        } else {
-            name = place.getName();
-            isVisited = place.getVisited();
-        }
-
-        displayCurrentPlace(name, isVisited, additionalInfo);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: toggles the visited status of the given place
-    private void toggleVisitStatus(Location place, boolean isVisited) {
-        if (place instanceof City) {
-            ((City) place).toggleVisited();
-        } else {
-            ((Location) place).toggleVisited();
-        }
-        String newStatus = isVisited ? "Not Visited" : "Visited";
-        System.out.printf("║  Status updated to: %-39s║%n", newStatus);
-    }
-
-    // EFFECTS: displays all locations to the console
-    private void viewAllLocations() {
-        if (locations.isEmpty()) {
-            System.out.println("╔═══════════════════════════════════╗");
-            System.out.println("║     No locations available        ║");
-            System.out.println("╚═══════════════════════════════════╝");
-            return;
-        }
-
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║                     ALL LOCATIONS                          ║");
-        System.out.println("╠════════════════════════════════════════════════════════════╣");
-
-        for (Location location : locations) {
-            displayLocationInfo(location);
-        }
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
-    }
-
-    // EFFECTS: displays a single Location to the screen
-    private void displayLocationInfo(Location location) {
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║                   LOCATION INFORMATION                     ║");
-        System.out.println("╠════════════════════════════════════════════════════════════╣");
-        System.out.printf("║  Name: %-52s║%n", location.getName());
-        System.out.printf("║  Region: %-50s║%n", location.getRegion());
-        System.out.printf("║  Visited: %-49s║%n", location.getVisited() ? "Yes" : "No");
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
     }
 
     // EFFECTS: shows the visited city progress as a progress bar
