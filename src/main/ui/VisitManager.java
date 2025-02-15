@@ -7,6 +7,12 @@ import model.City;
 import model.Location;
 
 public class VisitManager {
+    private static final String TOP_BORDER    = "╔══════════════════════════════════════════════════════════════╗";
+    private static final String BOTTOM_BORDER = "╚══════════════════════════════════════════════════════════════╝";
+    private static final String MIDDLE_BORDER = "╠══════════════════════════════════════════════════════════════╣";
+    private static final String VERTICAL_BAR  = "║";
+    private static final int LINE_WIDTH = 60;
+
     ArrayList<City> cities;
     ArrayList<Location> locations;
     Scanner input;
@@ -31,31 +37,45 @@ public class VisitManager {
             String choice = input.next().toLowerCase();
             if (choice.equals("m")) {
                 toggleVisitStatus(place, place.getVisited());
-            } else if (!choice.equals("n")) {
-                System.out.println("║  Invalid choice, moving to next place...                    ║");
+            }  else if (choice.equals("n")) {
+                System.out.println("║  Status unchanged...                                          ║");
             }
-            System.out.println("╚════════════════════════════════════════════════════════════╝\n");
+            else if (!choice.equals("n")) {
+                System.out.println("║ By the Old Gods and the New, that command is not recognized ║");
+            }
+            System.out.println(BOTTOM_BORDER);
         }
+        displayDepartureMessage();
     }
 
     // EFFECTS: displays the visit status menu
     private void displayVisitStatusMenu() {
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║                 CHANGE VISIT STATUS                        ║");
-        System.out.println("╠════════════════════════════════════════════════════════════╣");
-        System.out.println("║  Navigating through cities and locations                   ║");
-        System.out.println("║  [m] Toggle visited status                                 ║");
-        System.out.println("║  [n] Next entry                                            ║");
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
+        System.out.println(TOP_BORDER);
+        System.out.println("              THE MAESTER'S TRAVEL RECORDS");
+        System.out.println(MIDDLE_BORDER);
+        System.out.println("              By order of the Hand of the King");
+        System.out.println(VERTICAL_BAR + formatLine("Royal Decrees:"));
+        System.out.println(VERTICAL_BAR + formatLine("[M] Mark your passage through these lands"));
+        System.out.println(VERTICAL_BAR + formatLine("[N] Proceed to the next holding"));
+        System.out.println(VERTICAL_BAR + formatLine("[Q] Return to the Small Council"));
+        System.out.println(BOTTOM_BORDER + "\n");
     }
+
+    // EFFECTS: returns a line of the specified length wrapped with vertical bars
+    private String formatLine(String text) {
+        return String.format(" %-" + (LINE_WIDTH + 1) + "s" + VERTICAL_BAR, text);
+    }
+
 
     // EFFECTS: displays the current place being modified
     private void displayCurrentPlace(String name, boolean isVisited, String additionalInfo) {
         String visitedStatus = isVisited ? "Visited" : "Not Visited";
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.printf("║  Current Place: %-43s║%n", name + additionalInfo);
-        System.out.printf("║  Status: %-49s║%n", visitedStatus);
-        System.out.print("║  Enter choice: ");
+        System.out.println(TOP_BORDER);
+
+        System.out.printf("║  %-60s║%n", name + additionalInfo);
+        System.out.printf("║  Status: %-52s║%n", visitedStatus);
+        System.out.println(MIDDLE_BORDER);
+        System.out.print("║  Your command, my lord: ");
     }
 
     // MODIFIES: this
@@ -69,7 +89,8 @@ public class VisitManager {
             City city = (City) place;
             name = city.getName();
             isVisited = city.getVisited();
-            additionalInfo = city.getIsCapital() ? " (Capital)" : "";
+            additionalInfo += ", House " + city.getHouse(); 
+            additionalInfo += city.getIsCapital() ? " (Capital)" : "";
         } else {
             name = place.getName();
             isVisited = place.getVisited();
@@ -87,6 +108,14 @@ public class VisitManager {
             ((Location) place).toggleVisited();
         }
         String newStatus = isVisited ? "Not Visited" : "Visited";
-        System.out.printf("║  Status updated to: %-39s║%n", newStatus);
+        System.out.printf("║  Status updated to: %-41s║%n", newStatus);
+    }
+
+    private void displayDepartureMessage() {
+        System.out.println(TOP_BORDER);
+        System.out.println("              The Records Have Been Updated");
+        System.out.println("              Returning to the Small Council");
+        System.out.println("              May the Seven guide your path!");
+        System.out.println(BOTTOM_BORDER);
     }
 }
