@@ -39,8 +39,7 @@ public class VisitManager {
                 toggleVisitStatus(place, place.getVisited());
             }  else if (choice.equals("n")) {
                 System.out.println("║  Status unchanged...                                          ║");
-            }
-            else if (!choice.equals("n")) {
+            } else if (!choice.equals("n")) {
                 System.out.println("║ By the Old Gods and the New, that command is not recognized ║");
             }
             System.out.println(BOTTOM_BORDER);
