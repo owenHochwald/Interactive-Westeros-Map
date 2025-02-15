@@ -95,9 +95,9 @@ public class MapApp {
         System.out.println("╠════════════════════════════════════════╣");
         System.out.println("║  1. View Cities                        ║");
         System.out.println("║  2. View Locations                     ║");
-        System.out.println("║  3. Visit Places                       ║");
-        System.out.println("║  4. Manage Custom Locations & Cities   ║");
-        System.out.println("║  5. Load Map                           ║");
+        System.out.println("║  3. Visit Your Kingdom                 ║");
+        System.out.println("║  4. Manage Locations & Cities          ║");
+        System.out.println("║  5. Reclaim Your Realm                 ║");
         System.out.println("║  6. Archive Your Realm                 ║");
         System.out.println("║  7. Display Progress                   ║");
         System.out.println("║  8. Abandon the Throne                 ║");
