@@ -14,9 +14,7 @@ import persistence.JsonWriter;
 /*
  * Represents a UI to handle all of the user interaction with the console.
  * Cities must contain unique cities with unique names.
- * 
  */
-
 public class MapApp {
     private static final String JSON_STORE = "./data/mapState.json";
     private ArrayList<City> cities;
@@ -85,26 +83,6 @@ public class MapApp {
         locations.add(new Location("Wolf's Wood", "The North", false));
     }
 
-    // // EFFECTS: displays map menu options
-    // private void displayMainMenu() {
-    //     System.out.println("╔════════════════════════════════════════╗");
-    //     System.out.println("║       GAME OF THRONES MAP MENU         ║");
-    //     System.out.println("╠════════════════════════════════════════╣");
-    //     System.out.println("║  [va] View all cities                  ║");
-    //     System.out.println("║  [vc] View only custom-made cities     ║");
-    //     System.out.println("║  [l]  View all locations               ║");
-    //     System.out.println("║  [lc] View only custom-made locations  ║");
-    //     System.out.println("║  [v]  Visit places                     ║");
-    //     System.out.println("║  [al] Add a custom location            ║");
-    //     System.out.println("║  [ac] Add a custom city                ║");
-    //     System.out.println("║  [p]  Display your progress            ║");
-    //     System.out.println("║  [ls] Load saved map                   ║");
-    //     System.out.println("║  [sm] Save map                         ║");
-    //     System.out.println("║  [q]  Quit                             ║");
-    //     System.out.println("╠════════════════════════════════════════╣");
-    //     System.out.print("║  Enter your choice: ");
-    // }
-
     // EFFECTS: displays map menu options
     private void displayMainMenu() {
         System.out.println("╔════════════════════════════════════════╗");
@@ -121,24 +99,6 @@ public class MapApp {
         System.out.println("╚════════════════════════════════════════╝");
         System.out.print("Your command, my lord: ");
     }
-
-    // // MODIFIES: this
-    // // EFFECTS: processes user keyboard input
-    // private void handleInput(String key) {
-    //     switch (key) {
-    //         case "va" -> viewAllCities();
-    //         case "v" -> changeVisitStatus();
-    //         case "vc" -> changeCustomCities();
-    //         case "ac" -> addCity();
-    //         case "al" -> addLocation();
-    //         case "p" -> displayProgress();
-    //         case "l" -> viewAllLocations();
-    //         case "lc" -> viewCustomLocations();
-    //         case "ls" -> loadMap();
-    //         case "sm" -> saveMap();
-    //         default -> System.out.println("Invalid selection!");
-    //     }
-    // }
 
     // MODIFIES: this
     // EFFECTS: processes user keyboard input
@@ -165,7 +125,7 @@ public class MapApp {
         System.out.println("║  2. Manage Cities                      ║");
         System.out.println("╚════════════════════════════════════════╝");
         System.out.print("Your command, my lord: ");
- 
+
         String command = input.next().toLowerCase();
         if (command.equals("1")) {
             manageLocations();
@@ -179,7 +139,7 @@ public class MapApp {
 
     // MODIFES: this, Progress
     // EFFECTS: displays city management options
-    //          and logic to direct user to next step
+    // and logic to direct user to next step
     private void manageCities() {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║       MANAGE CITIES                    ║");
@@ -190,7 +150,7 @@ public class MapApp {
         System.out.println("║  [4] Go back                           ║");
         System.out.println("╠════════════════════════════════════════╣");
         System.out.print("║  Enter your choice: ");
-        
+
         String command = input.next();
         handleMangeCityInput(command);
     }
@@ -213,16 +173,41 @@ public class MapApp {
             default:
                 System.out.println("Invalid selection!");
         }
-
     }
-    
+
     // MODIFES: this, Progress
     // EFFECTS: displays location management options
-    //          and logic to direct user to next step
+    // and logic to direct user to next step
     private void manageLocations() {
-        
+        System.out.println("╔════════════════════════════════════════╗");
+        System.out.println("║       MANAGE Locations                 ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.println("║  [1] Add a location                    ║");
+        System.out.println("║  [2] Remove a location                 ║");
+        System.out.println("║  [4] Go back                           ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.print("║  Enter your choice: ");
+
+        String command = input.next();
+        handleMangeLocationInput(command);
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user keyboard input for custom location view
+    private void handleMangeLocationInput(String key) {
+        switch (key) {
+            case "1":
+                addLocation();
+                break;
+            case "2":
+                removeLocation();
+                break;
+            case "3":
+                break;
+            default:
+                System.out.println("Invalid selection!");
+        }
+    }
 
     // EFFECTS: displays all cities one by one
     private void viewAllCities() {
@@ -278,8 +263,6 @@ public class MapApp {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
-
-
 
     // Helper method to pad strings to the right
     private String padRight(String s, int n) {
@@ -360,121 +343,6 @@ public class MapApp {
         System.out.printf("║  Status updated to: %-39s║%n", newStatus);
     }
 
-    // EFFECTS: displays options menu for custom cities
-    private void customCitiesMenu() {
-        System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║       CUSTOM CITIES MANAGEMENT         ║");
-        System.out.println("╠════════════════════════════════════════╣");
-        System.out.println("║  [r] Remove a city                     ║");
-        System.out.println("║  [a] Establish an alliance             ║");
-        System.out.println("║  [v] Toggle visited status             ║");
-        System.out.println("║  [n] Go to the next city               ║");
-        System.out.println("║  [q] Quit                              ║");
-        System.out.println("╠════════════════════════════════════════╣");
-        System.out.print("║  Enter your choice: ");
-    }
-
-    // // MODIFIES: this
-    // // EFFECTS: processes user keyboard input for custom cities view
-    // private void handleInputCustomCityView(String key, City city) {
-    //     switch (key) {
-    //         case "r":
-    //             removeCity(city);
-    //             break;
-    //         case "a":
-    //             establishAlliance(city);
-    //             break;
-    //         case "v":
-    //             city.toggleVisited();
-    //             break;
-    //         case "n":
-    //             break;
-    //         default:
-    //             System.out.println("Invalid selection!");
-    //     }
-
-    // }
-
-    // // MODIFIES: this
-    // // EFFECTS displays custom cities one by one with ability to change their
-    // // settings
-    // private void changeCustomCities() {
-    //     ArrayList<City> customCities = getCustomCities();
-    //     System.out.println();
-    //     if (customCities.isEmpty()) {
-    //         System.out.println("╔═══════════════════════════════════╗");
-    //         System.out.println("║     No custom cities created :(   ║");
-    //         System.out.println("╚═══════════════════════════════════╝");
-    //     } else {
-    //         for (City city : customCities) {
-    //             displayCityInfo(city);
-    //             customCitiesMenu();
-    //             String choice = input.next().toLowerCase();
-
-    //             if (choice.equals("q")) {
-    //                 break;
-    //             }
-    //             handleInputCustomCityView(choice, city);
-    //         }
-    //     }
-    // }
-
-    private void displayCityInfo(City city) {
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║                     CITY INFORMATION                       ║");
-        System.out.println("╠════════════════════════════════════════════════════════════╣");
-        System.out.printf("║  Name: %-52s║%n", city.getName());
-        System.out.printf("║  Population: %-47d║%n", city.getPopulation());
-        System.out.printf("║  House: %-52s║%n", city.getHouse());
-        System.out.printf("║  Region: %-51s║%n", city.getRegion());
-        System.out.printf("║  Capital City: %-45s║%n", city.getIsCapital() ? "Yes" : "No");
-        System.out.printf("║  Visited: %-50s║%n", city.getVisited() ? "Yes" : "No");
-        System.out.printf("║  Alliances: %-48s║%n",city.getAlliances());
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
-    }
-
-    private void viewCustomLocations() {
-        ArrayList<Location> customLocations = getCustomLocations();
-
-        if (customLocations.isEmpty()) {
-            System.out.println("╔═══════════════════════════════════╗");
-            System.out.println("║   No custom locations created :(  ║");
-            System.out.println("╚═══════════════════════════════════╝");
-            return;
-        }
-
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║                   CUSTOM LOCATIONS                         ║");
-        System.out.println("╠════════════════════════════════════════════════════════════╣");
-
-        for (Location location : customLocations) {
-            displayLocationInfo(location);
-        }
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
-    }
-
-    // Helper method to get custom cities
-    private ArrayList<City> getCustomCities() {
-        ArrayList<City> customCities = new ArrayList<>();
-        for (City city : cities) {
-            if (city.customMade()) {
-                customCities.add(city);
-            }
-        }
-        return customCities;
-    }
-
-    // Helper method to get custom locations
-    private ArrayList<Location> getCustomLocations() {
-        ArrayList<Location> customLocations = new ArrayList<>();
-        for (Location location : locations) {
-            if (location.customMade()) {
-                customLocations.add(location);
-            }
-        }
-        return customLocations;
-    }
-
     // EFFECTS: displays all locations to the console
     private void viewAllLocations() {
         if (locations.isEmpty()) {
@@ -544,7 +412,7 @@ public class MapApp {
     // EFFECTS: prompts the user for a string input and returns it
     private String getStringInput(String prompt) {
         System.out.print(prompt);
-        return input.nextLine();  
+        return input.nextLine();
     }
 
     // EFFECTS: prompts the user for an integer input and validates it
@@ -569,7 +437,7 @@ public class MapApp {
     private boolean getValidatedBoolean(String prompt) {
         while (true) {
             System.out.print(prompt);
-            String response = input.nextLine().toLowerCase(); 
+            String response = input.nextLine().toLowerCase();
             if (response.equals("true") || response.equals("false")) {
                 return Boolean.parseBoolean(response);
             } else {
@@ -578,7 +446,7 @@ public class MapApp {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, Progress
     // EFFECTS: removes a city if its a custom city, nothing if its not
     private void removeCity() {
         System.out.println("╔════════════════════════════════════════════════════════════╗");
@@ -586,7 +454,7 @@ public class MapApp {
         String cityName = input.next();
         City cityToRemove = findCityByName(cityName);
 
-        if(cityToRemove.customMade()) {
+        if (cityToRemove.customMade()) {
             if (cityToRemove.getVisited()) {
                 Progress.decreaseNumCitiesVisited();
                 Progress.decreasesNumVisitedEntries();
@@ -596,6 +464,25 @@ public class MapApp {
             cities.remove(cityToRemove);
         } else {
             System.out.println("We can't remove a original cities, my lord!");
+        }
+    }
+
+    // MODIFIES: this, Progress
+    // EFFECTS: removes a location if its a custom location, nothing if its not
+    private void removeLocation() {
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║ Enter a location name to remove: ");
+        String locationName = input.next();
+        Location locationToRemove = findLocationByName(locationName);
+
+        if (locationToRemove.customMade()) {
+            if (locationToRemove.getVisited()) {
+                Progress.decreasesNumVisitedEntries();
+            }
+            Progress.decreasesNumEntries();
+            locations.remove(locationToRemove);
+        } else {
+            System.out.println("We can't remove a original locations, my lord!");
         }
     }
 
@@ -622,6 +509,17 @@ public class MapApp {
         for (City city : cities) {
             if (city.getName().equals(name)) {
                 return city;
+            }
+        }
+        return null;
+    }
+
+    // REQUIRES: name in the locations names
+    // EFFECTS: returns the locations with the matching name, nothing if not found
+    private Location findLocationByName(String name) {
+        for (Location location : locations) {
+            if (location.getName().equals(name)) {
+                return location;
             }
         }
         return null;
