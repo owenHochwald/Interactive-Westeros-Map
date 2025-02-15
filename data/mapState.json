@@ -71,24 +71,14 @@
             "population": 40000
         },
         {
-            "isCapital": true,
-            "customMade": true,
-            "name": " Erie",
-            "visited": false,
-            "alliances": [],
-            "region": " East",
-            "house": "",
-            "population": 60000
-        },
-        {
             "isCapital": false,
             "customMade": true,
-            "name": "",
+            "name": "Greywater Watch",
             "visited": false,
             "alliances": [],
-            "region": "",
-            "house": "",
-            "population": 5000
+            "region": "The North",
+            "house": "Reed",
+            "population": 10000
         }
     ],
     "locations": [

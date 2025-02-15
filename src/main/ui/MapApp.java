@@ -152,6 +152,10 @@ public class MapApp {
             Progress.resetTotalEntry();
             locations = jsonReader.readLocations();
             cities = jsonReader.readCities();
+            locationManager = new LocationManager(locations, input);
+            cityManager = new CityManager(cities, input);
+            viewer = new Viewer(cities, locations);
+            visitManager = new VisitManager(cities, locations, input);
             System.out.println("╠  ...Loaded in saved cities and locations...  ═╣");
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
