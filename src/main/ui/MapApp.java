@@ -43,9 +43,9 @@ public class MapApp {
         init();
 
         while (true) {
-            displayMenu();
+            displayMainMenu();
             command = input.next().toLowerCase();
-            if (command.equals("q")) {
+            if (command.equals("8")) {
                 System.out.println("Thanks for playing!");
                 break;
             } else {
@@ -85,43 +85,112 @@ public class MapApp {
         locations.add(new Location("Wolf's Wood", "The North", false));
     }
 
+    // // EFFECTS: displays map menu options
+    // private void displayMainMenu() {
+    //     System.out.println("╔════════════════════════════════════════╗");
+    //     System.out.println("║       GAME OF THRONES MAP MENU         ║");
+    //     System.out.println("╠════════════════════════════════════════╣");
+    //     System.out.println("║  [va] View all cities                  ║");
+    //     System.out.println("║  [vc] View only custom-made cities     ║");
+    //     System.out.println("║  [l]  View all locations               ║");
+    //     System.out.println("║  [lc] View only custom-made locations  ║");
+    //     System.out.println("║  [v]  Visit places                     ║");
+    //     System.out.println("║  [al] Add a custom location            ║");
+    //     System.out.println("║  [ac] Add a custom city                ║");
+    //     System.out.println("║  [p]  Display your progress            ║");
+    //     System.out.println("║  [ls] Load saved map                   ║");
+    //     System.out.println("║  [sm] Save map                         ║");
+    //     System.out.println("║  [q]  Quit                             ║");
+    //     System.out.println("╠════════════════════════════════════════╣");
+    //     System.out.print("║  Enter your choice: ");
+    // }
+
     // EFFECTS: displays map menu options
-    private void displayMenu() {
+    private void displayMainMenu() {
         System.out.println("╔════════════════════════════════════════╗");
-        System.out.println("║       GAME OF THRONES MAP MENU         ║");
+        System.out.println("║       THE REALM OF WESTEROS            ║");
         System.out.println("╠════════════════════════════════════════╣");
-        System.out.println("║  [va] View all cities                  ║");
-        System.out.println("║  [vc] View only custom-made cities     ║");
-        System.out.println("║  [l]  View all locations               ║");
-        System.out.println("║  [lc] View only custom-made locations  ║");
-        System.out.println("║  [v]  Visit places                     ║");
-        System.out.println("║  [al] Add a custom location            ║");
-        System.out.println("║  [ac] Add a custom city                ║");
-        System.out.println("║  [p]  Display your progress            ║");
-        System.out.println("║  [ls] Load saved map                   ║");
-        System.out.println("║  [sm] Save map                         ║");
-        System.out.println("║  [q]  Quit                             ║");
-        System.out.println("╠════════════════════════════════════════╣");
-        System.out.print("║  Enter your choice: ");
+        System.out.println("║  1. View Cities                        ║");
+        System.out.println("║  2. View Locations                     ║");
+        System.out.println("║  3. Visit Places                       ║");
+        System.out.println("║  4. Manage Custom Locations & Cities   ║");
+        System.out.println("║  5. Load Map                           ║");
+        System.out.println("║  6. Archivew Your Realm                ║");
+        System.out.println("║  7. Display Progress                   ║");
+        System.out.println("║  8. Abandon the Throne                 ║");
+        System.out.println("╚════════════════════════════════════════╝");
+        System.out.print("Your command, my lord: ");
     }
+
+    // // MODIFIES: this
+    // // EFFECTS: processes user keyboard input
+    // private void handleInput(String key) {
+    //     switch (key) {
+    //         case "va" -> viewAllCities();
+    //         case "v" -> changeVisitStatus();
+    //         case "vc" -> changeCustomCities();
+    //         case "ac" -> addCity();
+    //         case "al" -> addLocation();
+    //         case "p" -> displayProgress();
+    //         case "l" -> viewAllLocations();
+    //         case "lc" -> viewCustomLocations();
+    //         case "ls" -> loadMap();
+    //         case "sm" -> saveMap();
+    //         default -> System.out.println("Invalid selection!");
+    //     }
+    // }
 
     // MODIFIES: this
     // EFFECTS: processes user keyboard input
     private void handleInput(String key) {
         switch (key) {
-            case "va" -> viewAllCities();
-            case "v" -> changeVisitStatus();
-            case "vc" -> changeCustomCities();
-            case "ac" -> addCity();
-            case "al" -> addLocation();
-            case "p" -> displayProgress();
-            case "l" -> viewAllLocations();
-            case "lc" -> viewCustomLocations();
-            case "ls" -> loadMap();
-            case "sm" -> saveMap();
+            case "1" -> viewAllCities();
+            case "2" -> viewAllLocations();
+            case "3" -> changeVisitStatus();
+            case "4" -> manageEntries();
+            case "5" -> loadMap();
+            case "6" -> saveMap();
+            case "7" -> displayProgress();
             default -> System.out.println("Invalid selection!");
         }
     }
+
+    // MODIFES: this, Progress
+    // EFFECTS: displays city / location options for next steps
+    private void manageEntries() {
+        System.out.println("╔════════════════════════════════════════╗");
+        System.out.println("║       Manage Locations & Cities        ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.println("║  1. Manage Locations                   ║");
+        System.out.println("║  2. Manage Cities                      ║");
+        System.out.println("╚════════════════════════════════════════╝");
+        System.out.print("Your command, my lord: ");
+ 
+        String command = input.next().toLowerCase();
+        if (command.equals("1")) {
+            manageCities();
+        } else if (command.equals("2")) {
+            manageLocations();
+        } else {
+            System.out.println("I don't know what you mean, please enter something I can do...");
+        }
+
+    }
+
+    // MODIFES: this, Progress
+    // EFFECTS: displays city management options
+    //          and logic to direct user to next step
+    private void manageCities() {
+        
+    }
+    
+    // MODIFES: this, Progress
+    // EFFECTS: displays location management options
+    //          and logic to direct user to next step
+    private void manageLocations() {
+        
+    }
+
 
     // EFFECTS: displays all cities one by one
     private void viewAllCities() {
