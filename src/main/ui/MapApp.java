@@ -265,10 +265,10 @@ public class MapApp {
         System.out.println("║       CUSTOM CITIES MANAGEMENT         ║");
         System.out.println("╠════════════════════════════════════════╣");
         System.out.println("║  [r] Remove a city                     ║");
-        System.out.println("║  [a] Establish an alliance            ║");
-        System.out.println("║  [v] Toggle visited status            ║");
-        System.out.println("║  [n] Go to the next city              ║");
-        System.out.println("║  [q] Quit                            ║");
+        System.out.println("║  [a] Establish an alliance             ║");
+        System.out.println("║  [v] Toggle visited status             ║");
+        System.out.println("║  [n] Go to the next city               ║");
+        System.out.println("║  [q] Quit                              ║");
         System.out.println("╠════════════════════════════════════════╣");
         System.out.print("║  Enter your choice: ");
     }
@@ -426,11 +426,12 @@ public class MapApp {
     // MODIFIES: this
     // EFFECTS: adds a custom city
     private void addCity() {
+        input.nextLine();
         System.out.println("\nEnter city details:");
-        String name = getUserInput("Name: ");
+        String name = getStringInput("Name: ");
         int population = getValidatedInt("Population: ");
-        String house = getUserInput("House (ruling family): ");
-        String region = getUserInput("Region: ");
+        String house = getStringInput("House (ruling family): ");
+        String region = getStringInput("Region: ");
         boolean isCapital = getValidatedBoolean("Is this city a capital? (true/false): ");
 
         City newCity = new City(name, population, house, region, isCapital, true);
@@ -440,35 +441,40 @@ public class MapApp {
     }
 
     // EFFECTS: prompts the user for a string input and returns it
-    private String getUserInput(String prompt) {
+    private String getStringInput(String prompt) {
         System.out.print(prompt);
-        input.next();
-
-        return input.nextLine();
+        return input.nextLine();  
     }
 
     // EFFECTS: prompts the user for an integer input and validates it
     private int getValidatedInt(String prompt) {
-        System.out.print(prompt);
-        while (!input.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a valid number.");
-            input.next();
+        while (true) {
+            System.out.print(prompt);
+            try {
+                String line = input.nextLine();
+                int value = Integer.parseInt(line);
+                if (value >= 0) {
+                    return value;
+                } else {
+                    System.out.println("Please enter a non-negative number.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
         }
-        int value = input.nextInt();
-        input.nextLine();
-        return value;
     }
 
     // EFFECTS: prompts the user for a boolean input and validates it
     private boolean getValidatedBoolean(String prompt) {
-        System.out.print(prompt);
-        while (!input.hasNextBoolean()) {
-            System.out.println("Invalid input. Please enter true or false.");
-            input.next();
+        while (true) {
+            System.out.print(prompt);
+            String response = input.nextLine().toLowerCase(); 
+            if (response.equals("true") || response.equals("false")) {
+                return Boolean.parseBoolean(response);
+            } else {
+                System.out.println("Invalid input. Please enter true or false.");
+            }
         }
-        boolean value = input.nextBoolean();
-        input.nextLine();
-        return value;
     }
 
     // REQUIRES: city in cities
@@ -489,12 +495,15 @@ public class MapApp {
     // MODIFIES: this
     // EFFECTS: establishes an alliance between two cities in the map
     private void establishAlliance(City c1) {
-        System.out.print("Enter a city name to ally the current city with: ");
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║ Enter a city name to ally the current city with: ");
         String cityName = input.next();
         City c2 = findCityByName(cityName);
         c1.addAlliance(c2.getName());
-        System.out.println("City: " + c1.getName() + ", alliance: " + c1.getAlliances());
-        System.out.println("City: " + c2.getName() + ", alliance: " + c2.getAlliances());
+        c2.addAlliance(c1.getName());
+        System.out.println("║ Succesfully created the alliance!           ");
+        // System.out.println("City: " + c1.getName() + ", alliance: " + c1.getAlliances());
+        // System.out.println("City: " + c2.getName() + ", alliance: " + c2.getAlliances());
     }
 
     // Helper method for establishAlliance
