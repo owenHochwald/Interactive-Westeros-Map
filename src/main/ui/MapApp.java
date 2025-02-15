@@ -115,7 +115,7 @@ public class MapApp {
         System.out.println("║  3. Visit Places                       ║");
         System.out.println("║  4. Manage Custom Locations & Cities   ║");
         System.out.println("║  5. Load Map                           ║");
-        System.out.println("║  6. Archivew Your Realm                ║");
+        System.out.println("║  6. Archive Your Realm                 ║");
         System.out.println("║  7. Display Progress                   ║");
         System.out.println("║  8. Abandon the Throne                 ║");
         System.out.println("╚════════════════════════════════════════╝");
@@ -168,9 +168,9 @@ public class MapApp {
  
         String command = input.next().toLowerCase();
         if (command.equals("1")) {
-            manageCities();
-        } else if (command.equals("2")) {
             manageLocations();
+        } else if (command.equals("2")) {
+            manageCities();
         } else {
             System.out.println("I don't know what you mean, please enter something I can do...");
         }
@@ -181,7 +181,39 @@ public class MapApp {
     // EFFECTS: displays city management options
     //          and logic to direct user to next step
     private void manageCities() {
+        System.out.println("╔════════════════════════════════════════╗");
+        System.out.println("║       MANAGE CITIES                    ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.println("║  [1] Add a city                        ║");
+        System.out.println("║  [2] Remove a city                     ║");
+        System.out.println("║  [3] Establish an alliance             ║");
+        System.out.println("║  [4] Go back                           ║");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.print("║  Enter your choice: ");
         
+        String command = input.next();
+        handleMangeCityInput(command);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user keyboard input for custom cities view
+    private void handleMangeCityInput(String key) {
+        switch (key) {
+            case "1":
+                addCity();
+                break;
+            case "2":
+                removeCity();
+                break;
+            case "3":
+                establishAlliance();
+                break;
+            case "4":
+                break;
+            default:
+                System.out.println("Invalid selection!");
+        }
+
     }
     
     // MODIFES: this, Progress
@@ -342,50 +374,50 @@ public class MapApp {
         System.out.print("║  Enter your choice: ");
     }
 
-    // MODIFIES: this
-    // EFFECTS: processes user keyboard input for custom cities view
-    private void handleInputCustomCityView(String key, City city) {
-        switch (key) {
-            case "r":
-                removeCity(city);
-                break;
-            case "a":
-                establishAlliance(city);
-                break;
-            case "v":
-                city.toggleVisited();
-                break;
-            case "n":
-                break;
-            default:
-                System.out.println("Invalid selection!");
-        }
+    // // MODIFIES: this
+    // // EFFECTS: processes user keyboard input for custom cities view
+    // private void handleInputCustomCityView(String key, City city) {
+    //     switch (key) {
+    //         case "r":
+    //             removeCity(city);
+    //             break;
+    //         case "a":
+    //             establishAlliance(city);
+    //             break;
+    //         case "v":
+    //             city.toggleVisited();
+    //             break;
+    //         case "n":
+    //             break;
+    //         default:
+    //             System.out.println("Invalid selection!");
+    //     }
 
-    }
+    // }
 
-    // MODIFIES: this
-    // EFFECTS displays custom cities one by one with ability to change their
-    // settings
-    private void changeCustomCities() {
-        ArrayList<City> customCities = getCustomCities();
-        System.out.println();
-        if (customCities.isEmpty()) {
-            System.out.println("╔═══════════════════════════════════╗");
-            System.out.println("║     No custom cities created :(   ║");
-            System.out.println("╚═══════════════════════════════════╝");
-        } else {
-            for (City city : customCities) {
-                displayCityInfo(city);
-                customCitiesMenu();
-                String choice = input.next().toLowerCase();
+    // // MODIFIES: this
+    // // EFFECTS displays custom cities one by one with ability to change their
+    // // settings
+    // private void changeCustomCities() {
+    //     ArrayList<City> customCities = getCustomCities();
+    //     System.out.println();
+    //     if (customCities.isEmpty()) {
+    //         System.out.println("╔═══════════════════════════════════╗");
+    //         System.out.println("║     No custom cities created :(   ║");
+    //         System.out.println("╚═══════════════════════════════════╝");
+    //     } else {
+    //         for (City city : customCities) {
+    //             displayCityInfo(city);
+    //             customCitiesMenu();
+    //             String choice = input.next().toLowerCase();
 
-                if (choice.equals("q")) {
-                    break;
-                }
-                handleInputCustomCityView(choice, city);
-            }
-        }
-    }
+    //             if (choice.equals("q")) {
+    //                 break;
+    //             }
+    //             handleInputCustomCityView(choice, city);
+    //         }
+    //     }
+    // }
 
     private void displayCityInfo(City city) {
         System.out.println("╔════════════════════════════════════════════════════════════╗");
@@ -546,33 +578,41 @@ public class MapApp {
         }
     }
 
-    // REQUIRES: city in cities
     // MODIFIES: this
-    // EFFECTS: removes a custom city
-    private void removeCity(City city) {
-        if (city.getVisited()) {
-            Progress.decreaseNumCitiesVisited();
-            Progress.decreasesNumVisitedEntries();
-        }
-        Progress.decreasesNumEntries();
-        Progress.setTotalNumCities(Progress.getTotalNumCities() - 1);
-        cities.remove(city);
+    // EFFECTS: removes a city if its a custom city, nothing if its not
+    private void removeCity() {
+        System.out.println("╔════════════════════════════════════════════════════════════╗");
+        System.out.println("║ Enter a city name to remove: ");
+        String cityName = input.next();
+        City cityToRemove = findCityByName(cityName);
 
+        if(cityToRemove.customMade()) {
+            if (cityToRemove.getVisited()) {
+                Progress.decreaseNumCitiesVisited();
+                Progress.decreasesNumVisitedEntries();
+            }
+            Progress.decreasesNumEntries();
+            Progress.setTotalNumCities(Progress.getTotalNumCities() - 1);
+            cities.remove(cityToRemove);
+        } else {
+            System.out.println("We can't remove a original cities, my lord!");
+        }
     }
 
-    // REQUIRES: city is in cities
     // MODIFIES: this
     // EFFECTS: establishes an alliance between two cities in the map
-    private void establishAlliance(City c1) {
+    private void establishAlliance() {
         System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║ Enter a city name to ally the current city with: ");
+        System.out.println("║ Entry the first city: ");
         String cityName = input.next();
-        City c2 = findCityByName(cityName);
-        c1.addAlliance(c2.getName());
-        c2.addAlliance(c1.getName());
-        System.out.println("║ Succesfully created the alliance!           ");
-        // System.out.println("City: " + c1.getName() + ", alliance: " + c1.getAlliances());
-        // System.out.println("City: " + c2.getName() + ", alliance: " + c2.getAlliances());
+        City firstCity = findCityByName(cityName);
+        System.out.println("║ Entry the second city: ");
+        cityName = input.next();
+        City secondCity = findCityByName(cityName);
+
+        firstCity.addAlliance(secondCity.getName());
+        secondCity.addAlliance(firstCity.getName());
+        System.out.println("║ Succesfully created the alliance!");
     }
 
     // Helper method for establishAlliance
