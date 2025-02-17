@@ -9,20 +9,20 @@ import java.util.ArrayList;
 public class Map {
 
     // EFFECTS: constructs a new map with cities and locations
-    public Map() {
+    public Map(ArrayList<Location> locations, ArrayList<City> cities) {
 
     }
 
 
     // MODIFIES: this
     // EFFECTS: loads the map state from file
-    public void loadMap() {
+    public void loadMap(String path) {
 
     }
 
     // MODIFIES: mapState
     // EFFECTS: saves the current map state to file
-    public void saveMap() {
+    public void saveMap(String path) {
 
     }
 
@@ -40,7 +40,7 @@ public class Map {
     }
 
     public void setCities(ArrayList<City> cities) {
-        
+
     }
 
 }
