@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import model.City;
 import model.Location;
+import model.Map;
 import model.Progress;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -17,6 +18,7 @@ import persistence.JsonWriter;
  */
 public class MapApp {
     private static final String JSON_STORE = "./data/mapState.json";
+    private Map map;
     private ArrayList<City> cities;
     private ArrayList<Location> locations;
     private Scanner input;
@@ -59,11 +61,13 @@ public class MapApp {
     private void init() {
         this.cities = new ArrayList<>();
         this.locations = new ArrayList<>();
-        this.input = new Scanner(System.in);
         initCities();
         initLocations();
-        locationManager = new LocationManager(locations, input);
-        cityManager = new CityManager(cities, input);
+        this.map = new Map(locations, cities);
+        this.input = new Scanner(System.in);
+
+        locationManager = new LocationManager(map.getLocations(), input);
+        cityManager = new CityManager(map.getCities(), input);
         viewer = new Viewer(cities, locations);
         visitManager = new VisitManager(cities, locations, input);
     }
