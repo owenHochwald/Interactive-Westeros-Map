@@ -2,6 +2,7 @@ package ui.gui;
 
 import javax.swing.*;
 
+import model.Map;
 import model.Progress;
 
 import java.awt.*;
@@ -20,9 +21,11 @@ public class MenuBar extends JMenuBar {
     private JButton viewCitiesButton;
     private JButton viewLocationsButton;
     private JButton addEntryButton;
+    private Map map;
 
     // EFFECTS: creates a menu bar with title, progress, and actions
-    public MenuBar() {
+    public MenuBar(Map map) {
+        this.map = map;
         setLayout(new BorderLayout());
         setOpaque(false);
 
@@ -32,8 +35,12 @@ public class MenuBar extends JMenuBar {
         add(leftPanel, BorderLayout.WEST);
 
         JPanel rightPanel = new JPanel();
-        // rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        initRightPanel(rightPanel);
+    }
 
+    // MODIFES: this
+    // inits the right panel of the menu bar
+    public void initRightPanel(JPanel rightPanel) {
         progressBar = new JProgressBar(0, 100);
         progressBar.setPreferredSize(new Dimension(150, 20));
         progressBar.setStringPainted(true);
