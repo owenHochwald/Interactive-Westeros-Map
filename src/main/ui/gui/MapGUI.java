@@ -18,6 +18,9 @@ public class MapGUI extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
 
+        MenuBar menu = new MenuBar();
+        setJMenuBar(menu);
+
         JPanel imageContainer = new JPanel();
         imageContainer.setLayout(new BoxLayout(imageContainer, BoxLayout.Y_AXIS));
 
