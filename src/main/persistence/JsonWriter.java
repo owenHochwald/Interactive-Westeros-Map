@@ -30,7 +30,7 @@ public class JsonWriter {
         writer = new PrintWriter(new File(destination));
     }
 
-    // MODIFIES: this
+    // MODIFIES: json file at destination
     // EFFECTS: writes JSON representation of locations and cities to file
     public void write(ArrayList<Location> locations, ArrayList<City> cities) {
         JSONObject json = new JSONObject();

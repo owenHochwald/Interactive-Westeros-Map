@@ -1,0 +1,44 @@
+{
+    "cities": [
+        {
+            "isCapital": true,
+            "customMade": false,
+            "name": "King's Landing",
+            "visited": false,
+            "alliances": [],
+            "region": "Crownlands",
+            "house": "Baratheon",
+            "population": 500000
+        },
+        {
+            "isCapital": true,
+            "customMade": false,
+            "name": "Winterfell",
+            "visited": false,
+            "alliances": [],
+            "region": "The North",
+            "house": "Stark",
+            "population": 100000
+        }
+    ],
+    "locations": [
+        {
+            "customMade": false,
+            "name": "Gods Eye",
+            "visited": false,
+            "region": "The Riverlands"
+        },
+        {
+            "customMade": false,
+            "name": "The Wall",
+            "visited": false,
+            "region": "The North"
+        },
+        {
+            "customMade": false,
+            "name": "Wolf's Wood",
+            "visited": false,
+            "region": "The North"
+        }
+    ]
+}

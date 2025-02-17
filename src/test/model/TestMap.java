@@ -1,13 +1,14 @@
 package model;
 
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-
 
 public class TestMap {
 
@@ -15,8 +16,10 @@ public class TestMap {
     private ArrayList<Location> locations;
     private Map mapTest;
 
-    @BeforeEach
-    void setup() {
+    @Before
+    public void setup() {
+        cities = new ArrayList<>();
+        locations = new ArrayList<>();
         cities.add(new City("King's Landing", 500000, "Baratheon", "Crownlands", true, false));
         cities.add(new City("Winterfell", 100000, "Stark", "The North", true, false));
 
@@ -27,15 +30,15 @@ public class TestMap {
     }
 
     @Test
-    void testConstuctor() {
+    public void testConstuctor() {
         assertEquals(2, mapTest.getCities().size());
         assertEquals(3, mapTest.getLocations().size());
-        assertEquals("King's Landing", mapTest.getCities().get(0));
-        assertEquals("Wolf's Wood", mapTest.getLocations().get(2));
+        assertEquals("King's Landing", mapTest.getCities().get(0).getName());
+        assertEquals("Wolf's Wood", mapTest.getLocations().get(2).getName());
     }
 
     @Test
-    void testSetLocations() {
+    public void testSetLocations() {
         assertEquals(3, mapTest.getLocations().size());
         mapTest.setLocations(null);
         assertNull(mapTest.getLocations());
@@ -46,8 +49,8 @@ public class TestMap {
     }
 
     @Test
-    void testSetCities() {
-        assertEquals(3, mapTest.getCities().size());
+    public void testSetCities() {
+        assertEquals(2, mapTest.getCities().size());
         mapTest.setCities(null);
         assertNull(mapTest.getCities());
         cities = new ArrayList<>();
@@ -57,19 +60,28 @@ public class TestMap {
     }
 
     @Test
-    void testLoadMap() {
-        mapTest.setCities(null);
-        mapTest.setLocations(null);
-        mapTest.loadMap("./data/testReaderGeneralMapState.json");
-        assertEquals(2, mapTest.getCities().size());
-        assertEquals(2, mapTest.getLocations().size());
+    public void testLoadMap() {
+        try {
+            mapTest.setCities(null);
+            mapTest.setLocations(null);
+            mapTest.loadMap("./data/testReaderGeneralMapState.json");
+            assertEquals(2, mapTest.getCities().size());
+            assertEquals(2, mapTest.getLocations().size());
+        } catch (IOException e) {
+            fail();
+        }
+
     }
 
     @Test
-    void testWriteMap() {
-        mapTest.saveMap("./data/testWriterGeneralMapState.json");
-        mapTest.loadMap("./data/testWriterGeneralMapState.json");
-        assertEquals(2, mapTest.getCities().size());
-        assertEquals(2, mapTest.getLocations().size());
+    public void testWriteMap() {
+        try {
+            mapTest.saveMap("./data/testWriterGeneralMapState.json");
+            mapTest.loadMap("./data/testWriterGeneralMapState.json");
+            assertEquals(2, mapTest.getCities().size());
+            assertEquals(3, mapTest.getLocations().size());
+        } catch (IOException e) {
+            fail();
+        }
     }
 }
