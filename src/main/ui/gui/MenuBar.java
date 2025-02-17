@@ -2,12 +2,15 @@ package ui.gui;
 
 
 import javax.swing.*;
+
+import model.Progress;
+
 import java.awt.*;
-    
+
 /*
  * Represents a menu bar that will be displayed at the top of the page.
- * Has the ability to display the users progress in visited locations,
- * manage entries and view entries.
+ * Has the ability to display the two seperate progress bars (cities and entries) 
+ * for the users progress in exploring, manage entries and view entries.
  */
 public class MenuBar extends JMenuBar {
 
@@ -56,34 +59,36 @@ public class MenuBar extends JMenuBar {
         setVisible(true);
     }
 
+    // MODIFES: this
+    // EFFECTS: updates progress bars based on values from the Progress class
+    public void updateProgress() {
+
+    }
+
 
     // getters
     public JButton getSaveButton() {
-        return null;
+        return saveButton;
     }
 
     public JButton getLoadButton() {
-        return null;
+        return loadButton;
     }
 
     public JButton getViewCitiesButton() {
-        return null;
+        return viewCitiesButton;
     }
 
     public JButton getViewLocationsButton() {
-        return null;
+        return viewLocationsButton;
     }
 
     public JButton getAddEntryButton() {
-        return null;
-    }
-
-    public JProgressBar getProgressBar() {
-        return null;
+        return addEntryButton;
     }
 
     public JLabel getTitle() {
-        return null;
+        return title;
     }
 
 }
