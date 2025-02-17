@@ -6,13 +6,16 @@ import model.Map;
 import model.Progress;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /*
  * Represents a menu bar that will be displayed at the top of the page.
  * Has the ability to display progress toward visiting all the entries, 
  * buttons for managing and viewing entries.
  */
-public class MenuBar extends JMenuBar {
+public class MenuBar extends JMenuBar implements ActionListener {
 
     private JLabel title;
     private JProgressBar progressBar;
@@ -49,6 +52,7 @@ public class MenuBar extends JMenuBar {
 
         saveButton = new JButton("Save");
         loadButton = new JButton("Load");
+        loadButton.addActionListener(this);
         viewCitiesButton = new JButton("View All Cities");
         viewLocationsButton = new JButton("View All Locations");
         addEntryButton = new JButton("Add Entry");
@@ -68,7 +72,28 @@ public class MenuBar extends JMenuBar {
         int numVisitedEntries = Progress.getTotalNumVisitedEntries();
         int percentage = (int) ((numVisitedEntries * 100.0) / numEntries);
         progressBar.setValue(percentage);
-        progressBar.setString("Places: " + percentage);
+        progressBar.setString("Places: " + numVisitedEntries + "/" + numEntries);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == loadButton) {
+            try {
+                map.loadMap("./data/mapState.json");
+                updateProgress();
+                System.out.println(map.getCities());
+            } catch (IOException error) {
+                System.out.println("Destination doesn't exist: " + error);
+            }
+        } else if (e.getSource() == saveButton) {
+            try {
+                map.saveMap("./data/mapState.json");
+                updateProgress();
+                System.out.println(map.getCities());
+            } catch (IOException error) {
+                System.out.println("Destination doesn't exist: " + error);
+            }
+        }
     }
 
     // getters
