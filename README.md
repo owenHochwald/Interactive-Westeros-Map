@@ -42,6 +42,16 @@ This project is of particular interest to me because:
 
 ---
 
+# Instructions for End User
+
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by...
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by...
+- You can locate my visual component by...
+- You can save the state of my application by...
+- You can reload the state of my application by...
+
+---
+
 ## References
 
 Paul Carter (November 10, 2024) JsonSerializationDemo.
