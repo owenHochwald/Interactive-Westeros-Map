@@ -19,10 +19,9 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     private JLabel title;
     private JProgressBar progressBar;
+    private JButton updateProgressBar;
     private JButton saveButton;
     private JButton loadButton;
-    private JButton viewCitiesButton;
-    private JButton viewLocationsButton;
     private JButton addEntryButton;
     private Map map;
 
@@ -45,21 +44,24 @@ public class MenuBar extends JMenuBar implements ActionListener {
     // inits the right panel of the menu bar
     public void initRightPanel(JPanel rightPanel) {
         progressBar = new JProgressBar(0, 100);
-        progressBar.setPreferredSize(new Dimension(150, 20));
+        progressBar.setPreferredSize(new Dimension(600, 30));
         progressBar.setStringPainted(true);
         updateProgress();
         rightPanel.add(progressBar);
 
+        JPanel fillerSpace = new JPanel();
+        fillerSpace.setPreferredSize(new Dimension(120, 30));
+        rightPanel.add(fillerSpace);
+
         saveButton = new JButton("Save");
         loadButton = new JButton("Load");
+        updateProgressBar = new JButton("Update Progress");
         loadButton.addActionListener(this);
-        viewCitiesButton = new JButton("View All Cities");
-        viewLocationsButton = new JButton("View All Locations");
+        updateProgressBar.addActionListener(this);
         addEntryButton = new JButton("Add Entry");
+        rightPanel.add(updateProgressBar);
         rightPanel.add(saveButton);
         rightPanel.add(loadButton);
-        rightPanel.add(viewCitiesButton);
-        rightPanel.add(viewLocationsButton);
         rightPanel.add(addEntryButton);
 
         add(rightPanel, BorderLayout.EAST);
@@ -95,6 +97,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
             } catch (IOException error) {
                 System.out.println("Destination doesn't exist: " + error);
             }
+        } else if (e.getSource() == updateProgressBar) {
+            updateProgress();
         }
     }
 
@@ -105,14 +109,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     public JButton getLoadButton() {
         return loadButton;
-    }
-
-    public JButton getViewCitiesButton() {
-        return viewCitiesButton;
-    }
-
-    public JButton getViewLocationsButton() {
-        return viewLocationsButton;
     }
 
     public JButton getAddEntryButton() {
