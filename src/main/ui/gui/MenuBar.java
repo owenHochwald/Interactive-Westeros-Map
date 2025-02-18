@@ -56,10 +56,16 @@ public class MenuBar extends JMenuBar implements ActionListener {
         saveButton = new JButton("Save");
         loadButton = new JButton("Load");
         updateProgressBar = new JButton("Update Progress");
+        addEntryButton = new JButton("Add Entry");
+
+        updateProgressBar.setFocusable(false);
+        saveButton.setFocusable(false);
+
         loadButton.addActionListener(this);
         updateProgressBar.addActionListener(this);
         saveButton.addActionListener(this);
-        addEntryButton = new JButton("Add Entry");
+        addEntryButton.addActionListener(this);
+
         rightPanel.add(updateProgressBar);
         rightPanel.add(saveButton);
         rightPanel.add(loadButton);
@@ -98,6 +104,9 @@ public class MenuBar extends JMenuBar implements ActionListener {
             }
         } else if (e.getSource() == updateProgressBar) {
             updateProgress();
+        } else if (e.getSource() == addEntryButton) {
+            new EntryWindow(map);
         }
+
     }
 }

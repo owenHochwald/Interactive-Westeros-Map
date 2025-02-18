@@ -270,6 +270,7 @@ public class EastDisplay extends JPanel {
         regions.add("The Reach");
         regions.add("The Stormlands");
         regions.add("Dorne");
+        regions.add("The Iron Islands");
     }
 
     // ActionListener implementations, seperated out instead of a long conditional
