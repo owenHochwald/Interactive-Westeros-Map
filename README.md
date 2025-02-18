@@ -45,7 +45,7 @@ This project is of particular interest to me because:
 # Instructions for End User
 - To add a City / Location to the Map, select "Add Entry" at the top right of the menu
 - You can view a subset of the cities in a specific region by selecting "Filter by Region".
-- You can order the cities by on population size by selecting "Sort".
+- You can add new entries directly to the map by click regions on the image.
 - You can locate my visual component by running the GUI and looking at the background.
 - You can save the state of my application by selecting the "Save" button in the menu.
 - You can reload the state of my application by selecting the "Load" button in the menu.
