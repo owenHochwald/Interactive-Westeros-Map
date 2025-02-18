@@ -69,16 +69,6 @@
             "region": "The Riverlands",
             "house": "Tully",
             "population": 40000
-        },
-        {
-            "isCapital": false,
-            "customMade": true,
-            "name": "Greywater Watch",
-            "visited": false,
-            "alliances": [],
-            "region": "The North",
-            "house": "Reed",
-            "population": 10000
         }
     ],
     "locations": [

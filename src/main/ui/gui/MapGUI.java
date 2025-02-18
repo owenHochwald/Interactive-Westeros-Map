@@ -16,7 +16,6 @@ public class MapGUI extends JFrame {
 
     private Map map;
 
-    // Constructs main window
     // EFFECTS: sets up window for the map GUI with a scrollable image and 50px
     // padding below it
     public MapGUI() {

@@ -58,6 +58,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
         updateProgressBar = new JButton("Update Progress");
         loadButton.addActionListener(this);
         updateProgressBar.addActionListener(this);
+        saveButton.addActionListener(this);
         addEntryButton = new JButton("Add Entry");
         rightPanel.add(updateProgressBar);
         rightPanel.add(saveButton);
@@ -85,7 +86,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
             try {
                 map.loadMap("./data/mapState.json");
                 updateProgress();
-                System.out.println(map.getCities());
             } catch (IOException error) {
                 System.out.println("Destination doesn't exist: " + error);
             }
@@ -93,29 +93,11 @@ public class MenuBar extends JMenuBar implements ActionListener {
             try {
                 map.saveMap("./data/mapState.json");
                 updateProgress();
-                System.out.println(map.getCities());
             } catch (IOException error) {
                 System.out.println("Destination doesn't exist: " + error);
             }
         } else if (e.getSource() == updateProgressBar) {
             updateProgress();
         }
-    }
-
-    // getters
-    public JButton getSaveButton() {
-        return saveButton;
-    }
-
-    public JButton getLoadButton() {
-        return loadButton;
-    }
-
-    public JButton getAddEntryButton() {
-        return addEntryButton;
-    }
-
-    public JLabel getTitle() {
-        return title;
     }
 }
