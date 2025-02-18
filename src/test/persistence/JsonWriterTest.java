@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import model.City;
 import model.Location;
+import model.Map;
 import model.Progress;
 
 import java.io.IOException;
@@ -60,7 +61,7 @@ class JsonWriterTest extends JsonTest {
             assertEquals("Owen", location.getName());
             assertEquals("test", city.getName());
         } catch (IOException e) {
-            fail("Exception should not have been thrown");
+            fail();
         }
     }
 
@@ -93,7 +94,7 @@ class JsonWriterTest extends JsonTest {
                     true, true, true, a2);
 
         } catch (IOException e) {
-            fail("Exception should not have been thrown");
+            fail();
         }
     }
 
@@ -123,5 +124,33 @@ class JsonWriterTest extends JsonTest {
         writer.open();
         writer.write(locations, cities);
         writer.close();
+    }
+
+    @Test 
+    public void testWriteMapToFile() {
+        try {
+            City c1 = new City("Winterfell", 15000, "Stark", "The North", true, false);
+            City c2 = new City("Kings Landing", 1000000, "Lannister", "Crownlands", true, true);
+            Location l1 = new Location("Kings Road", "Crownlands", true);
+            Location l2 = new Location("The Gods Eye", "The Riverlands", false);
+            ArrayList<Location> locations = new ArrayList<>();
+            locations.add(l1);
+            locations.add(l2);
+            ArrayList<City> cities = new ArrayList<>();
+            cities.add(c1);
+            cities.add(c2);
+            locations.add(l1);
+            Map map = new Map(locations, cities);
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralMap.json");
+            writer.open();
+            writer.write(map);
+            writer.close();
+            JsonReader reader = new JsonReader("./data/testWriterGeneralMap.json");
+            ArrayList<Location> readLocations = reader.readLocations();
+            ArrayList<City> readCities = reader.readCities();
+            writerGeneralMapChecker(readLocations, readCities);
+        } catch (IOException e) {
+            fail();
+        }
     }
 }
