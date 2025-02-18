@@ -125,6 +125,7 @@ public class EntryWindow extends JFrame implements ActionListener {
         Progress.increaseNumEntries();
         Progress.increaseTotalCities();
 
+        mainMapPanel.setCurrentCityName(name);
         mainMapPanel.setCityAddingMode(true);
     }
 

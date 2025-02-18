@@ -18,8 +18,9 @@ public class MapGUI extends JFrame {
 
     private Map map;
     private boolean isCityAddingMode;
-    private ArrayList<Rectangle> citySquares;
+    private ArrayList<CityMarker> markers;
     private MapPanel mapPanel;
+    private String currentCityName;
 
     // EFFECTS: sets up window for the map GUI with a scrollable image and 50px
     // padding below it, and a list of squares with a toggle for the current mode.
@@ -48,7 +49,7 @@ public class MapGUI extends JFrame {
     // EFFECTS: helper method to init the main frame of the applicaiton
     private void initFrame() {
         isCityAddingMode = false;
-        citySquares = new ArrayList<>();
+        markers = new ArrayList<>();
         init();
         setSize(1340, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -61,12 +62,12 @@ public class MapGUI extends JFrame {
     private void initMapComponents() {
         setJMenuBar(new MenuBar(map, this));
         ImageIcon mapIcon = new ImageIcon("public/westeros_map.jpg");
-        mapPanel = new MapPanel(mapIcon, citySquares);
+        mapPanel = new MapPanel(mapIcon, markers);
         mapPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (isCityAddingMode) {
-                    addCitySquare(e.getX(), e.getY());
+                    addCityMarker(e.getX(), e.getY());
                     setCityAddingMode(false);
                 }
             }
@@ -107,15 +108,17 @@ public class MapGUI extends JFrame {
     // MODIFES: this
     // EFFECTS: draws a square to represent the location of the city and adds it to
     // the citySquares list
-    private void addCitySquare(int x, int y) {
-        int size = 20;
-        Rectangle square = new Rectangle(x - size / 2, y - size / 2, size, size);
-        citySquares.add(square);
+    private void addCityMarker(int x, int y) {
+        markers.add(new CityMarker(x, y, 20, currentCityName));
         mapPanel.repaint();
     }
 
     // setters
     public void setCityAddingMode(boolean mode) {
         isCityAddingMode = mode;
+    }
+
+    public void setCurrentCityName(String name) {
+        currentCityName = name;
     }
 }
