@@ -69,6 +69,26 @@
             "region": "The Riverlands",
             "house": "Tully",
             "population": 40000
+        },
+        {
+            "isCapital": false,
+            "customMade": false,
+            "name": "Castle Black",
+            "visited": false,
+            "alliances": [],
+            "region": "The North",
+            "house": "None",
+            "population": 1000
+        },
+        {
+            "isCapital": false,
+            "customMade": false,
+            "name": "Mole Town",
+            "visited": false,
+            "alliances": [],
+            "region": "The North",
+            "house": "None",
+            "population": 3000
         }
     ],
     "locations": [

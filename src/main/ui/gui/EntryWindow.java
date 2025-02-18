@@ -19,6 +19,7 @@ public class EntryWindow extends JFrame implements ActionListener {
     private Map map;
     private ArrayList<String> regions;
     private JComboBox<String> entryTypeComboBox;
+    private JComboBox<String> regionTypeComboBox;
     private JPanel formPanel;
     private JTextField nameField;
     private JTextField houseField;
@@ -62,9 +63,19 @@ public class EntryWindow extends JFrame implements ActionListener {
         nameField = new JTextField();
         formPanel.add(nameField);
 
+        String[] regionTypes = {"Beyond the Wall", "The North", "The Vale", "The Riverlands",
+        "The Crownlands", "The Westerlands", "The Reach", "The Stormlands", "Dorne", "The Iron Islands" };
+
+
+        // formPanel.add(new JLabel("Region:"));
+        // regionField = new JTextField();
+        // formPanel.add(regionField);
+
+
+        regionTypeComboBox = new JComboBox<>(regionTypes);
         formPanel.add(new JLabel("Region:"));
-        regionField = new JTextField();
-        formPanel.add(regionField);
+        formPanel.add(regionTypeComboBox);
+
 
         if (entryType.equals("City")) {
             formPanel.add(new JLabel("House:"));
@@ -112,7 +123,7 @@ public class EntryWindow extends JFrame implements ActionListener {
     // EFFECTS: helper method to handle the submission in case of a city or a location
     private void handleSubmission() {
         String name = nameField.getText();
-        String region = regionField.getText();
+        String region = (String) regionTypeComboBox.getSelectedItem();
     
         if ("City".equals(entryTypeComboBox.getSelectedItem())) {
             String house = houseField.getText();
@@ -142,6 +153,7 @@ public class EntryWindow extends JFrame implements ActionListener {
         Location location = new Location(name, region, false);
         map.getLocations().add(location);
         Progress.increaseNumEntries();
+        dispose();
     }
 
     // MODIFIES: this
