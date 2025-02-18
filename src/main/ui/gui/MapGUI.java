@@ -20,9 +20,8 @@ public class MapGUI extends JFrame {
     // EFFECTS: sets up window for the map GUI with a scrollable image and 50px
     // padding below it
     public MapGUI() {
-        super("Westeros Map Manager");
         init();
-        setSize(1000, 1000);
+        setSize(1340, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -44,6 +43,9 @@ public class MapGUI extends JFrame {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         add(scrollPane, BorderLayout.LINE_START);
+
+        EastDisplay eastDisplay = new EastDisplay(map);
+        add(eastDisplay, BorderLayout.EAST);
 
         ImageIcon icon = new ImageIcon("public/crown_logo.jpg");
         setIconImage(icon.getImage());
