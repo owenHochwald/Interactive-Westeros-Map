@@ -30,7 +30,9 @@ public class JsonReader {
     // EFFECTS: reads a map from file and returns it;
     // throws IOException if an error occurs reading data from file
     public Map readMap() throws IOException {
-        return null;
+        ArrayList<Location> locations = readLocations();
+        ArrayList<City> cities = readCities();
+        return new Map(locations, cities);
     }
 
     // EFFECTS: reads Locations from file and returns it;
