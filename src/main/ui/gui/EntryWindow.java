@@ -22,12 +22,13 @@ public class EntryWindow extends JFrame implements ActionListener {
     private JTextField nameField;
     private JTextField houseField;
     private JTextField populationField;
-    private JTextField regionField;
     private JButton submitButton;
+    private MapGUI mainMapPanel;
 
     // EFFECTS: constructs a new entry window to choose city / location and add
     // fields
-    public EntryWindow(Map map) {
+    public EntryWindow(Map map, MapGUI mainMapPanel) {
+        this.mainMapPanel = mainMapPanel;
         this.map = map;
         setTitle("Add an Entry");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -113,7 +114,6 @@ public class EntryWindow extends JFrame implements ActionListener {
         }
 
         clearFields();
-        JOptionPane.showMessageDialog(this, "Entry added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
         dispose();
     }
 
@@ -124,6 +124,8 @@ public class EntryWindow extends JFrame implements ActionListener {
         map.getCities().add(city);
         Progress.increaseNumEntries();
         Progress.increaseTotalCities();
+
+        mainMapPanel.setCityAddingMode(true);
     }
 
     // MODIFES: this, Progress
@@ -139,7 +141,6 @@ public class EntryWindow extends JFrame implements ActionListener {
     // EFFECTS: helper method to clear the form fields after submission
     private void clearFields() {
         nameField.setText("");
-        regionField.setText("");
 
         if (houseField != null) {
             houseField.setText("");

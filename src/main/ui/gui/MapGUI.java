@@ -7,7 +7,9 @@ import model.Location;
 import model.Map;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
+import java.awt.event.MouseEvent;
 
 /*
  * Represents the main page of the GUI, displaying the map and associated cities / locations
@@ -15,30 +17,18 @@ import java.util.ArrayList;
 public class MapGUI extends JFrame {
 
     private Map map;
+    private boolean isCityAddingMode;
+    private ArrayList<Rectangle> citySquares;
+    private MapPanel mapPanel;
 
     // EFFECTS: sets up window for the map GUI with a scrollable image and 50px
-    // padding below it
+    // padding below it, and a list of squares with a toggle for the current mode.
     public MapGUI() {
-        init();
-        setSize(1340, 1000);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
-        setLocationRelativeTo(null);
+        initFrame();
 
-        MenuBar menu = new MenuBar(map);
-        setJMenuBar(menu);
+        initMapComponents();
 
-        JPanel imageContainer = new JPanel();
-        imageContainer.setLayout(new BoxLayout(imageContainer, BoxLayout.Y_AXIS));
-
-        ImageIcon mapIcon = new ImageIcon("public/westeros_map.jpg");
-        JLabel imageLabel = new JLabel(mapIcon);
-        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        imageContainer.add(imageLabel);
-
-        imageContainer.add(Box.createRigidArea(new Dimension(0, 50)));
-
-        JScrollPane scrollPane = new JScrollPane(imageContainer);
+        JScrollPane scrollPane = new JScrollPane(mapPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         add(scrollPane, BorderLayout.LINE_START);
@@ -51,6 +41,36 @@ public class MapGUI extends JFrame {
         getContentPane().setBackground(new Color(0x555555));
 
         setVisible(true);
+
+    }
+
+    // MODIFES: this
+    // EFFECTS: helper method to init the main frame of the applicaiton
+    private void initFrame() {
+        isCityAddingMode = false;
+        citySquares = new ArrayList<>();
+        init();
+        setSize(1340, 1000);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+    }
+
+    // MODIFES": this
+    // EFFECTS: helper method to init the map frame
+    private void initMapComponents() {
+        setJMenuBar(new MenuBar(map, this));
+        ImageIcon mapIcon = new ImageIcon("public/westeros_map.jpg");
+        mapPanel = new MapPanel(mapIcon, citySquares);
+        mapPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (isCityAddingMode) {
+                    addCitySquare(e.getX(), e.getY());
+                    setCityAddingMode(false);
+                }
+            }
+        });
     }
 
     // MODIFES: this
@@ -81,5 +101,21 @@ public class MapGUI extends JFrame {
         locations.add(new Location("Gods Eye", "The Riverlands", false));
         locations.add(new Location("The Wall", "The North", false));
         locations.add(new Location("Wolf's Wood", "The North", false));
+    }
+
+    // REQUIRES: x and y are within the range of the frame
+    // MODIFES: this
+    // EFFECTS: draws a square to represent the location of the city and adds it to
+    // the citySquares list
+    private void addCitySquare(int x, int y) {
+        int size = 20;
+        Rectangle square = new Rectangle(x - size / 2, y - size / 2, size, size);
+        citySquares.add(square);
+        mapPanel.repaint();
+    }
+
+    // setters
+    public void setCityAddingMode(boolean mode) {
+        isCityAddingMode = mode;
     }
 }

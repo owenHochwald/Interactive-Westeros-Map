@@ -24,9 +24,13 @@ public class MenuBar extends JMenuBar implements ActionListener {
     private JButton loadButton;
     private JButton addEntryButton;
     private Map map;
+    private MapGUI mainMapPanel;
+
 
     // EFFECTS: creates a menu bar with title, progress, and actions
-    public MenuBar(Map map) {
+    public MenuBar(Map map, MapGUI mainMapPanel) {
+        this.mainMapPanel = mainMapPanel;
+
         this.map = map;
         setLayout(new BorderLayout());
         setOpaque(false);
@@ -105,7 +109,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
         } else if (e.getSource() == updateProgressBar) {
             updateProgress();
         } else if (e.getSource() == addEntryButton) {
-            new EntryWindow(map);
+            new EntryWindow(map, mainMapPanel);
         }
 
     }
