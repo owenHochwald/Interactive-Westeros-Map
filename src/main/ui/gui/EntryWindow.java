@@ -10,14 +10,12 @@ import model.Progress;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /*
  * Represents a window to add a new city / location to the map
  */
 public class EntryWindow extends JFrame implements ActionListener {
     private Map map;
-    private ArrayList<String> regions;
     private JComboBox<String> entryTypeComboBox;
     private JComboBox<String> regionTypeComboBox;
     private JPanel formPanel;
@@ -35,7 +33,6 @@ public class EntryWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(450, 300);
         setLayout(new BorderLayout(10, 10));
-        populateRegions();
 
         String[] entryTypes = { "City", "Location" };
         entryTypeComboBox = new JComboBox<>(entryTypes);
@@ -63,19 +60,16 @@ public class EntryWindow extends JFrame implements ActionListener {
         nameField = new JTextField();
         formPanel.add(nameField);
 
-        String[] regionTypes = {"Beyond the Wall", "The North", "The Vale", "The Riverlands",
-        "The Crownlands", "The Westerlands", "The Reach", "The Stormlands", "Dorne", "The Iron Islands" };
-
+        String[] regionTypes = { "Beyond the Wall", "The North", "The Vale", "The Riverlands",
+                "The Crownlands", "The Westerlands", "The Reach", "The Stormlands", "Dorne", "The Iron Islands" };
 
         // formPanel.add(new JLabel("Region:"));
         // regionField = new JTextField();
         // formPanel.add(regionField);
 
-
         regionTypeComboBox = new JComboBox<>(regionTypes);
         formPanel.add(new JLabel("Region:"));
         formPanel.add(regionTypeComboBox);
-
 
         if (entryType.equals("City")) {
             formPanel.add(new JLabel("House:"));
@@ -88,22 +82,6 @@ public class EntryWindow extends JFrame implements ActionListener {
         }
         formPanel.revalidate();
         formPanel.repaint();
-    }
-
-    // MODIFIES: this
-    // EFFECTS: adds all the map regions to regions
-    private void populateRegions() {
-        regions = new ArrayList<>();
-        regions.add("Beyond the Wall");
-        regions.add("The North");
-        regions.add("The Vale");
-        regions.add("The Riverlands");
-        regions.add("The Crownlands");
-        regions.add("The Westerlands");
-        regions.add("The Reach");
-        regions.add("The Stormlands");
-        regions.add("Dorne");
-        regions.add("The Iron Islands");
     }
 
     // EFFECTS: Handles actions for the combo box and submit button
@@ -120,11 +98,12 @@ public class EntryWindow extends JFrame implements ActionListener {
     }
 
     // MODIFES: this
-    // EFFECTS: helper method to handle the submission in case of a city or a location
+    // EFFECTS: helper method to handle the submission in case of a city or a
+    // location
     private void handleSubmission() {
         String name = nameField.getText();
         String region = (String) regionTypeComboBox.getSelectedItem();
-    
+
         if ("City".equals(entryTypeComboBox.getSelectedItem())) {
             String house = houseField.getText();
             int population = Integer.parseInt(populationField.getText());
@@ -132,7 +111,7 @@ public class EntryWindow extends JFrame implements ActionListener {
         } else {
             handleLocationSubmission(name, region);
         }
-    
+
         clearFields();
         JOptionPane.showMessageDialog(this, "Entry added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
         dispose();
@@ -167,5 +146,5 @@ public class EntryWindow extends JFrame implements ActionListener {
             populationField.setText("");
         }
     }
-    
+
 }
