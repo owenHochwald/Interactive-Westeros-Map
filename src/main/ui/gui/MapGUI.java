@@ -106,8 +106,8 @@ public class MapGUI extends JFrame {
 
     // REQUIRES: x and y are within the range of the frame
     // MODIFES: this
-    // EFFECTS: draws a square to represent the location of the city and adds it to
-    // the citySquares list
+    // EFFECTS: draws a city marker to represent the location of the city and adds it to
+    // the markers list
     private void addCityMarker(int x, int y) {
         markers.add(new CityMarker(x, y, 20, currentCityName));
         mapPanel.repaint();
