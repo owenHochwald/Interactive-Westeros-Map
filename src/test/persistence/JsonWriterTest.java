@@ -126,21 +126,10 @@ class JsonWriterTest extends JsonTest {
         writer.close();
     }
 
-    @Test 
+    @Test
     public void testWriteMapToFile() {
         try {
-            City c1 = new City("Winterfell", 15000, "Stark", "The North", true, false);
-            City c2 = new City("Kings Landing", 1000000, "Lannister", "Crownlands", true, true);
-            Location l1 = new Location("Kings Road", "Crownlands", true);
-            Location l2 = new Location("The Gods Eye", "The Riverlands", false);
-            ArrayList<Location> locations = new ArrayList<>();
-            locations.add(l1);
-            locations.add(l2);
-            ArrayList<City> cities = new ArrayList<>();
-            cities.add(c1);
-            cities.add(c2);
-            locations.add(l1);
-            Map map = new Map(locations, cities);
+            Map map = initMap();
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralMap.json");
             writer.open();
             writer.write(map);
@@ -152,5 +141,22 @@ class JsonWriterTest extends JsonTest {
         } catch (IOException e) {
             fail();
         }
+    }
+
+    // EFFECTS: returns a init map for test use
+    public Map initMap() {
+        City c1 = new City("Winterfell", 15000, "Stark", "The North", true, false);
+        City c2 = new City("Kings Landing", 1000000, "Lannister", "Crownlands", true, true);
+        Location l1 = new Location("Kings Road", "Crownlands", true);
+        Location l2 = new Location("The Gods Eye", "The Riverlands", false);
+        ArrayList<Location> locations = new ArrayList<>();
+        locations.add(l1);
+        locations.add(l2);
+        ArrayList<City> cities = new ArrayList<>();
+        cities.add(c1);
+        cities.add(c2);
+        locations.add(l1);
+        Map map = new Map(locations, cities);
+        return map;
     }
 }
