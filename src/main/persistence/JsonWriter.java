@@ -1,6 +1,7 @@
 package persistence;
 
 import model.Location;
+import model.Map;
 import model.City;
 
 
@@ -28,6 +29,12 @@ public class JsonWriter {
     // be opened for writing
     public void open() throws FileNotFoundException {
         writer = new PrintWriter(new File(destination));
+    }
+
+    // MODIFES: json file at destination
+    // EFFECTS: writes JSON representation of a Map to file
+    public void write(Map map) {
+        
     }
 
     // MODIFIES: json file at destination
