@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import model.City;
 import model.Location;
+import model.Map;
 
 /*
  *  Represents a reader that reads a map from JSON data stored in file
@@ -24,6 +25,12 @@ public class JsonReader {
     // EFFECTS: constructs reader to read data from source file
     public JsonReader(String src) {
         this.src = src;
+    }
+
+    // EFFECTS: reads a map from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public Map readMap() throws IOException {
+        return null;
     }
 
     // EFFECTS: reads Locations from file and returns it;
