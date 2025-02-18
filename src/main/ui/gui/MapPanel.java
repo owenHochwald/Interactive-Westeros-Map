@@ -33,10 +33,10 @@ public class MapPanel extends JPanel {
         g.setColor(Color.RED);
         for (CityMarker marker : markers) {
             int radius = marker.getDiameter() / 2;
-            g.fillOval(marker.getX() - radius, marker.getY() - radius, marker.getDiameter(), marker.getDiameter());
+            g.fillOval(marker.getXloc() - radius, marker.getYloc() - radius, marker.getDiameter(), marker.getDiameter());
             FontMetrics fm = g.getFontMetrics();
             int textWidth = fm.stringWidth(marker.getName());
-            g.drawString(marker.getName(), marker.getX() - textWidth / 2, marker.getY() - radius - 5);
+            g.drawString(marker.getName(), marker.getXloc() - textWidth / 2, marker.getYloc() - radius - 5);
         }
     }
 }
