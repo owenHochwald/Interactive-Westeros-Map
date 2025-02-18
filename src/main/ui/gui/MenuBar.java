@@ -75,6 +75,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
         progressBar.setString("Places: " + numVisitedEntries + "/" + numEntries);
     }
 
+    // MODIFIES: this, Progress
+    // EFFECTS: implements handling when buttons are pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadButton) {
