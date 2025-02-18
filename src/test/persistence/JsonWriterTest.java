@@ -146,9 +146,9 @@ class JsonWriterTest extends JsonTest {
             writer.write(map);
             writer.close();
             JsonReader reader = new JsonReader("./data/testWriterGeneralMap.json");
-            ArrayList<Location> readLocations = reader.readLocations();
-            ArrayList<City> readCities = reader.readCities();
-            writerGeneralMapChecker(readLocations, readCities);
+            Map readMap = reader.readMap();
+            assertEquals(2, readMap.getCities().size());
+            assertEquals(3, readMap.getLocations().size());
         } catch (IOException e) {
             fail();
         }

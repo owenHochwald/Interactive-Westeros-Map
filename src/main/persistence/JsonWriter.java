@@ -34,7 +34,7 @@ public class JsonWriter {
     // MODIFES: json file at destination
     // EFFECTS: writes JSON representation of a Map to file
     public void write(Map map) {
-        
+        write(map.getLocations(), map.getCities());
     }
 
     // MODIFIES: json file at destination
