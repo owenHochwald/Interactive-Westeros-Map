@@ -61,3 +61,7 @@ https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 Bohemian (December 29, 2012) How to test a private constructor in Java application?
 
 https://stackoverflow.com/questions/14077842/how-to-test-a-private-constructor-in-java-application
+
+Bro Code (September 14, 2020) Java GUI: Full Course
+
+https://www.youtube.com/watch?app=desktop&v=Kmgo00avvEw&t=8m44s&ab_channel=BroCode
