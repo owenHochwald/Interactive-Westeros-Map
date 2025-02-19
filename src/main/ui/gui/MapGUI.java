@@ -26,15 +26,15 @@ public class MapGUI extends JFrame {
     // padding below it, and a list of squares with a toggle for the current mode.
     public MapGUI() {
         initFrame();
-
-        initMapComponents();
+        MenuBar menu = new MenuBar(map, this);
+        initMapComponents(menu);
 
         JScrollPane scrollPane = new JScrollPane(mapPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         add(scrollPane, BorderLayout.LINE_START);
 
-        EastDisplay eastDisplay = new EastDisplay(map);
+        EastDisplay eastDisplay = new EastDisplay(map, menu);
         add(eastDisplay, BorderLayout.EAST);
 
         ImageIcon icon = new ImageIcon("public/crown_logo.jpg");
@@ -59,8 +59,8 @@ public class MapGUI extends JFrame {
 
     // MODIFES": this
     // EFFECTS: helper method to init the map frame
-    private void initMapComponents() {
-        setJMenuBar(new MenuBar(map, this));
+    private void initMapComponents(MenuBar menu) {
+        setJMenuBar(menu);
         ImageIcon mapIcon = new ImageIcon("public/westeros_map.jpg");
         mapPanel = new MapPanel(mapIcon, markers);
         mapPanel.addMouseListener(new MouseAdapter() {

@@ -18,14 +18,16 @@ public class MapPanel extends JPanel {
     private Image mapImage;
     private ArrayList<CityMarker> markers;
 
-    // EFFECTS: constructs a new map panel with an icon and squares displayed on the page
+    // EFFECTS: constructs a new map panel with an icon and squares displayed on the
+    // page
     public MapPanel(ImageIcon mapIcon, ArrayList<CityMarker> markers) {
         this.mapImage = mapIcon.getImage();
         this.markers = markers;
         setPreferredSize(new Dimension(mapIcon.getIconWidth(), mapIcon.getIconHeight()));
     }
 
-    // EFFECTS: overrides the default painCOmponent to display the squares representing cities
+    // EFFECTS: overrides the default painCOmponent to display the squares
+    // representing cities
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -33,7 +35,8 @@ public class MapPanel extends JPanel {
         g.setColor(Color.RED);
         for (CityMarker marker : markers) {
             int radius = marker.getDiameter() / 2;
-            g.fillOval(marker.getXloc() - radius, marker.getYloc() - radius, marker.getDiameter(), marker.getDiameter());
+            g.fillOval(marker.getXloc() - radius, marker.getYloc() - radius, marker.getDiameter(),
+                    marker.getDiameter());
             FontMetrics fm = g.getFontMetrics();
             int textWidth = fm.stringWidth(marker.getName());
             g.drawString(marker.getName(), marker.getXloc() - textWidth / 2, marker.getYloc() - radius - 5);

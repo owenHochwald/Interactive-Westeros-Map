@@ -14,6 +14,7 @@ import model.Progress;
 public class EastDisplay extends JPanel {
     private ArrayList<String> regions;
     private Map map;
+    private MenuBar menu;
     private JButton viewCitiesButton;
     private JButton viewLocationsButton;
     private JPanel contentPanel;
@@ -23,8 +24,9 @@ public class EastDisplay extends JPanel {
 
     // EFFECTS: constructs a new panel that will display either cities or locations
     // and have the ability to display cities based on region
-    public EastDisplay(Map map) {
+    public EastDisplay(Map map, MenuBar menu) {
         this.map = map;
+        this.menu = menu;
         this.regions = new ArrayList<>();
         setSize(Integer.MAX_VALUE, 60);
         populateRegions();
@@ -342,6 +344,7 @@ public class EastDisplay extends JPanel {
                 Progress.decreasesNumEntries();
                 Progress.setTotalNumCities(Progress.getTotalNumCities() - 1);
                 updateCitiesPanel(citiesListPanel);
+                menu.updateProgress();
             } else {
                 if (location.getVisited()) {
                     Progress.decreasesNumVisitedEntries();
@@ -349,6 +352,7 @@ public class EastDisplay extends JPanel {
                 Progress.decreasesNumEntries();
                 map.getLocations().remove(location);
                 updateLocationsPanel(locationsListPanel);
+                menu.updateProgress();
             }
         }
     }
@@ -374,8 +378,10 @@ public class EastDisplay extends JPanel {
             // Update the respective list panel based on location type
             if (location instanceof City) {
                 updateCitiesPanel(citiesListPanel);
+                menu.updateProgress();
             } else {
                 updateLocationsPanel(locationsListPanel);
+                menu.updateProgress();
             }
         }
 
