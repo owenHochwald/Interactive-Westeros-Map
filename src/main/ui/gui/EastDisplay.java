@@ -19,6 +19,8 @@ public class EastDisplay extends JPanel {
     private CardLayout cardLayout;
     private JPanel citiesListPanel;
     private JPanel locationsListPanel;
+    private JComboBox<String> regionFilter; 
+
 
     // EFFECTS: constructs a new panel that will display either cities or locations
     // and have the ability to display cities based on region
@@ -41,9 +43,14 @@ public class EastDisplay extends JPanel {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         viewCitiesButton = new JButton("View Cities");
         viewLocationsButton = new JButton("View Locations");
+        
+        String[] regions = { "Any","Beyond the Wall", "The North", "The Vale", "The Riverlands",
+                "The Crownlands", "The Westerlands", "The Reach", "The Stormlands", "Dorne", "The Iron Islands" };
+        regionFilter = new JComboBox<>(regions);
 
         buttonPanel.add(viewCitiesButton);
         buttonPanel.add(viewLocationsButton);
+        buttonPanel.add(regionFilter);
         add(buttonPanel, BorderLayout.NORTH);
     }
 
@@ -66,6 +73,7 @@ public class EastDisplay extends JPanel {
     private void setupActionListeners() {
         viewCitiesButton.addActionListener(new ViewCitiesActionListener());
         viewLocationsButton.addActionListener(new ViewLocationsActionListener());
+        regionFilter.addActionListener(new RegionFilterActionListener());
     }
 
     // REQUIRES: a non-empty / valid message
@@ -102,22 +110,14 @@ public class EastDisplay extends JPanel {
     // displays a message that none are available
     private void updateCitiesPanel(JPanel citiesListPanel) {
         citiesListPanel.removeAll();
+        String selectedRegion = (String) regionFilter.getSelectedItem();
+
         if (map.getCities().isEmpty()) {
             citiesListPanel.add(new JLabel("No cities available."));
         } else {
-            addCitiesToPanel(citiesListPanel);
+            addFilteredCitiesToPanel(citiesListPanel, selectedRegion);
         }
         refreshPanel(citiesListPanel);
-    }
-
-    // REQUIRES: a valid JPanel
-    // MODIFIES: citiesListPanel
-    // EFFECTS: adds all cities to the panel
-    private void addCitiesToPanel(JPanel citiesListPanel) {
-        for (City city : map.getCities()) {
-            JPanel cityPanel = createItemPanel(city);
-            citiesListPanel.add(cityPanel);
-        }
     }
 
     // MODIFIES: this
@@ -165,6 +165,20 @@ public class EastDisplay extends JPanel {
             }
         }
     }
+
+
+    // REQUIRES: a valid JPanel and region string
+    // MODIFIES: citiesListPanel
+    // EFFECTS: adds cities filtered by region to the panel
+    private void addFilteredCitiesToPanel(JPanel citiesListPanel, String selectedRegion) {
+        for (City city : map.getCities()) {
+            if (selectedRegion.equals("Any") || city.getRegion().equals(selectedRegion)) {
+                JPanel cityPanel = createItemPanel(city);
+                citiesListPanel.add(cityPanel);
+            }
+        }
+    }
+
 
     // REQUIRES: a valid JPanel
     // MODIFIES: panel
@@ -257,13 +271,21 @@ public class EastDisplay extends JPanel {
     }
 
     // ActionListener implementations, seperated out instead of a long conditional
-    // chain
+    // chain for checkstyle purposes
 
     // EFFECTS: handles displaying all the cities
     private class ViewCitiesActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             cardLayout.show(contentPanel, "cities");
+            updateCitiesPanel(citiesListPanel);
+        }
+    }
+
+    // EFFECTS: handles filtering cities based on the given region
+    private class RegionFilterActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
             updateCitiesPanel(citiesListPanel);
         }
     }
