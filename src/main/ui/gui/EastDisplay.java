@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.util.ArrayList;
 
 import model.City;
 import model.Location;
@@ -12,7 +11,6 @@ import model.Map;
 import model.Progress;
 
 public class EastDisplay extends JPanel {
-    private ArrayList<String> regions;
     private Map map;
     private MenuBar menu;
     private JButton viewCitiesButton;
@@ -27,9 +25,7 @@ public class EastDisplay extends JPanel {
     public EastDisplay(Map map, MenuBar menu) {
         this.map = map;
         this.menu = menu;
-        this.regions = new ArrayList<>();
         setSize(Integer.MAX_VALUE, 60);
-        populateRegions();
         setLayout(new BorderLayout());
 
         initializeButtonPanel();
@@ -258,21 +254,6 @@ public class EastDisplay extends JPanel {
         buttonsPanel.add(visitButton);
         buttonsPanel.add(removeButton);
         panel.add(buttonsPanel, BorderLayout.EAST);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: adds all the map regions to regions
-    private void populateRegions() {
-        regions.add("Beyond the Wall");
-        regions.add("The North");
-        regions.add("The Vale");
-        regions.add("The Riverlands");
-        regions.add("The Crownlands");
-        regions.add("The Westerlands");
-        regions.add("The Reach");
-        regions.add("The Stormlands");
-        regions.add("Dorne");
-        regions.add("The Iron Islands");
     }
 
     // ActionListener implementations, seperated out instead of a long conditional
