@@ -154,8 +154,9 @@ public class MapApp {
             Progress.resetEntryProgress();
             Progress.resetTotalCities();
             Progress.resetTotalEntry();
-            locations = jsonReader.readLocations();
-            cities = jsonReader.readCities();
+            map = jsonReader.readMap();
+            locations = map.getLocations();
+            cities = map.getCities();
             locationManager = new LocationManager(locations, input);
             cityManager = new CityManager(cities, input);
             viewer = new Viewer(cities, locations);
