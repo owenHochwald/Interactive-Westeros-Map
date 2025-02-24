@@ -14,7 +14,7 @@
             "isCapital": true,
             "customMade": false,
             "name": "Winterfell",
-            "visited": false,
+            "visited": true,
             "alliances": [],
             "region": "The North",
             "house": "Stark",
@@ -54,7 +54,7 @@
             "isCapital": true,
             "customMade": false,
             "name": "Sunspear",
-            "visited": false,
+            "visited": true,
             "alliances": [],
             "region": "Dorne",
             "house": "Martell",
@@ -64,7 +64,7 @@
             "isCapital": false,
             "customMade": false,
             "name": "Riverrun",
-            "visited": false,
+            "visited": true,
             "alliances": [],
             "region": "The Riverlands",
             "house": "Tully",
@@ -73,22 +73,32 @@
         {
             "isCapital": false,
             "customMade": false,
-            "name": "Castle Black",
+            "name": "Lannisport",
             "visited": false,
             "alliances": [],
-            "region": "The North",
-            "house": "None",
-            "population": 1000
+            "region": "The Westerlands",
+            "house": "Lannister",
+            "population": 100000
         },
         {
             "isCapital": false,
             "customMade": false,
-            "name": "Mole Town",
+            "name": "Gulltown",
             "visited": false,
             "alliances": [],
-            "region": "The North",
-            "house": "None",
-            "population": 3000
+            "region": "The Vale",
+            "house": "Arryn",
+            "population": 70000
+        },
+        {
+            "isCapital": false,
+            "customMade": false,
+            "name": "Storm's End",
+            "visited": false,
+            "alliances": [],
+            "region": "The Stormlands",
+            "house": "Baratheon",
+            "population": 40000
         }
     ],
     "locations": [

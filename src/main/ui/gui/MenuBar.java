@@ -19,7 +19,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
     private JLabel title;
     private JProgressBar progressBar;
-    private JButton updateProgressBar;
     private JButton saveButton;
     private JButton loadButton;
     private JButton addEntryButton;
@@ -59,18 +58,14 @@ public class MenuBar extends JMenuBar implements ActionListener {
 
         saveButton = new JButton("Save");
         loadButton = new JButton("Load");
-        updateProgressBar = new JButton("Update Progress");
         addEntryButton = new JButton("Add Entry");
 
-        updateProgressBar.setFocusable(false);
         saveButton.setFocusable(false);
 
         loadButton.addActionListener(this);
-        updateProgressBar.addActionListener(this);
         saveButton.addActionListener(this);
         addEntryButton.addActionListener(this);
 
-        rightPanel.add(updateProgressBar);
         rightPanel.add(saveButton);
         rightPanel.add(loadButton);
         rightPanel.add(addEntryButton);
@@ -88,12 +83,22 @@ public class MenuBar extends JMenuBar implements ActionListener {
         progressBar.setString("Places: " + numVisitedEntries + "/" + numEntries);
     }
 
+    // MODIFIES: Progress
+    // EFFECTS: helper resets the progress in visiting all entries
+    public void reset() {
+        Progress.resetCityProgress();
+        Progress.resetEntryProgress();
+        Progress.resetTotalCities();
+        Progress.resetTotalEntry();
+    }
+
     // MODIFIES: this, Progress
     // EFFECTS: implements handling when buttons are pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadButton) {
             try {
+                reset();
                 map.loadMap("./data/mapState.json");
                 updateProgress();
             } catch (IOException error) {
@@ -106,8 +111,6 @@ public class MenuBar extends JMenuBar implements ActionListener {
             } catch (IOException error) {
                 System.out.println("Destination doesn't exist: " + error);
             }
-        } else if (e.getSource() == updateProgressBar) {
-            updateProgress();
         } else if (e.getSource() == addEntryButton) {
             new EntryWindow(map, mainMapPanel);
         }
