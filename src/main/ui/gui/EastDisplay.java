@@ -8,9 +8,8 @@ import javax.swing.*;
 import model.City;
 import model.Location;
 import model.Map;
-import model.Progress;
 
-public class EastDisplay extends JPanel {
+public class EastDisplay extends JPanel implements ActionListener {
     private Map map;
     private MenuBar menu;
     private JButton viewCitiesButton;
@@ -19,8 +18,7 @@ public class EastDisplay extends JPanel {
     private CardLayout cardLayout;
     private JPanel citiesListPanel;
     private JPanel locationsListPanel;
-    private JComboBox<String> regionFilter; 
-
+    private JComboBox<String> regionFilter;
 
     // EFFECTS: constructs a new panel that will display either cities or locations
     // and have the ability to display cities based on region
@@ -43,8 +41,8 @@ public class EastDisplay extends JPanel {
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         viewCitiesButton = new JButton("View Cities");
         viewLocationsButton = new JButton("View Locations");
-        
-        String[] regions = { "Any","Beyond the Wall", "The North", "The Vale", "The Riverlands",
+
+        String[] regions = { "Any", "Beyond the Wall", "The North", "The Vale", "The Riverlands",
                 "The Crownlands", "The Westerlands", "The Reach", "The Stormlands", "Dorne", "The Iron Islands" };
         regionFilter = new JComboBox<>(regions);
 
@@ -71,9 +69,9 @@ public class EastDisplay extends JPanel {
     // MODIFIES: this
     // EFFECTS: sets up action listeners for view cities and view locations buttons
     private void setupActionListeners() {
-        viewCitiesButton.addActionListener(new ViewCitiesActionListener());
-        viewLocationsButton.addActionListener(new ViewLocationsActionListener());
-        regionFilter.addActionListener(new RegionFilterActionListener());
+        viewCitiesButton.addActionListener(this);
+        viewLocationsButton.addActionListener(this);
+        regionFilter.addActionListener(this);
     }
 
     // REQUIRES: a non-empty / valid message
@@ -108,7 +106,7 @@ public class EastDisplay extends JPanel {
     // MODIFIES: citiesListPanel
     // EFFECTS: updates the panel with new cities, creating a panel for each or
     // displays a message that none are available
-    private void updateCitiesPanel(JPanel citiesListPanel) {
+    public void updateCitiesPanel(JPanel citiesListPanel) {
         citiesListPanel.removeAll();
         String selectedRegion = (String) regionFilter.getSelectedItem();
 
@@ -142,7 +140,7 @@ public class EastDisplay extends JPanel {
     // MODIFIES: locationsListPanel
     // EFFECTS: updates the panel with new locations, creating a panel for each or
     // displays a message
-    private void updateLocationsPanel(JPanel locationsListPanel) {
+    public void updateLocationsPanel(JPanel locationsListPanel) {
         locationsListPanel.removeAll();
 
         if (map.getLocations().isEmpty()) {
@@ -166,7 +164,6 @@ public class EastDisplay extends JPanel {
         }
     }
 
-
     // REQUIRES: a valid JPanel and region string
     // MODIFIES: citiesListPanel
     // EFFECTS: adds cities filtered by region to the panel
@@ -178,7 +175,6 @@ public class EastDisplay extends JPanel {
             }
         }
     }
-
 
     // REQUIRES: a valid JPanel
     // MODIFIES: panel
@@ -256,46 +252,36 @@ public class EastDisplay extends JPanel {
     // MODIFIES: panel
     // EFFECTS: creates the buttons panel with remove and visit buttons
     private void createButtonsPanel(JPanel panel, Location location) {
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
-        JButton removeButton = new JButton("Remove");
-        JButton visitButton = new JButton(location.getVisited() ? "Unmark Visited" : "Mark Visited");
-
-        removeButton.addActionListener(new RemoveLocationListener(panel, location));
-        visitButton.addActionListener(new ToggleVisitedListener(visitButton, location, panel));
-
-        buttonsPanel.add(visitButton);
-        buttonsPanel.add(removeButton);
+        EntryButtonPanel buttonsPanel = new EntryButtonPanel(location, panel, this, menu);
         panel.add(buttonsPanel, BorderLayout.EAST);
     }
 
-    // ActionListener implementations, seperated out instead of a long conditional
-    // chain for checkstyle purposes
+    // handlers for components
 
-    // EFFECTS: handles displaying all the cities
-    private class ViewCitiesActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            cardLayout.show(contentPanel, "cities");
-            updateCitiesPanel(citiesListPanel);
-        }
+    // MODIFIES: this
+    // EFFECTS: hanldes displaying all cities from map to the panel
+    public void handleViewCities() {
+        cardLayout.show(contentPanel, "cities");
+        updateCitiesPanel(citiesListPanel);
     }
 
-    // EFFECTS: handles filtering cities based on the given region
-    private class RegionFilterActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            updateCitiesPanel(citiesListPanel);
-        }
+    // MODIFIES: this
+    // EFFECTS: hanldes displaying all locations from map to the panel
+    public void handleViewLocations() {
+        cardLayout.show(contentPanel, "locations");
+        updateCitiesPanel(locationsListPanel);
     }
 
-    // EFFECTS: handles viewing and displaying all the locations
-    private class ViewLocationsActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            cardLayout.show(contentPanel, "locations");
-            updateLocationsPanel(locationsListPanel);
+
+    // EFFECTS: Handles actions for the buttons / combo boxes for the EastDisplay
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == viewCitiesButton) {
+            handleViewCities();
+        } else if (e.getSource() == viewLocationsButton) {
+            handleViewLocations();
+        } else if (e.getSource() == regionFilter) {
+            updateCitiesPanel(citiesListPanel);
         }
     }
 
@@ -327,126 +313,16 @@ public class EastDisplay extends JPanel {
         }
     }
 
-    // MODIFIES: this, Progress
-    // EFFECTS: handles removing a location and updating Progress class
-    private class RemoveLocationListener implements ActionListener {
-        private Location location;
-
-        public RemoveLocationListener(JPanel panel, Location location) {
-            this.location = location;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (location instanceof City) {
-                if (location.getVisited()) {
-                    Progress.decreaseNumCitiesVisited();
-                    Progress.decreasesNumVisitedEntries();
-                }
-                map.getCities().remove(location);
-                Progress.decreasesNumEntries();
-                Progress.setTotalNumCities(Progress.getTotalNumCities() - 1);
-                updateCitiesPanel(citiesListPanel);
-                menu.updateProgress();
-            } else {
-                if (location.getVisited()) {
-                    Progress.decreasesNumVisitedEntries();
-                }
-                Progress.decreasesNumEntries();
-                map.getLocations().remove(location);
-                updateLocationsPanel(locationsListPanel);
-                menu.updateProgress();
-            }
-        }
+    // getters
+    public JPanel getCitiesListPanel() {
+        return citiesListPanel;
     }
 
-    // MODIFIES: this
-    // EFFECTS: handles toggling the visit status for an entry
-    private class ToggleVisitedListener implements ActionListener {
-        private JButton visitButton;
-        private Location location;
-        private JPanel itemPanel;
+    public JPanel getLocationsListPanel() {
+        return locationsListPanel;
+    }
 
-        public ToggleVisitedListener(JButton visitButton, Location location, JPanel itemPanel) {
-            this.visitButton = visitButton;
-            this.location = location;
-            this.itemPanel = itemPanel;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            location.toggleVisited();
-            updateVisitedStatus();
-
-            // Update the respective list panel based on location type
-            if (location instanceof City) {
-                updateCitiesPanel(citiesListPanel);
-                menu.updateProgress();
-            } else {
-                updateLocationsPanel(locationsListPanel);
-                menu.updateProgress();
-            }
-        }
-
-        // MODIFIES: this
-        // EFFECTS: updates the visited status in the item panel
-        private void updateVisitedStatus() {
-            visitButton.setText(location.getVisited() ? "Unmark Visited" : "Mark Visited");
-
-            // Find and update the info panel
-            for (Component comp : itemPanel.getComponents()) {
-                if (comp instanceof JPanel && comp != visitButton.getParent()) {
-                    JPanel infoPanel = (JPanel) comp;
-                    updateInfoPanel(infoPanel);
-                    break;
-                }
-            }
-        }
-
-        // MODIFIES: infoPanel
-        // EFFECTS: updates the info panel with the visited status
-        private void updateInfoPanel(JPanel infoPanel) {
-            // Find the details panel inside the info panel
-            for (Component comp : infoPanel.getComponents()) {
-                if (comp instanceof JPanel && ((JPanel) comp).getLayout() instanceof BorderLayout) {
-                    JPanel borderPanel = (JPanel) comp;
-                    updateDetailsPanel(borderPanel);
-                    break;
-                }
-            }
-        }
-
-        // MODIFIES: borderPanel
-        // EFFECTS: updates the details panel with the visited status
-        private void updateDetailsPanel(JPanel borderPanel) {
-            // Find the details panel (FlowLayout panel inside BorderLayout panel)
-            for (Component comp : borderPanel.getComponents()) {
-                if (comp instanceof JPanel && ((JPanel) comp).getLayout() instanceof FlowLayout) {
-                    JPanel detailsPanel = (JPanel) comp;
-                    updateVisitedLabel(detailsPanel);
-                    break;
-                }
-            }
-        }
-
-        // MODIFIES: detailsPanel
-        // EFFECTS: updates or adds the visited label based on location status
-        private void updateVisitedLabel(JPanel detailsPanel) {
-            // Remove any existing visited labels
-            Component[] components = detailsPanel.getComponents();
-            for (Component comp : components) {
-                if (comp instanceof JLabel && ((JLabel) comp).getText().contains("Visited")) {
-                    detailsPanel.remove(comp);
-                }
-            }
-
-            // Add visited label if location is visited
-            if (location.getVisited()) {
-                addVisitedLabel(detailsPanel);
-            }
-
-            detailsPanel.revalidate();
-            detailsPanel.repaint();
-        }
+    public Map getMap() {
+        return map;
     }
 }

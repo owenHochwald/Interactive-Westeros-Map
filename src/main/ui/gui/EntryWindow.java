@@ -89,12 +89,10 @@ public class EntryWindow extends JFrame implements ActionListener {
     // EFFECTS: Handles actions for the combo box and submit button
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
-
-        if (source == entryTypeComboBox) {
+        if (e.getSource() == entryTypeComboBox) {
             String selectedEntryType = (String) entryTypeComboBox.getSelectedItem();
             updateForm(selectedEntryType);
-        } else if (source == submitButton) {
+        } else if (e.getSource() == submitButton) {
             handleSubmission();
         }
     }
