@@ -5,7 +5,6 @@ import javax.swing.*;
 import model.City;
 import model.Location;
 import model.Map;
-import model.Progress;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,12 +23,14 @@ public class EntryWindow extends JFrame implements ActionListener {
     private JTextField populationField;
     private JButton submitButton;
     private MapGUI mainMapPanel;
+    private MenuBar menu;
 
     // EFFECTS: constructs a new entry window to choose city / location and add
     // fields
-    public EntryWindow(Map map, MapGUI mainMapPanel) {
+    public EntryWindow(Map map, MapGUI mainMapPanel, MenuBar menu) {
         this.mainMapPanel = mainMapPanel;
         this.map = map;
+        this.menu = menu;
         setTitle("Add an Entry");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(450, 300);
@@ -115,6 +116,7 @@ public class EntryWindow extends JFrame implements ActionListener {
 
         clearFields();
         dispose();
+        menu.updateProgress();
     }
 
     // MODIFIES: this, Progress
@@ -122,8 +124,6 @@ public class EntryWindow extends JFrame implements ActionListener {
     private void handleCitySubmission(String name, String region, String house, int population) {
         City city = new City(name, population, house, region, false, false);
         map.getCities().add(city);
-        Progress.increaseNumEntries();
-        Progress.increaseTotalCities();
 
         mainMapPanel.setCurrentCityName(name);
         mainMapPanel.setCityAddingMode(true);
@@ -134,8 +134,6 @@ public class EntryWindow extends JFrame implements ActionListener {
     private void handleLocationSubmission(String name, String region) {
         Location location = new Location(name, region, false);
         map.getLocations().add(location);
-        Progress.increaseNumEntries();
-        dispose();
     }
 
     // MODIFIES: this

@@ -112,7 +112,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
                 System.out.println("Destination doesn't exist: " + error);
             }
         } else if (e.getSource() == addEntryButton) {
-            new EntryWindow(map, mainMapPanel);
+            new EntryWindow(map, mainMapPanel, this);
         }
 
     }

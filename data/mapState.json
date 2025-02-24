@@ -119,6 +119,36 @@
             "name": "Wolf's Wood",
             "visited": false,
             "region": "The North"
+        },
+        {
+            "customMade": false,
+            "name": "Harrenhal",
+            "visited": false,
+            "region": "Beyond the Wall"
+        },
+        {
+            "customMade": false,
+            "name": "The Twins",
+            "visited": false,
+            "region": "The Riverlands"
+        },
+        {
+            "customMade": false,
+            "name": "Moat Cailin",
+            "visited": false,
+            "region": "The North"
+        },
+        {
+            "customMade": false,
+            "name": "Deepwood Motte",
+            "visited": false,
+            "region": "The North"
+        },
+        {
+            "customMade": false,
+            "name": "Shadow Tower",
+            "visited": false,
+            "region": "The North"
         }
     ]
 }
