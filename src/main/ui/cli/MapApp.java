@@ -112,15 +112,22 @@ public class MapApp {
     // MODIFIES: this
     // EFFECTS: processes user keyboard input
     private void handleInput(String key) {
-        switch (key) {
-            case "1" -> viewer.viewAllCities();
-            case "2" -> viewer.viewAllLocations();
-            case "3" -> visitManager.changeVisitStatus();
-            case "4" -> manageEntries();
-            case "5" -> loadMap();
-            case "6" -> saveMap();
-            case "7" -> displayProgress();
-            default -> System.out.println("Invalid selection!");
+        if (key == "1") {
+            viewer.viewAllCities();
+        } else if (key == "2") {
+            viewer.viewAllLocations();
+        } else if (key == "3") {
+            visitManager.changeVisitStatus();
+        } else if (key == "4") {
+            manageEntries();
+        } else if (key == "5") {
+            loadMap();
+        } else if (key == "6") {
+            saveMap();
+        } else if (key == "7") {
+            displayProgress();
+        } else {
+            System.out.println("Invalid selection!");
         }
     }
 

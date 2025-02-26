@@ -110,6 +110,7 @@ public class VisitManager {
         System.out.printf("║  Status updated to: %-41s║%n", newStatus);
     }
 
+    // EFFECTS: prints out a message to the console when a user returns to main menu
     private void displayDepartureMessage() {
         System.out.println(TOP_BORDER);
         System.out.println("              The Records Have Been Updated");
