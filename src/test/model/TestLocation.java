@@ -4,13 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TestLocation {
     private Location loc;
 
-    @Before
+    @BeforeEach
     public void setup() {
         Progress.setNumCitiesVisited(0);
         Progress.resetEntryProgress();
@@ -56,5 +56,5 @@ public class TestLocation {
         assertEquals(0, Progress.getNumCitiesVisited());
         assertEquals(0, Progress.getTotalNumVisitedEntries());
     }
-    
+
 }

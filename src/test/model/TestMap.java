@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TestMap {
 
@@ -16,7 +16,7 @@ public class TestMap {
     private ArrayList<Location> locations;
     private Map mapTest;
 
-    @Before
+    @BeforeEach
     public void setup() {
         cities = new ArrayList<>();
         locations = new ArrayList<>();
