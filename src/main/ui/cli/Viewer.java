@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import model.City;
 import model.Location;
 
+/*
+ * A class to represent all related componenets to printing out entries to the console
+ */
 public class Viewer {
     ArrayList<City> cities;
     ArrayList<Location> locations;

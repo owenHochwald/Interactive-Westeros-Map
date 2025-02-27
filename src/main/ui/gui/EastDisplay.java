@@ -9,6 +9,9 @@ import model.City;
 import model.Location;
 import model.Map;
 
+/*
+ * A class to represent the right side panel of the GUI with actions to view / filter cities and locations
+ */
 public class EastDisplay extends JPanel implements ActionListener {
     private Map map;
     private MenuBar menu;

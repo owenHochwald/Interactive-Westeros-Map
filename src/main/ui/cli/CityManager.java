@@ -6,6 +6,9 @@ import java.util.Scanner;
 import model.City;
 import model.Progress;
 
+/*
+ * A class to represent all related componenets to managing cities in the CLI
+ */
 public class CityManager {
     private ArrayList<City> cities;
     private Scanner input;
@@ -85,11 +88,10 @@ public class CityManager {
                 System.out.println("Please enter a non-negative number.");
             }
             // } catch (NumberFormatException e) {
-            //     System.out.println("Invalid input. Please enter a valid number.");
+            // System.out.println("Invalid input. Please enter a valid number.");
             // }
         }
     }
-
 
     // EFFECTS: prompts the user for a boolean input and validates it
     private boolean getValidatedBoolean(String prompt) {

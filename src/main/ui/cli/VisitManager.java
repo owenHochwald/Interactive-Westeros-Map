@@ -6,6 +6,9 @@ import java.util.Scanner;
 import model.City;
 import model.Location;
 
+/*
+ * A class to represent all related componenets to toggling the visit status of cities / locations
+ */
 public class VisitManager {
     private static final String TOP_BORDER    = "╔══════════════════════════════════════════════════════════════╗";
     private static final String BOTTOM_BORDER = "╚══════════════════════════════════════════════════════════════╝";

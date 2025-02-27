@@ -1,9 +1,10 @@
 package ui;
 
-import ui.gui.MapGUI;
+import ui.cli.MapApp;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        new MapGUI();
+        new MapApp();
+
     }
 }

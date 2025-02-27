@@ -6,6 +6,9 @@ import java.util.Scanner;
 import model.Location;
 import model.Progress;
 
+/*
+ * A class to represent all related componenets to managing locations in the CLI
+ */
 public class LocationManager {
     private ArrayList<Location> locations;
     private Scanner input;
