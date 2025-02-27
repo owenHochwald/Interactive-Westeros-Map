@@ -112,19 +112,19 @@ public class MapApp {
     // MODIFIES: this
     // EFFECTS: processes user keyboard input
     private void handleInput(String key) {
-        if (key == "1") {
+        if (key.equals("1")) {
             viewer.viewAllCities();
-        } else if (key == "2") {
+        } else if (key.equals("2")) {
             viewer.viewAllLocations();
-        } else if (key == "3") {
+        } else if (key.equals("3")) {
             visitManager.changeVisitStatus();
-        } else if (key == "4") {
+        } else if (key.equals("4")) {
             manageEntries();
-        } else if (key == "5") {
+        } else if (key.equals("5")) {
             loadMap();
-        } else if (key == "6") {
+        } else if (key.equals("6")) {
             saveMap();
-        } else if (key == "7") {
+        } else if (key.equals("7")) {
             displayProgress();
         } else {
             System.out.println("Invalid selection!");
