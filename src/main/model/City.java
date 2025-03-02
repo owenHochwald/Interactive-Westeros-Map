@@ -20,8 +20,7 @@ public class City extends Location {
     // EFFECTS: creates a new unvisited city with given name, population, alliances,
     // house, region,
     // capital status, and no alliances. Increases total number of cities by 1, set
-    // customMade
-    // to wether city is custom made or not
+    // customMade to wether city is custom made or not
     public City(String name, int population, String house, String region, boolean isCapital, boolean customMade) {
         super(name, region, customMade);
         this.population = population;
@@ -29,13 +28,15 @@ public class City extends Location {
         this.isCapital = isCapital;
         this.alliances = new ArrayList<>();
         Progress.increaseTotalCities();
+        EventLog.getInstance().logEvent(new Event("Created a new city to the map."));
+
     }
 
     // MODIFIES: this
     // EFFECTS: increases population by 1,000
     public void increasePopulation() {
         this.population += 1000;
-
+        EventLog.getInstance().logEvent(new Event("Population for " + name + " increased by 1000."));
     }
 
     // MODIFES: this, Progress
@@ -50,6 +51,7 @@ public class City extends Location {
             Progress.decreaseNumCitiesVisited();
         }
         visited = !visited;
+        EventLog.getInstance().logEvent(new Event("Toggled visit status for " + name));
     }
 
     // MODIFIES: this

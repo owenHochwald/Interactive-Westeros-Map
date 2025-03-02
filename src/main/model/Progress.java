@@ -27,12 +27,16 @@ public class Progress {
     // EFFECTS: increases the total number of entries by 1
     public static void increaseNumEntries() {
         totalNumEntries++;
+        EventLog.getInstance().logEvent(new Event("Increase number of exisiting entries."));
+
     }
 
     // MODIFIES: this
     // EFFECTS: decreases the total number of entries by 1
     public static void decreasesNumEntries() {
         totalNumEntries--;
+        EventLog.getInstance().logEvent(new Event("Decrease number of exisiting entries."));
+
     }
 
     // MODIFIES: this

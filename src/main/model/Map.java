@@ -27,6 +27,8 @@ public class Map {
         JsonReader reader = new JsonReader(path);
         cities = reader.readCities();
         locations = reader.readLocations();
+        EventLog.getInstance().logEvent(new Event("Loaded in a map state."));
+
     }
 
     // MODIFIES: json file at path
@@ -36,6 +38,7 @@ public class Map {
         saver.open();
         saver.write(locations, cities);
         saver.close();
+        EventLog.getInstance().logEvent(new Event("Saved a map state."));
 
     }
 

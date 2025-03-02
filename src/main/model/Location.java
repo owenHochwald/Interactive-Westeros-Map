@@ -22,6 +22,8 @@ public class Location {
         this.visited = false;
         this.customMade = customMade;
         Progress.increaseNumEntries();
+        EventLog.getInstance().logEvent(new Event("Created a new location to the map."));
+
     }
 
     // MODIFES: this, Progress
@@ -33,6 +35,7 @@ public class Location {
             Progress.decreasesNumVisitedEntries();
         }
         visited = !visited;
+        EventLog.getInstance().logEvent(new Event("Toggled visit status for " + name));
     }
 
     // getters
