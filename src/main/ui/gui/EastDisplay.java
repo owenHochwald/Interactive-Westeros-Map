@@ -275,6 +275,12 @@ public class EastDisplay extends JPanel implements ActionListener {
         updateCitiesPanel(locationsListPanel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: increases a cities population by 1000
+    public void handleIncreasePopulation() {
+        
+    }
+
 
     // EFFECTS: Handles actions for the buttons / combo boxes for the EastDisplay
     @Override
