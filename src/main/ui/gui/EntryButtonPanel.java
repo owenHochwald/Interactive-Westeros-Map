@@ -15,9 +15,11 @@ public class EntryButtonPanel extends JPanel implements ActionListener {
     private final Location location;
     private final JButton removeButton;
     private final JButton visitButton;
+    private final JButton increasePopulationButton;
     private final JPanel parentPanel;
     private final EastDisplay eastDisplay;
     private final MenuBar menu;
+
 
     // EFFECTS: constructs a new panel with the desired buttons
     public EntryButtonPanel(Location location, JPanel parentPanel, EastDisplay eastDisplay, MenuBar menu) {
@@ -30,10 +32,12 @@ public class EntryButtonPanel extends JPanel implements ActionListener {
 
         removeButton = new JButton("Remove");
         visitButton = new JButton(location.getVisited() ? "Unmark Visited" : "Mark Visited");
+        increasePopulationButton = new JButton("Increase Population");
 
         setupButtons();
         add(visitButton);
         add(removeButton);
+        add(increasePopulationButton);
     }
 
     // MODIFIES: this
@@ -41,6 +45,7 @@ public class EntryButtonPanel extends JPanel implements ActionListener {
     private void setupButtons() {
         removeButton.addActionListener(this);
         visitButton.addActionListener(this);
+        increasePopulationButton.addActionListener(this);
     }
 
     // MODIFIES: this
@@ -52,6 +57,13 @@ public class EntryButtonPanel extends JPanel implements ActionListener {
             handleLocationRemoval();
         }
         menu.updateProgress();
+    }
+
+    // MODIFIES: this
+    // EFFETS: increases the population for a city
+    private void handleIncreasePopulation() {
+        ((City) location).increasePopulation();
+        eastDisplay.updateCitiesPanel(eastDisplay.getCitiesListPanel());
     }
 
     // MODIFIES: this
@@ -115,6 +127,8 @@ public class EntryButtonPanel extends JPanel implements ActionListener {
             handleRemove();
         } else if (e.getSource() == visitButton) {
             handleVisit();
+        } else if (e.getSource() == increasePopulationButton) {
+            handleIncreasePopulation();
         }
     }
 }

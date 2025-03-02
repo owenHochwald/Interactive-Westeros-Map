@@ -233,8 +233,11 @@ public class EastDisplay extends JPanel implements ActionListener {
         if (location instanceof City) {
             City city = (City) location;
             JLabel houseLabel = new JLabel(" | " + city.getHouse());
+            JLabel populationLabel = new JLabel(" | " + city.getPopulation());
             houseLabel.setFont(new Font(houseLabel.getFont().getName(), Font.PLAIN, 12));
+            populationLabel.setFont(new Font(populationLabel.getFont().getName(), Font.PLAIN, 12));
             detailsPanel.add(houseLabel);
+            detailsPanel.add(populationLabel);
         }
         if (location.getVisited()) {
             addVisitedLabel(detailsPanel);
@@ -273,12 +276,6 @@ public class EastDisplay extends JPanel implements ActionListener {
     public void handleViewLocations() {
         cardLayout.show(contentPanel, "locations");
         updateCitiesPanel(locationsListPanel);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: increases a cities population by 1000
-    public void handleIncreasePopulation() {
-        
     }
 
 
