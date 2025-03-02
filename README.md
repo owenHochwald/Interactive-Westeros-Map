@@ -49,6 +49,7 @@ This project is of particular interest to me because:
 - You can locate my visual component by running the GUI and looking at the background.
 - You can save the state of my application by selecting the "Save" button in the menu.
 - You can reload the state of my application by selecting the "Load" button in the menu.
+- You can increase the population for a city by selecting the "Increase Population" button in the "View Cities" panel.
 
 ---
 
