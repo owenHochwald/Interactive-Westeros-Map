@@ -3,6 +3,7 @@ package ui.gui;
 import javax.swing.*;
 
 import model.City;
+import model.EventLog;
 import model.Location;
 import model.Map;
 
@@ -10,11 +11,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 /*
  * Represents the main page of the GUI, displaying the map and associated cities / locations
  */
-public class MapGUI extends JFrame {
+public class MapGUI extends JFrame implements WindowListener {
 
     private Map map;
     private boolean isCityAddingMode;
@@ -42,7 +45,7 @@ public class MapGUI extends JFrame {
         getContentPane().setBackground(new Color(0x555555));
 
         setVisible(true);
-
+        addWindowListener(this);
     }
 
     // MODIFES: this
@@ -106,11 +109,48 @@ public class MapGUI extends JFrame {
 
     // REQUIRES: x and y are within the range of the frame
     // MODIFES: this
-    // EFFECTS: draws a city marker to represent the location of the city and adds it to
-    // the markers list
+    // EFFECTS: draws a city marker to represent the location of the city and adds
+    // it to the markers list
     private void addCityMarker(int x, int y) {
         markers.add(new CityMarker(x, y, 20, currentCityName));
         mapPanel.repaint();
+    }
+
+    // EFFECTS: prints logs to console when main window is closing
+    public void windowClosing(WindowEvent e) {
+        System.out.println("Closing window.");
+        for (model.Event next : EventLog.getInstance()) {
+            System.out.println(next.toString());
+        }
+    }
+
+    // EFFECTS: plain implementation to satisify implements relationship
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    // EFFECTS: plain implementation to satisify implements relationship
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    // EFFECTS: plain implementation to satisify implements relationship
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    // EFFECTS: plain implementation to satisify implements relationship
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    // EFFECTS: plain implementation to satisify implements relationship
+    public void windowDeactivated(WindowEvent e) {
+
+    }
+
+    // EFFECTS: plain implementation to satisify implements relationship
+    public void windowClosed(WindowEvent e) {
     }
 
     // setters

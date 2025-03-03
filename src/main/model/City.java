@@ -28,7 +28,8 @@ public class City extends Location {
         this.isCapital = isCapital;
         this.alliances = new ArrayList<>();
         Progress.increaseTotalCities();
-        EventLog.getInstance().logEvent(new Event("Created a new city to the map."));
+        EventLog.getInstance().logEvent(new Event("Created city " + name + " to the map."));
+
 
     }
 

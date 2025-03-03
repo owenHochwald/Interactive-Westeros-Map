@@ -22,7 +22,7 @@ public class Location {
         this.visited = false;
         this.customMade = customMade;
         Progress.increaseNumEntries();
-        EventLog.getInstance().logEvent(new Event("Created a new location to the map."));
+        EventLog.getInstance().logEvent(new Event("Created location " + name + " to the map."));
 
     }
 

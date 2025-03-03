@@ -50,8 +50,193 @@ This project is of particular interest to me because:
 - You can save the state of my application by selecting the "Save" button in the menu.
 - You can reload the state of my application by selecting the "Load" button in the menu.
 - You can increase the population for a city by selecting the "Increase Population" button in the "View Cities" panel.
+- You can interact with the progress bar by toggling the visit status of entries.
 
 ---
+
+
+## Phase 4: Task 2
+
+Closing window.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:10:54 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:10:54 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Toggled visit status for Winterfell
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Toggled visit status for Sunspear
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Toggled visit status for Riverrun
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Created a new city to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Increase number of exisiting entries.
+Sun Mar 02 16:11:01 PST 2025
+Created a new location to the map.
+Sun Mar 02 16:11:01 PST 2025
+Loaded in a map state.
+Sun Mar 02 16:11:03 PST 2025
+Population for King's Landing increased by 1000.
+Sun Mar 02 16:11:03 PST 2025
+Population for King's Landing increased by 1000.
+Sun Mar 02 16:11:04 PST 2025
+Population for King's Landing increased by 1000.
+Sun Mar 02 16:11:04 PST 2025
+Population for King's Landing increased by 1000.
+Sun Mar 02 16:11:04 PST 2025
+Population for King's Landing increased by 1000.
+Sun Mar 02 16:11:05 PST 2025
+Toggled visit status for King's Landing
+Sun Mar 02 16:11:05 PST 2025
+Toggled visit status for King's Landing
+Sun Mar 02 16:11:06 PST 2025
+Toggled visit status for King's Landing
+Sun Mar 02 16:11:06 PST 2025
+Toggled visit status for King's Landing
+Sun Mar 02 16:11:06 PST 2025
+Toggled visit status for King's Landing
+Sun Mar 02 16:11:06 PST 2025
+Toggled visit status for King's Landing
+
+----
+
 
 ## References
 

@@ -27,7 +27,7 @@ public class Progress {
     // EFFECTS: increases the total number of entries by 1
     public static void increaseNumEntries() {
         totalNumEntries++;
-        EventLog.getInstance().logEvent(new Event("Increase number of exisiting entries."));
+        EventLog.getInstance().logEvent(new Event("Increase number of exisiting entries. An entry was created."));
 
     }
 
@@ -35,7 +35,7 @@ public class Progress {
     // EFFECTS: decreases the total number of entries by 1
     public static void decreasesNumEntries() {
         totalNumEntries--;
-        EventLog.getInstance().logEvent(new Event("Decrease number of exisiting entries."));
+        EventLog.getInstance().logEvent(new Event("Decrease number of exisiting entries. An entry was removed."));
 
     }
 
@@ -43,12 +43,15 @@ public class Progress {
     // EFFECTS: increases the total number of visited entries by 1
     public static void increaseNumVisitedEntries() {
         numEntriesVisited++;
+        EventLog.getInstance().logEvent(new Event("Increase number of visited entries."));
     }
 
     // MODIFIES: this
     // EFFECTS: decreases the total number of visited entries by 1
     public static void decreasesNumVisitedEntries() {
         numEntriesVisited--;
+        EventLog.getInstance().logEvent(new Event("Decrease number of visited entries."));
+
     }
 
     // MODIFIES: this
