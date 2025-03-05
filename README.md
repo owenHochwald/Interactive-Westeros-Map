@@ -237,6 +237,15 @@ Toggled visit status for King's Landing
 
 ----
 
+## Phase 4: Task 3
+
+Upon reviewing the design presented in my UML class diagram, I noticed that my program has a high degree of coupling, with many related connections, particularly when passing data between model classes. The diagram is very complex, making the relationships somewhat messy. This could lead to maintainability issues, as modifying one part of the application might require changes across multiple related classes, increasing the risk of unintended consequences.
+
+If I had more time, I would restructure how data flows between different parts of the application to make the design more modular. Instead of having direct dependencies between many classes, I would introduce a way to package and pass data in a more organized manner, reducing the number of direct connections and thus making the diagram easier. Additionally, I would create a central point of control for managing interactions between related components (like accessing Visit/City/LocationManager), making it easier to update or extend the system without affecting multiple areas at once. These changes would improve maintainability, reduce unintended side effects, and make future modifications smoother.
+
+
+----
+
 
 ## References
 
